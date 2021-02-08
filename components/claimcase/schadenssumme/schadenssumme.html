@@ -1,0 +1,10 @@
+<div class="bb-container">
+    <h4>{{$t('components.claimcase.damageAmount.title', 'Schadenssumme')}}</h4>
+    <div>
+        <div>
+            <v-text-field v-if="formAnswer.status=='PENDING' || formAnswer.status == 'PROGRESS' || formAnswer.status == 'SUCCESS' " v-model="formAnswer.schadenssumme" v-bind:label="$t('components.claimcase.damageAmount.damageAmountToBePaidOut', 'Schadenssumme die ausgezahlt werden soll')" required></v-text-field>
+            <v-btn  v-if="formAnswer.status=='PENDING' || formAnswer.status == 'PROGRESS' || formAnswer.status == 'SUCCESS'" color="primary" @click="save()" v-on="on">{{$t('components.claimcase.damageAmount.buttons.set', 'Festlegen')}}</v-btn>
+            <v-text-field v-if="formAnswer.status=='FINISHED' || formAnswer.status=='DECLINED' " v-bind:label="$t('components.claimcase.damageAmount.fixedPaymentAmount', 'Die festgelegte Auszahlungshöhe beträgt')" v-model="formAnswer.schadenssumme" disabled filled></v-text-field>
+        </div>
+    </div>
+</div>

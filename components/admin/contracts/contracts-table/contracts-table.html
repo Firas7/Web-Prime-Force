@@ -1,0 +1,168 @@
+<div>
+  <div class="text-center">
+    <v-progress-circular
+      :size="50"
+      color="primary"
+      indeterminate
+      v-if="loading"
+    ></v-progress-circular>
+  </div>
+
+  <div v-if="!!contracts && contracts.length !== 0 && !loading" class="bb-container">
+    <v-toolbar flat>
+      <v-toolbar-title>
+        <p class="headline">{{ $t('components.admin.contracts.contractsTable.title', 'Vertragsübersicht') }}</p>
+      </v-toolbar-title>
+      <v-spacer></v-spacer>
+      <v-btn
+        depressed
+        color="primary"
+        v-if="scopeAdmin"
+        @click="showFormDialog()"
+      >
+        {{ $t('components.admin.contracts.contractsTable.buttons.add', 'Anlegen') }}
+      </v-btn>
+    </v-toolbar>
+
+    <div :key="contract._id" class="table-loop" v-for="contract in contracts">
+      <div
+        :key="contract._id"
+        @click="showDetail(contract)"
+        class="mobile-table"
+      >
+        <div class="header productname-header">
+          {{
+          $t('components.admin.contracts.contractsTable.tableHeaders.productname', 'Produktname')
+          }}
+        </div>
+        <div class="header branch-header">
+          {{
+          $t('components.admin.contracts.contractsTable.tableHeaders.branch', 'Sparte')
+          }}
+        </div>
+        <div class="header id-header">
+          {{
+          $t('components.admin.contracts.contractsTable.tableHeaders.id', 'Vertragsnummer')
+          }}
+        </div>
+        <div class="header partnernumber-header">
+          {{
+          $t('components.admin.contracts.contractsTable.tableHeaders.partnerId', 'Partnernummer')
+          }}
+        </div>
+        <div class="header action-header">
+          {{
+          $t('components.admin.contracts.contractsTable.tableHeaders.action', 'Aktionen')
+          }}
+        </div>
+        <div class="data productname-data">{{ contract.productname }}</div>
+        <div class="data branch-data">{{ contract.branch }}</div>
+        <div class="data id-data">{{ contract._id }}</div>
+        <div class="data partnernumber-data">{{ contract.partnerId }}</div>
+        <div class="data action-data">
+          <v-tooltip bottom>
+            <template v-slot:activator="{ on }">
+              <v-btn
+                icon
+                depressed
+                v-on="on"
+                @click.stop="showDetail(contract)">
+                <v-icon>mdi-magnify-plus-outline</v-icon>
+              </v-btn>
+            </template>
+            <span>{{ $t('components.admin.contracts.contractsTable.tooltips.detail', 'Vertragsdteails anzeigen') }}</span>
+          </v-tooltip>
+          <v-tooltip bottom>
+            <template v-slot:activator="{ on }">
+              <v-btn
+                icon
+                depressed
+                v-on="on"
+                v-if="scopeAdmin"
+                @click.stop="deleteContract(contract._id)"
+              >
+                <v-icon>mdi-trash-can-outline</v-icon>
+              </v-btn>
+            </template>
+            <span>{{ $t('components.admin.contracts.contractsTable.tooltips.delete', 'Vertrag löschen') }}</span>
+          </v-tooltip>
+          <v-tooltip bottom>
+            <template v-slot:activator="{ on }">
+              <v-btn
+                icon
+                depressed
+                v-on="on"
+                @click.stop="addClaimcase(contract.partnerId, contract._id, contract.branch)">
+                <v-icon>mdi-shield-plus-outline</v-icon>
+              </v-btn>
+            </template>
+            <span>{{ $t('components.admin.contracts.contractsTable.tooltips.claimcase', 'Neuen Schadensfall anlegen') }}</span>
+          </v-tooltip>
+        </div>
+      </div>
+    </div>
+
+    <!-- Pagination -->
+    <div class="bb-pagination">
+      <v-select
+        v-if="scopeAdmin"
+        :label="$t('components.admin.contracts.contractsTable.pagination.itemsPerPage', 'Verträge pro Seite')"
+        :items="itemsPerPage"
+        v-model="limit"
+        @change="changeLimit"
+        class="bb-pagignation-itemsperpage"
+      ></v-select>
+
+      <v-spacer></v-spacer>
+
+      <span v-if="scopeAdmin" class="bb-pagignation-counter">
+        {{ $t('components.admin.contracts.contractsTable.pagination.contracts', 'Verträge') }}:
+        {{ startIndex + 1 }} - {{ endIndex }} {{
+        $t('components.admin.contracts.contractsTable.pagination.of', 'von') }} {{ documents }}
+      </span>
+
+      <div class="bb-pagignation-btn">
+        <v-tooltip top>
+          <template v-slot:activator="{ on }">
+            <v-btn
+              v-if="scopeAdmin"
+              depressed
+              v-on="on"
+              class="bb-pagignation-btn-previous"
+              color="primary"
+              @click="previousPage()"
+            >
+              <v-icon>mdi-arrow-left-bold-circle-outline</v-icon>
+            </v-btn>
+          </template>
+          {{ $t('components.admin.contracts.contractsTable.tooltips.loadPrevious', 'Vorherige Seite laden') }}
+        </v-tooltip>
+
+        <v-tooltip top>
+          <template v-slot:activator="{ on }">
+            <v-btn
+              v-if="scopeAdmin"
+              depressed
+              v-on="on"
+              class="bb-pagignation-btn-next"
+              color="primary"
+              @click="nextPage()"
+            >
+              <v-icon>mdi-arrow-right-bold-circle-outline</v-icon>
+            </v-btn>
+          </template>
+          {{ $t('components.admin.contracts.contractsTable.tooltips.loadNext', 'Nächste Seite laden') }}
+        </v-tooltip>
+      </div>
+    </div>
+  </div>
+
+  <div v-if="showDialog">
+    <formDialog
+      v-bind:show.sync="showDialog"
+      v-bind:contract="contract"
+      v-bind:editMode="editMode"
+      @addContract="addContract"
+    />
+  </div>
+</div>

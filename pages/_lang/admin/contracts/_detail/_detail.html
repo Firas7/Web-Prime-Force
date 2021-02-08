@@ -1,0 +1,14 @@
+<div>
+  <authComponent v-if="contract" v-bind:auth="contract.auth"></authComponent>
+  <div>
+    <detailDialog
+      v-bind:editMode="editMode"
+      v-bind:scopeAdmin="scopeAdmin"
+      v-bind:change.sync="contract"
+      v-bind:insured="insured"
+      @editContract="editContract"
+      @fetchObjects="fetchObjects"
+    >
+    </detailDialog>
+  </div>
+</div>

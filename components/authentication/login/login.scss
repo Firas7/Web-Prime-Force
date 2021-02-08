@@ -1,0 +1,29 @@
+.card-action {
+  display: flex;
+  flex-direction: column;
+
+  button {
+    margin: 8px 0 0;
+
+    @media screen and (max-width: 560px) {
+      min-height: 35px;
+    }
+
+    &:first-child {
+      margin: 0;
+    }
+  }
+
+  .text-light {
+    color: #ebf4ff;
+  }
+
+  .highlight {
+    color: #667eea;
+    white-space: normal;
+  }
+}
+
+h1 {
+  color: #3c366b;
+}

@@ -1,0 +1,33 @@
+<section>
+  <p v-if="status===Status.NONE">
+    {{ $t('components.common.statusComponent.none', 'Bereit zum Senden') }}
+  </p>
+  <p v-if="status===Status.SUCCESS">
+    {{ $t('components.common.statusComponent.success', 'Erfolgreich') }}
+  </p>
+  <p v-if="status===Status.UNKNOWN_USER">
+    {{
+      $t('components.common.statusComponent.unknown-user', 'Unbekannter Nutzer')
+    }}
+  </p>
+  <p v-if="status===Status.UNKNOWN_ERROR">
+    {{
+      $t(
+        'components.common.statusComponent.unknown-error',
+        'Unbekannter Fehler'
+      )
+    }}
+  </p>
+  <p v-if="status===Status.PENDING">
+    {{ $t('components.common.statusComponent.pending', 'Ausstehend') }}
+  </p>
+  <p v-if="status===Status.PROGRESS">
+    {{ $t('components.common.statusComponent.progress', 'In Bearbeitung') }}
+  </p>
+  <p v-if="status===Status.FINISHED">
+    {{ $t('components.common.statusComponent.finished', 'Beendet') }}
+  </p>
+  <p v-if="status===Status.DECLINED">
+    {{ $t('components.common.statusComponent.declined', 'Abgelehnt') }}
+  </p>
+</section>

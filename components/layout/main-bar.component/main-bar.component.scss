@@ -1,0 +1,88 @@
+.main-bar-component {
+  background-color: #fff;
+  height: 100%;
+  position: fixed;
+  width: 120px;
+  @media only screen and (max-width: 639px) {
+    width: 75vw;
+  }
+
+  .menu {
+    margin-left: 1rem;
+    margin-top: 0.8rem;
+    @media only screen and (min-width: 640px) {
+      display: none;
+    }
+  }
+
+  div {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    @media only screen and (max-width: 639px) {
+      justify-content: left;
+    }
+
+    .logo {
+      height: auto;
+      margin-top: 1rem;
+      /*margin: 2rem 0;*/
+      width: 40px;
+
+      .logo-img {
+        width: 100%;
+      }
+
+      @media only screen and (max-width: 639px) {
+        margin-top: 0.5rem;
+        width: 25px;
+      }
+
+    }
+
+    .link {
+      border-left: 3px solid #fff;
+      border-right: 3px solid #fff;
+      cursor: pointer;
+      margin-top: 10px;
+      padding-top: 10px;
+      width: 100%;
+
+      @media only screen and (max-width: 639px) {
+        align-items: flex-start;
+        display: flex;
+        flex-direction: row;
+        margin-top: 4px;
+        padding-left: 1rem;
+        padding-top: 10px;
+      }
+
+      p {
+        padding: 0 10px;
+        text-align: center;
+        user-select: none;
+        word-wrap: break-word;
+        @media only screen and (max-width: 639px) {
+          font-size: 0.8rem;
+          padding-left: 0.5rem;
+        }
+
+        .label {
+          font-size: 1rem;
+          @media only screen and (max-width: 639px) {
+            font-size: 0.5rem;
+          }
+        }
+      }
+
+      &.active {
+        background-color: #f8f9fd;
+        border-bottom-left-radius: 4px;
+        border-left: 4px solid #667eea;
+        border-right: 4px solid #f8f9fd;
+        border-top-left-radius: 4px;
+      }
+    }
+  }
+}

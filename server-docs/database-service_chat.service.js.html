@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="utf-8">
+    <title>database-service/chat.service.js - Documentation</title>
+    
+    
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
+    <script src="scripts/nav.js" defer></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav >
+    
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-controller_claim.html">controller/claim</a><ul class='methods'><li data-type='method'><a href="module-controller_claim.html#~checkAuth">checkAuth</a></li><li data-type='method'><a href="module-controller_claim.html#~checkAuthForGet">checkAuthForGet</a></li><li data-type='method'><a href="module-controller_claim.html#~validateClaim">validateClaim</a></li></ul></li><li><a href="module-controller_image.html">controller/image</a><ul class='methods'><li data-type='method'><a href="module-controller_image.html#~deleteImages">deleteImages</a></li><li data-type='method'><a href="module-controller_image.html#~getImage">getImage</a></li><li data-type='method'><a href="module-controller_image.html#~safeImage">safeImage</a></li><li data-type='method'><a href="module-controller_image.html#~uploadImage">uploadImage</a></li></ul></li><li><a href="module-controller_mail.html">controller/mail</a><ul class='methods'><li data-type='method'><a href="module-controller_mail.html#~genClaimLink">genClaimLink</a></li><li data-type='method'><a href="module-controller_mail.html#~genRegLink">genRegLink</a></li><li data-type='method'><a href="module-controller_mail.html#~genRegLinkWithOTPW">genRegLinkWithOTPW</a></li><li data-type='method'><a href="module-controller_mail.html#~sendClaimMail">sendClaimMail</a></li><li data-type='method'><a href="module-controller_mail.html#~sendRegister">sendRegister</a></li><li data-type='method'><a href="module-controller_mail.html#~sendReset">sendReset</a></li><li data-type='method'><a href="module-controller_mail.html#~sendTokenToLinkUserInsured">sendTokenToLinkUserInsured</a></li></ul></li><li><a href="module-controller_search.html">controller/search</a><ul class='methods'><li data-type='method'><a href="module-controller_search.html#~contract">contract</a></li><li data-type='method'><a href="module-controller_search.html#~getLength">getLength</a></li><li data-type='method'><a href="module-controller_search.html#~getRegexScore">getRegexScore</a></li><li data-type='method'><a href="module-controller_search.html#~getResult">getResult</a></li><li data-type='method'><a href="module-controller_search.html#~insured">insured</a></li><li data-type='method'><a href="module-controller_search.html#~miniInsured">miniInsured</a></li><li data-type='method'><a href="module-controller_search.html#~search">search</a></li></ul></li><li><a href="module-controller_token.html">controller/token</a><ul class='methods'><li data-type='method'><a href="module-controller_token.html#~createClaimToken">createClaimToken</a></li><li data-type='method'><a href="module-controller_token.html#~createLinkUserInsuredToken">createLinkUserInsuredToken</a></li><li data-type='method'><a href="module-controller_token.html#~createRegisterToken">createRegisterToken</a></li><li data-type='method'><a href="module-controller_token.html#~createResetToken">createResetToken</a></li><li data-type='method'><a href="module-controller_token.html#~createToken">createToken</a></li></ul></li><li><a href="module-controller_user.html">controller/user</a><ul class='methods'><li data-type='method'><a href="module-controller_user.html#~checkUserObjectAuth">checkUserObjectAuth</a></li><li data-type='method'><a href="module-controller_user.html#~checkUserObjectPartner">checkUserObjectPartner</a></li><li data-type='method'><a href="module-controller_user.html#~generateRandomPassword">generateRandomPassword</a></li><li data-type='method'><a href="module-controller_user.html#~hashPassword">hashPassword</a></li><li data-type='method'><a href="module-controller_user.html#~verifyCredentials">verifyCredentials</a></li><li data-type='method'><a href="module-controller_user.html#~verifyUniqueUser">verifyUniqueUser</a></li></ul></li><li><a href="module-service_agent.html">service/agent</a><ul class='methods'><li data-type='method'><a href="module-service_agent.html#~createAgent">createAgent</a></li><li data-type='method'><a href="module-service_agent.html#~getById">getById</a></li></ul></li><li><a href="module-service_chat.html">service/chat</a><ul class='methods'><li data-type='method'><a href="module-service_chat.html#~createChat">createChat</a></li><li data-type='method'><a href="module-service_chat.html#~getAllChats">getAllChats</a></li><li data-type='method'><a href="module-service_chat.html#~getByBusinessObjectId">getByBusinessObjectId</a></li><li data-type='method'><a href="module-service_chat.html#~getByChatId">getByChatId</a></li></ul></li><li><a href="module-service_claim.html">service/claim</a><ul class='methods'><li data-type='method'><a href="module-service_claim.html#~addImageId">addImageId</a></li><li data-type='method'><a href="module-service_claim.html#~addRating">addRating</a></li><li data-type='method'><a href="module-service_claim.html#~addSchadenssumme">addSchadenssumme</a></li><li data-type='method'><a href="module-service_claim.html#~createClaimCase">createClaimCase</a></li><li data-type='method'><a href="module-service_claim.html#~deleteImage">deleteImage</a></li><li data-type='method'><a href="module-service_claim.html#~postNewClaimcase">postNewClaimcase</a></li><li data-type='method'><a href="module-service_claim.html#~updateById">updateById</a></li><li data-type='method'><a href="module-service_claim.html#~updateClaimCaseBySecret">updateClaimCaseBySecret</a></li><li data-type='method'><a href="module-service_claim.html#~updateClaimCaseStatusById">updateClaimCaseStatusById</a></li></ul></li><li><a href="module-service_clerk.html">service/clerk</a><ul class='methods'><li data-type='method'><a href="module-service_clerk.html#~getById">getById</a></li></ul></li><li><a href="module-service_contract.html">service/contract</a><ul class='methods'><li data-type='method'><a href="module-service_contract.html#~createByContractId">createByContractId</a></li><li data-type='method'><a href="module-service_contract.html#~deleteByContractId">deleteByContractId</a></li><li data-type='method'><a href="module-service_contract.html#~getAll">getAll</a></li><li data-type='method'><a href="module-service_contract.html#~getAllAuth">getAllAuth</a></li><li data-type='method'><a href="module-service_contract.html#~getByContractId">getByContractId</a></li><li data-type='method'><a href="module-service_contract.html#~getByPartnerId">getByPartnerId</a></li><li data-type='method'><a href="module-service_contract.html#~getNumberOfDocuments">getNumberOfDocuments</a></li><li data-type='method'><a href="module-service_contract.html#~search">search</a></li><li data-type='method'><a href="module-service_contract.html#~updateByContractId">updateByContractId</a></li></ul></li><li><a href="module-service_forms.html">service/forms</a><ul class='methods'><li data-type='method'><a href="module-service_forms.html#~getAllForms">getAllForms</a></li><li data-type='method'><a href="module-service_forms.html#~getFormByVersion">getFormByVersion</a></li><li data-type='method'><a href="module-service_forms.html#~postNewClaim">postNewClaim</a></li><li data-type='method'><a href="module-service_forms.html#~postNewForm">postNewForm</a></li><li data-type='method'><a href="module-service_forms.html#~updateForm">updateForm</a></li></ul></li><li><a href="module-service_profile.html">service/profile</a><ul class='methods'><li data-type='method'><a href="module-service_profile.html#~createInsured">createInsured</a></li><li data-type='method'><a href="module-service_profile.html#~deleteByInsuredId">deleteByInsuredId</a></li><li data-type='method'><a href="module-service_profile.html#~getAll">getAll</a></li><li data-type='method'><a href="module-service_profile.html#~getById">getById</a></li><li data-type='method'><a href="module-service_profile.html#~getByInsuredId">getByInsuredId</a></li><li data-type='method'><a href="module-service_profile.html#~getByPartnerId">getByPartnerId</a></li><li data-type='method'><a href="module-service_profile.html#~getCircularReplacer">getCircularReplacer</a></li><li data-type='method'><a href="module-service_profile.html#~getProfileById">getProfileById</a></li><li data-type='method'><a href="module-service_profile.html#~getProfileByPartnerId">getProfileByPartnerId</a></li><li data-type='method'><a href="module-service_profile.html#~linkAgentByInsuredId">linkAgentByInsuredId</a></li><li data-type='method'><a href="module-service_profile.html#~linkClerkByInsuredId">linkClerkByInsuredId</a></li><li data-type='method'><a href="module-service_profile.html#~safeMail">safeMail</a></li><li data-type='method'><a href="module-service_profile.html#~search">search</a></li><li data-type='method'><a href="module-service_profile.html#~updateByInsuredId">updateByInsuredId</a></li><li data-type='method'><a href="module-service_profile.html#~updatetProfileById">updatetProfileById</a></li></ul></li><li></li><li></li><li><a href="module-service_tantant.html">service/tantant</a><ul class='methods'><li data-type='method'><a href="module-service_tantant.html#~createTenant">createTenant</a></li><li data-type='method'><a href="module-service_tantant.html#~deleteById">deleteById</a></li><li data-type='method'><a href="module-service_tantant.html#~getAll">getAll</a></li><li data-type='method'><a href="module-service_tantant.html#~getById">getById</a></li><li data-type='method'><a href="module-service_tantant.html#~getNumberOfDocuments">getNumberOfDocuments</a></li><li data-type='method'><a href="module-service_tantant.html#~updateById">updateById</a></li></ul></li><li><a href="module-service_user.html">service/user</a><ul class='methods'><li data-type='method'><a href="module-service_user.html#~completeRegById">completeRegById</a></li><li data-type='method'><a href="module-service_user.html#~confirmLinkUserInsuredToken">confirmLinkUserInsuredToken</a></li><li data-type='method'><a href="module-service_user.html#~createUser">createUser</a></li><li data-type='method'><a href="module-service_user.html#~getUser">getUser</a></li><li data-type='method'><a href="module-service_user.html#~getUserById">getUserById</a></li><li data-type='method'><a href="module-service_user.html#~getUserByRegToken">getUserByRegToken</a></li><li data-type='method'><a href="module-service_user.html#~getUserByResetToken">getUserByResetToken</a></li><li data-type='method'><a href="module-service_user.html#~updateLinkUserAgent">updateLinkUserAgent</a></li><li data-type='method'><a href="module-service_user.html#~updateLinkUserInsuredToken">updateLinkUserInsuredToken</a></li><li data-type='method'><a href="module-service_user.html#~updateResetToken">updateResetToken</a></li><li data-type='method'><a href="module-service_user.html#~updateUserPassword">updateUserPassword</a></li></ul></li></ul><h3>Global</h3><ul><li><a href="global.html#countPerCreateAll">countPerCreateAll</a></li><li><a href="global.html#countPerCreateAuth">countPerCreateAuth</a></li><li><a href="global.html#countPerCreateUser">countPerCreateUser</a></li><li><a href="global.html#countPerStateAll">countPerStateAll</a></li><li><a href="global.html#countPerStateAuth">countPerStateAuth</a></li><li><a href="global.html#countPerStateUser">countPerStateUser</a></li><li><a href="global.html#getAllClaimcases">getAllClaimcases</a></li><li><a href="global.html#getByPartnerId">getByPartnerId</a></li><li><a href="global.html#getClaimCase">getClaimCase</a></li><li><a href="global.html#getClaimCaseBySecret">getClaimCaseBySecret</a></li><li><a href="global.html#getClaimCasesByContractID">getClaimCasesByContractID</a></li><li><a href="global.html#getClaimCasesForAuth">getClaimCasesForAuth</a></li><li><a href="global.html#getClaimCaseWithSecret">getClaimCaseWithSecret</a></li></ul>
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">database-service/chat.service.js</h1>
+    
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>'use strict';
+const logger = require('../logger');
+const chats = require('./collection-service').chats;
+const mongo = require('mongodb');
+/** @module service/chat */
+
+
+/**
+ *
+ *
+ * @param {*} chatID
+ * @returns chat
+ */
+async function getByChatId(chatID) {
+  const collection = chats();
+  // const object_id = new mongo.ObjectID(chatID);
+  try {
+    return await collection.find({ id: chatID }).toArray();
+  } catch (err) {
+    logger.error(err);
+    return false;
+  }
+}
+
+/**
+ *
+ *
+ * @returns chats
+ */
+async function getAllChats() {
+  const collection = chats();
+  try {
+    return await collection.find().toArray();
+  } catch (err) {
+    logger.error(err);
+    return false;
+  }
+}
+
+async function getByUserId(userID) {
+  const collection = chats();
+  // const object_id = new mongo.ObjectID(chatID);
+  try {
+    return await collection.find({ participants: userID }).toArray();
+  } catch (err) {
+    logger.error(err);
+    return false;
+  }
+}
+
+/**
+ *
+ *
+ * @param {*} boID
+ * @returns chats
+ */
+async function getByBusinessObjectId(boID) {
+  const collection = chats();
+  // const object_id = new mongo.ObjectID(chatID);
+  try {
+    return await collection.find({ businessObjectID: boID }).toArray();
+  } catch (err) {
+    logger.error(err);
+    return false;
+  }
+}
+
+/**
+ *
+ *
+ * @param {*} chat
+ * @returns mongo create object
+ */
+async function createChat(chat) {
+  const collection = chats();
+  chat._id = new mongo.ObjectID(chat._id);
+  try {
+    return await collection.insertOne(chat);
+  } catch (err) {
+    logger.error(
+      '[chat.service] createChat (' + JSON.stringify(chat) + ') Error: ' + err
+    );
+    return false;
+  }
+}
+
+module.exports = {
+  getAllChats: getAllChats,
+  getByBusinessObjectId: getByBusinessObjectId,
+  getByChatId: getByChatId,
+  getByUserId: getByUserId,
+  createChat: createChat,
+};
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+    
+    
+</div>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.4</a> on Thu Jun 11 2020 12:25:00 GMT+0200 (Mitteleuropäische Sommerzeit) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/polyfill.js"></script>
+<script src="scripts/linenumber.js"></script>
+
+
+
+</body>
+</html>

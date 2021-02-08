@@ -1,0 +1,109 @@
+<div>
+  <v-toolbar class="bb-v-toolbar elevation-0">
+    <v-toolbar-title>
+      <router-link to="/claim">{{ $t('pages.claim.detail.aboutPage', 'Go to my About Page') }}</router-link>
+      <h3>
+        {{id}}
+      </h3></v-toolbar-title
+    >
+    <v-spacer></v-spacer>
+  </v-toolbar>
+
+  <div>
+    <v-tabs v-model="tab">
+      <v-tab 
+        :key="1" 
+        value="overview" 
+        ref="overview" 
+        href="#overview"
+      >
+        {{ $t('pages.claim.detail.tabs.overview', 'Übersicht') }}
+      </v-tab>
+      <v-tab 
+        :key="2" 
+        value="answers" 
+        ref="answers" 
+        href="#answers"
+      >
+        {{ $t('pages.claim.detail.tabs.answers', 'Antwort') }}
+      </v-tab>
+      <v-tab
+        :key="3"
+        v-if="!isInsured"
+        value="insured"
+        ref="insured"
+        href="#insured"
+      >
+        {{ $t('pages.claim.detail.tabs.insured', 'Versicherte') }}
+      </v-tab>
+      <v-tab 
+        :key="4" 
+        value="files" 
+        ref="files" 
+        href="#files"
+      >
+        {{ $t('pages.claim.detail.tabs.files', 'Dateien') }}
+      </v-tab>
+      <v-tab 
+        :key="5" 
+        value="schadenssumme" 
+        ref="schadenssumme" 
+        href="#schadenssumme"
+      >
+        {{ $t('pages.claim.detail.tabs.amountOfLoss', 'Schadenssumme') }}
+      </v-tab>
+    </v-tabs>
+
+    <v-tabs-items v-model="tab">
+      <v-tab-item v-if="!isInsured" :key="3" value="insured" ref="insured">
+        <insuredView v-bind:insured="insured"></insuredView>
+        <v-btn
+          @click="showDetail(insured)"
+          class="ma-2"
+          depressed
+          outlined
+          color="indigo"
+        >
+         {{ $t('pages.claim.detail.buttons.openDetail', 'Detail Öffnen') }}
+        </v-btn>
+      </v-tab-item>
+      <v-tab-item :key="4" value="files" ref="files">
+        <claimFiles
+          v-if="formAnswer"
+          v-bind:formAnswer="formAnswer"
+        ></claimFiles>
+      </v-tab-item>
+      <v-tab-item :key="1" value="overview" ref="overview">
+        <claimDetails
+          v-bind:formAnswer="formAnswer"
+          v-bind:form="branchForm"
+        ></claimDetails>
+        <authComponent
+          v-if="formAnswer"
+          v-bind:auth="formAnswer.auth"
+        ></authComponent>
+        <rating
+          v-if="formAnswer && formAnswer.status == 'FINISHED'"
+          v-bind:formAnswer="formAnswer"
+          @saveRating="saveRating"
+        ></rating>
+      </v-tab-item>
+      <v-tab-item :key="2" value="answers" ref="answers">
+        <claimAnswers
+          v-if="formAnswer"
+          v-bind:formAnswer="formAnswer"
+          v-bind:form="branchForm"
+        ></claimAnswers>
+      </v-tab-item>
+      <v-tab-item :key="5" value="schadenssumme" ref="schadenssumme">
+        <schadenssumme
+          v-if="formAnswer"
+          v-bind:formAnswer="formAnswer"
+        ></schadenssumme>
+      </v-tab-item>
+    </v-tabs-items>
+  </div>
+
+</div>
+
+

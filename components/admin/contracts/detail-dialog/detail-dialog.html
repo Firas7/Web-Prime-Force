@@ -1,0 +1,178 @@
+<div>
+  <v-card>
+    <v-toolbar class="bb-v-toolbar elevation-0">
+      <v-toolbar-title
+        ><h3>
+          {{ $t('components.admin.contracts.detailDialog.title',
+          'Vertragsdaten') }}
+        </h3></v-toolbar-title
+      >
+      <v-spacer></v-spacer>
+      <v-tooltip bottom>
+        <template v-slot:activator="{ on }">
+          <v-btn icon depressed v-if="scopeAdmin" v-on="on" @click="edit()">
+            <v-icon>mdi-pencil-outline</v-icon>
+          </v-btn>
+        </template>
+        <span
+          >{{ $t('components.admin.contracts.detailDialog.tooltips.edit',
+          'Bearbeiten') }}</span
+        >
+      </v-tooltip>
+    </v-toolbar>
+    <div class="bb-conatiner">
+      <div
+        class="bb-key-value-wrapper"
+        v-if="!!contract && !!contract.productname"
+      >
+        <p class="bb-key-value">
+          <span class="bb-key">
+            <v-icon class="bb-icon">mdi-note-outline</v-icon>{{
+            $t('components.admin.contracts.detailDialog.contractData.productname',
+            'Vertragsbezeichnung') }}</span
+          >
+          <span class="bb-value">{{ contract.productname }} </span>
+        </p>
+      </div>
+      <div class="bb-key-value-wrapper" v-if="!!contract && !!contract._id">
+        <p class="bb-key-value">
+          <span class="bb-key">
+            <v-icon class="bb-icon">mdi-content-paste</v-icon>{{
+            $t('components.admin.contracts.detailDialog.contractData.id',
+            'Vertragsnummer') }}</span
+          >
+          <span class="bb-value">{{ contract._id }}</span>
+        </p>
+      </div>
+      <div class="bb-key-value-wrapper" v-if="!!insured && !!insured.partnerId">
+        <p class="bb-key-value">
+          <span class="bb-key">
+            <v-icon class="bb-icon">mdi-link-variant</v-icon>{{
+            $t('components.admin.contracts.detailDialog.contractData.partnerId',
+            'Partnernummer') }}</span
+          >
+          <span class="bb-value">{{ insured.partnerId }} </span>
+        </p>
+      </div>
+      <v-divider></v-divider>
+      <h3 class="bb-name" v-if="!!insured">
+        {{ $t('components.admin.contracts.detailDialog.partnerTitle',
+        'Vertragspartner') }}
+      </h3>
+
+      <div
+        class="bb-key-value-wrapper"
+        v-if="!!insured && !!insured.salutation && !!insured.firstname && !!insured.lastname"
+      >
+        <p class="bb-key-value">
+          <span class="bb-key"
+            ><v-icon class="bb-icon">mdi-account-outline</v-icon>{{
+            $t('components.admin.contracts.detailDialog.partnerData.name',
+            'Name') }}</span
+          >
+          <span class="bb-value"
+            >{{ insured.salutation }} {{ insured.firstname }} {{
+            insured.lastname }}
+          </span>
+        </p>
+      </div>
+      <div class="bb-key-value-wrapper" v-if="!!insured && !!insured.birthday">
+        <p class="bb-key-value">
+          <span class="bb-key">
+            <v-icon class="bb-icon">mdi-calendar-outline</v-icon>{{
+            $t('components.admin.contracts.detailDialog.partnerData.birthday',
+            'Geburtstag') }}</span
+          >
+          <span class="bb-value">{{ formatDate(insured.birthday) }}</span>
+        </p>
+      </div>
+      <div class="bb-key-value-wrapper">
+        <p class="bb-key-value">
+          <span class="bb-key">
+            <v-icon class="bb-icon">mdi-map-marker-outline</v-icon>
+            {{$t('components.admin.contracts.detailDialog.partnerData.address',
+            'Adresse')}}</span
+          >
+          <span class="bb-value" v-if="!!insured&&!!insured.address"
+            >{{ insured.address.streetaddress}}<br />{{
+            insured.address.postcode}} {{ insured.address.city}}<br />{{
+            insured.address.state}}, {{insured.address.country}}</span
+          >
+        </p>
+      </div>
+      <v-divider></v-divider>
+      <h3 class="bb-name" v-if="!!contract">
+        {{ $t('components.admin.contracts.detailDialog.detailTitle',
+        'Vertragsdetails') }}
+      </h3>
+      <div class="bb-key-value-wrapper" v-if="!!contract && !!contract.branch">
+        <p class="bb-key-value">
+          <span class="bb-key"
+            >{{
+            $t('components.admin.contracts.detailDialog.contractDetailsData.branch',
+            'Sparte') }}</span
+          >
+          <span class="bb-value">{{ contract.branch }}</span>
+        </p>
+      </div>
+      <div
+        class="bb-key-value-wrapper"
+        v-if="!!contract && !!contract.insurancepapernumber"
+      >
+        <p class="bb-key-value">
+          <span class="bb-key"
+            >{{
+            $t('components.admin.contracts.detailDialog.contractDetailsData.insurancepapernumber',
+            'Versicherungsnummer') }}</span
+          >
+          <span class="bb-value">{{ contract.insurancepapernumber }}</span>
+        </p>
+      </div>
+      <div
+        class="bb-key-value-wrapper"
+        v-if="!!contract && !!contract.startdate"
+      >
+        <p class="bb-key-vaue">
+          <span class="bb-key"
+            >{{
+            $t('components.admin.contracts.detailDialog.contractDetailsData.startdate',
+            'Vertragsbeginn') }}</span
+          >
+          <span class="bb-value">{{ formatDate(contract.startdate) }}</span>
+        </p>
+      </div>
+      <formDialog
+        v-bind:show.sync="showEditDialog"
+        v-bind:contract="contract"
+        v-bind:editMode="editMode"
+        v-bind:date.sync="startdate"
+        @editContract="editContract"
+        @close="close"
+      >
+      </formDialog>
+    </div>
+    <v-card-actions class="bb-v-toolbar">
+      <v-spacer></v-spacer>
+      <v-btn
+        text
+        depressed
+        class="highlight"
+        color="#667EEA"
+        @click="switchBack()"
+      >
+        {{ $t('components.admin.contracts.detailDialog.buttons.close',
+        'Schließen') }}
+      </v-btn>
+      <v-btn
+        text
+        depressed
+        class="highlight"
+        color="#667EEA"
+        @click="addClaimcase()"
+      >
+        {{ $t('components.admin.contracts.contractsTable.tooltips.claimcase',
+        'Neuen Schadensfall anlegen') }}
+      </v-btn>
+    </v-card-actions>
+  </v-card>
+</div>

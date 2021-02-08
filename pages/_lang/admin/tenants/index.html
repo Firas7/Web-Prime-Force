@@ -1,0 +1,14 @@
+<div>
+  <tenantsTable
+    v-bind:tenants="tenants"
+    v-bind:change.sync="limit"
+    v-bind:documents="documents"
+    v-bind:loading="loading"
+    v-bind:itemsPerPage="itemsPerPage"
+    @addTenant="addTenant"
+    @editTenant="editTenant"
+    @deleteTenant="deleteTenant"
+    @fetchTenants="fetchTenants"
+  >
+  </tenantsTable>
+</div>

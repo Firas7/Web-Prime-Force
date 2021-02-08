@@ -1,0 +1,27 @@
+.searchfield-container {
+  display: flex;
+  justify-content: space-around;
+
+  .searchfield {
+    display: flex;
+    flex-direction: row;
+    width: 400px;
+
+    form {
+      width: 100%;
+    }
+  }
+}
+
+.search-result-container {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+
+  .search-results {
+    cursor: pointer;
+    margin-top: 1rem;
+    width: max-content;
+  }
+}

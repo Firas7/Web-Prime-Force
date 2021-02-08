@@ -1,0 +1,38 @@
+.head-bar-component {
+  align-items: center;
+  background-color: #f8f9fd;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  .menu {
+    display: none;
+    margin-left: 1rem;
+    @media only screen and (max-width: 639px) {
+      display: block;
+    }
+  }
+
+  .menu-tools {
+    align-items: center;
+    background-color: #f8f9fd;
+    display: flex;
+    flex-direction: row-reverse;
+
+    .logout {
+      margin-right: 3rem;
+    }
+
+    .language {
+      margin-right: 1rem;
+    }
+
+    .search {
+      margin-right: 1rem;
+    }
+
+    .message {
+      margin-right: 1rem;
+    }
+  }
+}

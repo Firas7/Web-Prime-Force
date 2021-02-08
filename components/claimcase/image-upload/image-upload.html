@@ -1,0 +1,70 @@
+<v-card class="mx-auto" max-width="50%">
+  <v-card-text>
+    <div>{{ $t('components.claimcase.imageUpload.info', 'Bild zu einer Kategorie hochladen')}}</div>
+  </v-card-text>
+  <div>
+    <v-combobox
+      v-model="select"
+      :items="tags"
+      v-bind:label="$t('components.claimcase.imageUpload.labels.tags', 'Bild zu einer Kategorie hochladen')"
+      multiple
+      chips
+    ></v-combobox>
+    <v-file-input
+      multiple
+      chips
+      accept="image/jpg,image/png"
+      prepend-icon="mdi-camera"
+      v-bind:label="$t('components.claimcase.imageUpload.labels.imageUpload', 'Bilder hochladen')"
+      v-model="file"
+      :disabled="status"
+      @change="preview()"
+    >
+      <template v-slot:selection="{ text, index, file }">
+        <v-chip small close @click:close="remove(index)">
+          {{ text }}
+        </v-chip>
+      </template>
+    </v-file-input>
+    <div v-if="status !== true">
+      <div class="row">
+        <div v-for="url in url" class="column" @click="showFullImage(url)">
+          <v-img :src="url" height="320px" width="240px"> </v-img>
+        </div>
+      </div>
+    </div>
+    <div v-if="status === true">
+      <div class="row">
+        <div
+          v-for="image in images"
+          class="column"
+          @click="showFullImage(image)"
+        >
+          <v-img
+            v-bind:src="'data:image/jpg;base64,' + image"
+            height="320px"
+            width="240px"
+          >
+          </v-img>
+        </div>
+      </div>
+    </div>
+    <div v-if="!!image">
+      <imageCard
+        v-bind:show.sync="showImageCard"
+        v-bind:status="status"
+        v-bind:image="image"
+      >
+      </imageCard>
+    </div>
+  </div>
+  <v-card-actions>
+    <v-btn
+      text
+      depressed
+      color="deep-purple accent-4"
+      @click="saveClaimcaseImages">
+      {{$t('components.claimcase.imageUpload.buttons.upload', 'Bilder Hochladen')}}
+    </v-btn>
+  </v-card-actions>
+</v-card>

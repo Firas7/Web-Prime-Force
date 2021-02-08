@@ -1,0 +1,36 @@
+<div>
+    <v-dialog v-model="syncedShow">
+        <v-card>
+            <v-card-title>
+                <h4>
+                  {{$t('components.claimcase.imageUpload.imageCard.imageInfo', 'Bild zum Schadenfall')}}
+                </h4>
+            </v-card-title>
+            <v-card-text>
+                <v-img
+                    v-if="status !== true"
+                    aspect-ratio
+                    contain
+                    :src="image"
+                >
+                </v-img>
+                <v-img
+                    v-if="status === true"
+                    aspect-ratio
+                    contain
+                    v-bind:src="'data:image/jpg;base64,' + image"
+                >
+                </v-img>
+            </v-card-text>
+            <v-card-actions>
+                <v-spacer></v-spacer>
+                <v-btn
+                    depressed
+                    class="primary"
+                    @click="close()"
+                > {{$t('components.claimcase.imageUpload.imageCard.buttons.close', 'Schließen')}}
+                </v-btn>
+            </v-card-actions>
+        </v-card>
+    </v-dialog>
+</div>

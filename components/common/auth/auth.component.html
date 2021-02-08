@@ -1,0 +1,29 @@
+<div v-if="!isInsured">
+  <v-card class="mx-auto" max-width="344">
+    <v-card-text>
+      <p>{{ $t('components.common.auth.title', 'Authorization') }}</p>
+      <v-list-item two-line v-if="auth">
+        <v-list-item-content>
+          <v-list-item-title>{{
+            $t('components.common.auth.branch', 'Sparte')
+          }}</v-list-item-title>
+          <v-list-item-subtitle>{{ auth.branch }}</v-list-item-subtitle>
+        </v-list-item-content>
+        <v-list-item-content>
+          <v-list-item-title>{{
+            $t('components.common.auth.level', 'Level')
+          }}</v-list-item-title>
+          <v-list-item-subtitle>{{ auth.level }}</v-list-item-subtitle>
+        </v-list-item-content>
+      </v-list-item>
+      <p v-else>
+        {{
+          $t(
+            'components.common.auth.noAuthorization',
+            'Dieses Object besitzt kein Authorizationschutz'
+          )
+        }}
+      </p>
+    </v-card-text>
+  </v-card>
+</div>

@@ -1,0 +1,589 @@
+.bb-container {
+  padding: 1rem 2rem;
+
+  .headline {
+    font-size: 40px;
+    line-height: 40px;
+  }
+
+  .text-light {
+    color: #ebf4ff;
+  }
+
+  .load-button {
+    margin-left: calc(50% - 113.415px);
+    width: 226.883px;
+  }
+
+  @media screen and (max-width: 639px) {
+    padding: 0.8rem;
+  }
+
+  .table-loop {
+    border-bottom: 1px solid #c7c7c7;
+    height: max-content;
+    margin-bottom: 0;
+    width: 100%;
+
+    &:last-of-type {
+      border-bottom: 0;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+  }
+
+  .mobile-table {
+    align-items: baseline;
+    background-color: #fff;
+    cursor: pointer;
+    display: grid;
+    //grid-column-gap: 1rem;
+    grid-template-areas: 'salutation-header firstname-header lastname-header gender-header birthday-header adress-header' ' salutatuon-data firstname-data lastname-data gender-data birthday-data adress-data' 'postcode-header postofficebox-header mail-header cellphone-header partnerid-header action-header' 'postcode-data postofficebox-data mail-data cellphone-data partnerid-data action-data';
+    //padding: 1rem 0;
+    padding-left: 1rem;
+    user-select: none;
+    width: 100%;
+
+    @media screen and (max-width: 1679px) {
+      //grid-row-gap: 0.4rem;
+      grid-template-areas: 'salutation-header firstname-header lastname-header gender-header' 'salutatuon-data firstname-data lastname-data gender-data' ' birthday-header adress-header postcode-header postofficebox-header' 'birthday-data adress-data postcode-data postofficebox-data' 'mail-header cellphone-header partnerid-header action-header' 'mail-data cellphone-data partnerid-data action-data';
+      //grid-template-columns: 1fr 1fr;
+      //grid-template-rows: 1fr 1fr 1fr 1fr;
+      //padding: 0.3rem 0;
+      padding-left: 1rem;
+    }
+    @media screen and (max-width: 1240px) {
+      //grid-row-gap: 0.4rem;
+      grid-template-areas: 'salutation-header firstname-header lastname-header' ' salutatuon-data firstname-data lastname-data' 'gender-header birthday-header adress-header' 'gender-data birthday-data adress-data' 'postcode-header postofficebox-header mail-header' 'postcode-data postofficebox-data mail-data' 'cellphone-header partnerid-header action-header' 'cellphone-data partnerid-data action-data';
+      //grid-template-columns: 1fr 1fr;
+      //grid-template-rows: 1fr 1fr 1fr 1fr;
+      padding-left: 1rem;
+    }
+
+    @media screen and (max-width: 1023px) {
+      //grid-row-gap: 0.4rem;
+      grid-template-areas: 'salutation-header firstname-header' 'salutatuon-data firstname-data' 'lastname-header gender-header' 'lastname-data gender-data' 'birthday-header adress-header' 'birthday-data adress-data' 'postcode-header postofficebox-header' 'postcode-data postofficebox-data' 'mail-header cellphone-header' 'mail-data cellphone-data' 'partnerid-header action-header' 'partnerid-data action-data';
+      //grid-template-columns: 1fr 1fr;
+      //grid-template-rows: 1fr 1fr 1fr 1fr;
+      padding-left: 1rem;
+    }
+
+    @media screen and (max-width: 768px) {
+      //grid-row-gap: 0.4rem;
+      grid-template-areas: 'salutation-header salutatuon-data' 'firstname-header firstname-data' 'lastname-header lastname-data' 'gender-header gender-data' 'birthday-header birthday-data' 'adress-header adress-data' 'postcode-header postcode-data' 'postofficebox-header postofficebox-data' 'mail-header mail-data' 'cellphone-header cellphone-data' 'partnerid-header partnerid-data' 'action-header action-data';
+      //grid-template-columns: 1fr 1fr;
+      //grid-template-rows: 1fr 1fr 1fr 1fr;
+      padding-left: 1rem;
+    }
+
+    @media screen and (max-width: 480px) {
+      //grid-row-gap: 0.4rem;
+      grid-template-areas: 'salutation-header' 'salutatuon-data' 'firstname-header' 'firstname-data' 'lastname-header' 'lastname-data' 'gender-header' 'gender-data' 'birthday-header' 'birthday-data' 'adress-header' 'adress-data' 'postcode-header' 'postcode-data' 'postofficebox-header' 'postofficebox-data' 'mail-header' 'mail-data' 'cellphone-header' 'cellphone-data' 'partnerid-header' 'partnerid-data' 'action-header' 'action-data';
+      //grid-template-columns: 1fr 1fr;
+      //grid-template-rows: 1fr 1fr 1fr 1fr;
+      padding-left: 1rem;
+    }
+
+
+
+    .header {
+      color: #888;
+      font-size: 0.7rem;
+      margin: 0;
+      text-transform: uppercase;
+    }
+
+    .data {
+      color: #888;
+      font-size: 10px;
+      margin-bottom: 5px;
+      min-height: 20px;
+      padding: 0;
+      //text-decoration: line-through;
+    }
+
+    .salutation-header {
+      grid-area: salutation-header;
+      width: 100px;
+      @media screen and (max-width: 1679px) {
+        width: 300px;
+      }
+      @media screen and (max-width: 1240px) {
+        width: 200px;
+      }
+      @media screen and (max-width: 1023px) {
+        width: 300px;
+      }
+      @media screen and (max-width: 768px) {
+        width: 125px;
+      }
+      @media screen and (max-width: 480px) {
+        width: 300px;
+      }
+    }
+
+    .firstname-header {
+      grid-area: firstname-header;
+      width: 150px;
+      @media screen and (max-width: 1679px) {
+        width: 250px;
+      }
+      @media screen and (max-width: 1240px) {
+        width: 250px;
+      }
+      @media screen and (max-width: 1023px) {
+        width: 250px;
+      }
+      @media screen and (max-width: 768px) {
+        width: 125px;
+      }
+      @media screen and (max-width: 480px) {
+        width: 300px;
+      }
+    }
+
+    .lastname-header {
+      grid-area: lastname-header;
+      width: 300px;
+      @media screen and (max-width: 1679px) {
+        width: 250px;
+      }
+      @media screen and (max-width: 1240px) {
+        width: 300px;
+      }
+      @media screen and (max-width: 1023px) {
+        width: 300px;
+      }
+      @media screen and (max-width: 768px) {
+        width: 125px;
+      }
+      @media screen and (max-width: 480px) {
+        width: 300px;
+      }
+    }
+
+    .gender-header {
+      grid-area: gender-header;
+      width: 200px;
+      @media screen and (max-width: 1679px) {
+        width: 150px;
+      }
+      @media screen and (max-width: 1240px) {
+        width: 200px;
+      }
+      @media screen and (max-width: 1023px) {
+        width: 250px;
+      }
+      @media screen and (max-width: 768px) {
+        width: 125px;
+      }
+      @media screen and (max-width: 480px) {
+        width: 300px;
+      }
+    }
+
+    .birthday-header {
+      grid-area: birthday-header;
+      width: 250px;
+      @media screen and (max-width: 1679px) {
+        width: 300px;
+      }
+      @media screen and (max-width: 1240px) {
+        width: 250px;
+      }
+      @media screen and (max-width: 1023px) {
+        width: 300px;
+      }
+      @media screen and (max-width: 768px) {
+        width: 125px;
+      }
+      @media screen and (max-width: 480px) {
+        width: 300px;
+      }
+    }
+
+    .adress-header {
+      grid-area: adress-header;
+      width: 250px;
+      @media screen and (max-width: 1679px) {
+        width: 250px;
+      }
+      @media screen and (max-width: 1240px) {
+        width: 300px;
+      }
+      @media screen and (max-width: 1023px) {
+        width: 250px;
+      }
+      @media screen and (max-width: 768px) {
+        width: 125px;
+      }
+      @media screen and (max-width: 480px) {
+        width: 300px;
+      }
+    }
+
+    .postcode-header {
+      grid-area: postcode-header;
+      width: 100px;
+      @media screen and (max-width: 1679px) {
+        width: 250px;
+      }
+      @media screen and (max-width: 1240px) {
+        width: 200px;
+      }
+      @media screen and (max-width: 1023px) {
+        width: 300px;
+      }
+      @media screen and (max-width: 768px) {
+        width: 125px;
+      }
+      @media screen and (max-width: 480px) {
+        width: 300px;
+      }
+    }
+
+    .postofficebox-header {
+      grid-area: postofficebox-header;
+      width: 150px;
+      @media screen and (max-width: 1679px) {
+        width: 150px;
+      }
+      @media screen and (max-width: 1240px) {
+        width: 250px;
+      }
+      @media screen and (max-width: 1023px) {
+        width: 250px;
+      }
+      @media screen and (max-width: 768px) {
+        width: 125px;
+      }
+      @media screen and (max-width: 480px) {
+        width: 300px;
+      }
+    }
+
+    .mail-header {
+      grid-area: mail-header;
+      width: 300px;
+      @media screen and (max-width: 1679px) {
+        width: 300px;
+      }
+      @media screen and (max-width: 1240px) {
+        width: 300px;
+      }
+      @media screen and (max-width: 1023px) {
+        width: 300px;
+      }
+      @media screen and (max-width: 768px) {
+        width: 125px;
+      }
+      @media screen and (max-width: 480px) {
+        width: 300px;
+      }
+    }
+
+    .cellphone-header {
+      grid-area: cellphone-header;
+      width: 200px;
+      @media screen and (max-width: 1679px) {
+        width: 250px;
+      }
+      @media screen and (max-width: 1240px) {
+        width: 200px;
+      }
+      @media screen and (max-width: 1023px) {
+        width: 250px;
+      }
+      @media screen and (max-width: 768px) {
+        width: 125px;
+      }
+      @media screen and (max-width: 480px) {
+        width: 300px;
+      }
+    }
+
+    .partnerid-header {
+      grid-area: partnerid-header;
+      width: 250px;
+      @media screen and (max-width: 1679px) {
+        width: 250px;
+      }
+      @media screen and (max-width: 1240px) {
+        width: 250px;
+      }
+      @media screen and (max-width: 1023px) {
+        width: 300px;
+      }
+      @media screen and (max-width: 768px) {
+        width: 125px;
+      }
+      @media screen and (max-width: 480px) {
+        width: 300px;
+      }
+    }
+
+    .action-header {
+      grid-area: action-header;
+      width: 250px;
+      @media screen and (max-width: 1679px) {
+        width: 150px;
+      }
+      @media screen and (max-width: 1240px) {
+        width: 300px;
+      }
+      @media screen and (max-width: 1023px) {
+        width: 250px;
+      }
+      @media screen and (max-width: 768px) {
+        width: 125px;
+      }
+      @media screen and (max-width: 480px) {
+        width: 300px;
+      }
+    }
+
+
+    .salutatuon-data {
+      grid-area: salutatuon-data;
+      width: 100px;
+      @media screen and (max-width: 1679px) {
+        width: 300px;
+      }
+      @media screen and (max-width: 1240px) {
+        width: 200px;
+      }
+      @media screen and (max-width: 1023px) {
+        width: 300px;
+      }
+      @media screen and (max-width: 768px) {
+        width: 300px;
+      }
+      @media screen and (max-width: 480px) {
+        width: 300px;
+      }
+    }
+
+    .firstname-data {
+      grid-area: firstname-data;
+      width: 150px;
+      @media screen and (max-width: 1679px) {
+        width: 250px;
+      }
+      @media screen and (max-width: 1240px) {
+        width: 250px;
+      }
+      @media screen and (max-width: 1023px) {
+        width: 250px;
+      }
+      @media screen and (max-width: 768px) {
+        width: 300px;
+      }
+      @media screen and (max-width: 480px) {
+        width: 300px;
+      }
+    }
+
+    .lastname-data {
+      grid-area: lastname-data;
+      width: 300px;
+      @media screen and (max-width: 1679px) {
+        width: 250px;
+      }
+      @media screen and (max-width: 1240px) {
+        width: 300px;
+      }
+      @media screen and (max-width: 1023px) {
+        width: 300px;
+      }
+      @media screen and (max-width: 768px) {
+        width: 300px;
+      }
+      @media screen and (max-width: 480px) {
+        width: 300px;
+      }
+    }
+
+    .gender-data {
+      grid-area: gender-data;
+      width: 200px;
+      @media screen and (max-width: 1679px) {
+        width: 150px;
+      }
+      @media screen and (max-width: 1240px) {
+        width: 200px;
+      }
+      @media screen and (max-width: 1023px) {
+        width: 250px;
+      }
+      @media screen and (max-width: 768px) {
+        width: 300px;
+      }
+      @media screen and (max-width: 480px) {
+        width: 300px;
+      }
+    }
+
+    .birthday-data {
+      grid-area: birthday-data;
+      width: 250px;
+      @media screen and (max-width: 1679px) {
+        width: 300px;
+      }
+      @media screen and (max-width: 1240px) {
+        width: 250px;
+      }
+      @media screen and (max-width: 1023px) {
+        width: 300px;
+      }
+      @media screen and (max-width: 768px) {
+        width: 300px;
+      }
+      @media screen and (max-width: 480px) {
+        width: 300px;
+      }
+    }
+
+    .adress-data {
+      grid-area: adress-data;
+      width: 250px;
+      @media screen and (max-width: 1679px) {
+        width: 250px;
+      }
+      @media screen and (max-width: 1240px) {
+        width: 300px;
+      }
+      @media screen and (max-width: 1023px) {
+        width: 250px;
+      }
+      @media screen and (max-width: 768px) {
+        width: 300px;
+      }
+      @media screen and (max-width: 480px) {
+        width: 300px;
+      }
+    }
+
+    .postcode-data {
+      grid-area: postcode-data;
+      width: 100px;
+      @media screen and (max-width: 1679px) {
+        width: 250px;
+      }
+      @media screen and (max-width: 1240px) {
+        width: 200px;
+      }
+      @media screen and (max-width: 1023px) {
+        width: 300px;
+      }
+      @media screen and (max-width: 768px) {
+        width: 300px;
+      }
+      @media screen and (max-width: 480px) {
+        width: 300px;
+      }
+    }
+
+    .postofficebox-data {
+      grid-area: postofficebox-data;
+      width: 150px;
+      @media screen and (max-width: 1679px) {
+        width: 150px;
+      }
+      @media screen and (max-width: 1240px) {
+        width: 250px;
+      }
+      @media screen and (max-width: 1023px) {
+        width: 250px;
+      }
+      @media screen and (max-width: 768px) {
+        width: 300px;
+      }
+      @media screen and (max-width: 480px) {
+        width: 300px;
+      }
+    }
+
+    .mail-data {
+      grid-area: mail-data;
+      width: 300px;
+      word-break: break-all;
+      @media screen and (max-width: 1679px) {
+        width: 300px;
+      }
+      @media screen and (max-width: 1240px) {
+        width: 300px;
+      }
+      @media screen and (max-width: 1023px) {
+        width: 300px;
+      }
+      @media screen and (max-width: 768px) {
+        width: 300px;
+      }
+      @media screen and (max-width: 480px) {
+        width: 300px;
+      }
+    }
+
+    .cellphone-data {
+      grid-area: cellphone-data;
+      width: 200px;
+      @media screen and (max-width: 1679px) {
+        width: 250px;
+      }
+      @media screen and (max-width: 1240px) {
+        width: 200px;
+      }
+      @media screen and (max-width: 1023px) {
+        width: 250px;
+      }
+      @media screen and (max-width: 768px) {
+        width: 300px;
+      }
+      @media screen and (max-width: 480px) {
+        width: 300px;
+      }
+    }
+
+    .partnerid-data {
+      grid-area: partnerid-data;
+      width: 250px;
+      @media screen and (max-width: 1679px) {
+        width: 250px;
+      }
+      @media screen and (max-width: 1240px) {
+        width: 250px;
+      }
+      @media screen and (max-width: 1023px) {
+        width: 300px;
+      }
+      @media screen and (max-width: 768px) {
+        width: 300px;
+      }
+      @media screen and (max-width: 480px) {
+        width: 300px;
+      }
+    }
+
+    .action-data {
+      grid-area: action-data;
+      width: 250px;
+      @media screen and (max-width: 1679px) {
+        width: 150px;
+      }
+      @media screen and (max-width: 1240px) {
+        width: 300px;
+      }
+      @media screen and (max-width: 1023px) {
+        width: 250px;
+      }
+      @media screen and (max-width: 768px) {
+        width: 300px;
+      }
+      @media screen and (max-width: 480px) {
+        width: 300px;
+      }
+    }
+
+  }
+
+}

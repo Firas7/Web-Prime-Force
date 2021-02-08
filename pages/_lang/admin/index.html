@@ -1,0 +1,61 @@
+<div>
+  <div class="searchfield-container">
+    <div class="searchfield">
+      <v-form v-model="isFormValid" v-on:submit.prevent>
+        <v-text-field
+          data-cy=admin-search-textfield
+          outlined
+          :label="$t('pages.admin.search', 'Suche')"
+          :append-icon="'mdi-magnify'"
+          @click:append="search(searchTerm, true)"
+          v-model="searchTerm"
+          @keyup.native.enter="search(searchTerm, true)"
+          :rules="rules"
+        ></v-text-field>
+      </v-form>
+    </div>
+  </div>
+
+  <div class="search-result-container">
+    <div class="search-info">
+      <p v-if="searchResults.time < 0">
+        <v-progress-circular
+          indeterminate
+          color="primary"
+        ></v-progress-circular>
+      </p>
+      <!-- todo: add übersetzen nachdem plugin richtig funktioniert -->
+      <p v-if="searchResults.time > 0">
+        Es wurden {{ searchResults.length_page }} von {{
+        searchResults.length_total }} in {{searchResults.time }} ms
+        zurückgegeben
+      </p>
+      <v-pagination
+        v-if="searchResults.length_total > 0"
+        v-model="page"
+        :length="pages"
+        :total-visible="6"
+        @input="next"
+      ></v-pagination>
+    </div>
+
+    <div
+      class="search-results"
+      v-if="searchResults.length_page > 0"
+      v-for="searchResult in searchResults.result"
+      v-on:click="openDetail(searchResult.insured.partnerId)"
+    >
+      <search-result-card v-bind:searchResult="searchResult">
+      </search-result-card>
+    </div>
+    <div class="search-info">
+      <v-pagination
+        v-if="searchResults.length_total > 0"
+        v-model="page"
+        :length="pages"
+        :total-visible="6"
+        @input="next"
+      ></v-pagination>
+    </div>
+  </div>
+</div>

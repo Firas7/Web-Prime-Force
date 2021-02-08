@@ -1,0 +1,77 @@
+<div>
+  <v-dialog v-model="syncedShow" max-width="600px">
+    <v-card data-cy="tenants-form-dialog-card">
+      <v-card-title>
+        <span v-if="!editMode" class="headline">
+          {{ $t('components.admin.tenant.formDialog.addTitle', 'Klienten erstellen') }}
+        </span>
+        <span v-if="editMode" class="headline">
+          {{ $t('components.admin.tenant.formDialog.editTitle', 'Klienten bearbeiten') }}
+        </span>
+      </v-card-title>
+      <v-card-text>
+        <v-form v-model="valid">
+          <v-text-field
+            data-cy="tenants-form-dialog-firstname-textfield"
+            v-model="choosenModel().firstname"
+            v-bind:label="$t('components.admin.tenant.formDialog.firstName', 'Vorname')"
+            :rules="[validateTextField(choosenModel().firstname)]"
+            required
+          />
+          <v-text-field
+            data-cy="tenants-form-dialog-lastname-textfield"
+            v-model="choosenModel().lastname"
+            v-bind:label="$t('components.admin.tenant.formDialog.lastName', 'Nachname')"
+            :rules="[validateTextField(choosenModel().lastname)]"
+            required
+          />
+          <v-text-field
+            data-cy="tenants-form-dialog-url-textfield"
+            v-model="choosenModel().url"
+            v-bind:label="$t('components.admin.tenant.formDialog.url', 'Webseite')"
+            :rules="[validateTextField(choosenModel().url)]"
+            required
+          />
+          <v-text-field
+            data-cy="tenants-form-dialog-pathname-textfield"
+            v-model="choosenModel().pathname"
+            v-bind:label="$t('components.admin.tenant.formDialog.pathName', 'Pfadname')"
+            :rules="[validateTextField(choosenModel().pathname)]"
+            required
+          />
+        </v-form>
+      </v-card-text>
+      <v-card-actions>
+        <v-spacer></v-spacer>
+        <v-btn
+          data-cy="tenants-form-dialog-close-btn"
+          depressed
+          color="#667EEA"
+          text
+          @click="closeDetailDialog()"
+          >{{ $t('components.admin.tenant.formDialog.buttons.cancel', 'Abbrechen') }}
+        </v-btn>
+        <v-btn
+          depressed
+          v-if="!editMode"
+          data-cy="tenants-form-dialog-add-btn"
+          :disabled="!valid"
+          color="#667EEA"
+          class="text-light"
+          @click="save()"
+          >{{ $t('components.admin.tenant.formDialog.buttons.save', 'Speichern') }}
+        </v-btn>
+        <v-btn
+          depressed
+          v-if="!!editMode && editMode"
+          data-cy="tenants-form-dialog-edit-btn"
+          :disabled="!valid"
+          color="#667EEA"
+          class="text-light"
+          @click="edit()"
+          >{{ $t('components.admin.tenant.formDialog.buttons.save', 'Speichern') }}
+        </v-btn>
+      </v-card-actions>
+    </v-card>
+  </v-dialog>
+</div>

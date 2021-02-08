@@ -1,0 +1,42 @@
+<div>
+  <v-card
+    v-if="formAnswer != null && formAnswer.images != null && formAnswer.images.length > 0"
+    max-width="50%"
+    class="mx-auto"
+  >
+    <v-list two-line subheader>
+      <v-subheader inset>{{$t('components.claimcase.claimFiles.files', 'Dateien')}}</v-subheader>
+
+      <v-list-item
+        v-for="item in formAnswer.images"
+        :key="item.small"
+        @click="showFullImage(item.fullHd)"
+      >
+        <v-list-item-avatar>
+          <v-icon :class="iconClass">mdiAccount</v-icon>
+        </v-list-item-avatar>
+
+        <v-list-item-content>
+          <v-list-item-title
+            v-if="item.tags.length > 0 "
+            v-text="item.tags"
+          ></v-list-item-title>
+          <v-list-item-title v-else>{{$t('components.claimcase.claimFiles.noTags', 'Keine Tags hinzugefügt')}}</v-list-item-title>
+          <v-list-item-subtitle v-text="subtitle"></v-list-item-subtitle>
+        </v-list-item-content>
+      </v-list-item>
+    </v-list>
+  </v-card>
+  <h3 v-else>
+    {{$t('components.claimcase.claimFiles.noFiles', 'Keine Dateien gefunden')}}
+  </h3>
+  <div v-if="!!image">
+    <imageCard
+      v-bind:show.sync="showImageCard"
+      v-bind:status="status"
+      v-bind:image="image"
+    >
+    </imageCard>
+  </div>
+  <imageUpload v-if="formAnswer" v-bind:id="formAnswer._id"></imageUpload>
+</div>

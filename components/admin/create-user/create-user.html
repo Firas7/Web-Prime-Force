@@ -1,0 +1,85 @@
+<section class="create mx-auto" >
+  <v-card flat>
+    <v-card-title>
+      <h1>{{ $t('components.admin.createUser.title', 'Benutzer Anlegen') }}</h1>
+    </v-card-title>
+    <v-card-text>
+      <!-- Core data -->
+      <v-text-field 
+        :label="$t('components.admin.createUser.email', 'Email')"
+        color="#3C366B"
+        v-model="user.email"
+        required> 
+      </v-text-field>
+      <v-text-field 
+        :label="$t('components.admin.createUser.firstname', 'Vorname')"
+        v-model="user.firstname"
+        required> 
+      </v-text-field>
+      <v-text-field 
+        :label="$t('components.admin.createUser.lastname', 'Nachname')"
+        v-model="user.lastname"
+        required> 
+      </v-text-field>
+      <!-- Authorization -->
+      <header>{{ $t('components.admin.createUser.authorization.title', 'Authorization') }}:</header>
+      <v-select
+        :label="$t('components.admin.createUser.authorization.branch', 'Branch')"
+        v-model="auth.branch"
+        :items="branch">
+      </v-select>
+      <v-text-field 
+        :label="$t('components.admin.createUser.authorization.level', 'Level')"
+        v-model="auth.level">
+      </v-text-field>
+      <!-- Scope -->
+      <header>Scope:</header>
+      <v-checkbox 
+        v-model="user.scope" 
+        value="ADMIN"
+        label="ADMIN"
+        :rules="[validateScope(user.scope)]"
+        hide-details>
+      </v-checkbox>
+      <v-checkbox 
+        v-model="user.scope"
+        value="INSURED"
+        label="INSURED"
+        :rules="[validateScope(user.scope)]"
+        hide-details>
+      </v-checkbox>
+      <v-checkbox 
+        v-model="user.scope" 
+        value="CLERK"
+        label="CLERK"
+        :rules="[validateScope(user.scope)]"
+        hide-details>
+      </v-checkbox>
+      <v-checkbox 
+        v-model="user.scope" 
+        value="AGENT"
+        label="AGENT"
+        :rules="[validateScope(user.scope)]">
+      </v-checkbox>
+      </v-text-field>
+    </v-card-text>
+    <v-card-actions class="card-action">
+      <v-btn 
+        text
+        class="highlight"
+        depressed
+        color="#667EEA"
+        @click="backToAdmin">
+        {{ $t('components.admin.createUser.buttons.back', 'ANLEGEN') }}
+      </v-btn>
+      <v-btn
+        color="#667EEA"
+        class="max-width text-light"
+        depressed
+        @click="createUser"
+        depressed>
+        {{ $t('components.admin.createUser.buttons.create', 'ZURÜCK') }}
+      </v-btn>
+    </v-card-actions>
+  </v-card>
+</section>

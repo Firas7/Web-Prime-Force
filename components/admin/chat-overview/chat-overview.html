@@ -1,0 +1,15 @@
+<div class="chat-overview">
+  <template v-for="chat in chats">
+    <v-card class="chat-overview-card" @click.native="openChat(chat._id)">
+     <div class="profile-image-holder">
+      <img class="profile-image" src="https://cdn.vuetifyjs.com/images/profiles/marcus.jpg" alt="">
+     </div>
+     <div class="display-text">
+      <h3>{{chat.messages[chat.messages.length-1].timestamp}}</h3>
+      <h2 class="part-name">{{partNames[chats.indexOf(chat)]}}</h2>
+      
+      <p class="message-body">{{chat.messages[chat.messages.length-1].content}}</p>
+     </div>
+    </v-card>
+  </template>
+</div>

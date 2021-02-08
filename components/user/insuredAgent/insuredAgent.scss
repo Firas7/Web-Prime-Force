@@ -1,0 +1,49 @@
+.agent-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+  @media screen and (max-width: 639px) {
+    flex-direction: column-reverse; 
+
+  }
+
+  .contact-data {
+    width: inherit;
+  
+    .name {
+      color: #667eea;
+      font-size: 1.5rem;
+    }
+  
+    .contact-data {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      margin-top: 0.3rem;
+  
+      span {
+        width: 20%;
+      }
+  
+      a {
+        width: 80%;
+      }
+    }
+  }
+  
+  .agent-image {
+    height: 6.25rem;
+    width: max-content;
+    @media screen and (max-width: 639px) {
+      align-self: center;
+      margin-bottom: 1rem;
+    }
+   
+
+    .face-image {
+      border-radius: 999px;
+    }
+  }  
+
+}

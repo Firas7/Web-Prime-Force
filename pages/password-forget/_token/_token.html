@@ -1,0 +1,58 @@
+<section class="token">
+  <app-header></app-header>
+  <div class="content mx-auto">
+    <h2 v-if="!confirmPassword" class="mb-5 text-center">
+      Passwort zurücksetzen
+    </h2>
+    <p v-if="!confirmPassword">Bitte geben Sie ihr neues Passwort ein:</p>
+    <v-form v-if="!confirmPassword" v-model="valid">
+      <v-text-field
+        :type="hiddenPassword ? 'password' : 'text'"
+        label="Neues Passwort"
+        prepend-icon="mdi-lock-outline"
+        :append-icon="hiddenPassword ? 'mdi-eye-outline': 'mdi-eye-off-outline'"
+        @click:append="showPassword"
+        clearable
+        required
+        :rules="[validatePasswordLength(password)]"
+        v-model="password"
+      >
+      </v-text-field>
+      <v-text-field
+        :type="hiddenPassword ? 'password' : 'text'"
+        label="Passwort wiederholen"
+        prepend-icon="mdi-lock-outline"
+        :append-icon="hiddenPassword ? 'mdi-eye-outline': 'mdi-eye-off-outline'"
+        @click:append="showPassword"
+        clearable
+        required
+        :rules="[validatePasswordMatch(passwordMatch)]"
+        v-model="passwordMatch"
+      >
+      </v-text-field>
+    </v-form>
+    <h2 v-if="confirmPassword" class="mb-5 text-center">Erfolgreich!</h2>
+    <p v-if="confirmPassword">Ihr Passwort wurde erfolgreich geändert.</p>
+
+    <v-btn
+      v-if="!confirmPassword"
+      color="#667EEA"
+      class="text-light"
+      depressed
+      @click="reset"
+      :disabled="!valid"
+    >
+      Aktualisieren
+    </v-btn>
+    <v-btn
+      v-if="confirmPassword"
+      block
+      color="#667EEA"
+      class="max-width text-light"
+      depressed
+      @click="closeReset"
+    >
+      Schließen
+    </v-btn>
+  </div>
+</section>

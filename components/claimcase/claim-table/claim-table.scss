@@ -1,0 +1,79 @@
+tr {
+  td {
+    &:last-of-type {
+      border-left: 1px solid #d3d3d3;
+    }
+
+    .clickable {
+      cursor: pointer;
+    }
+  }
+}
+
+.v-expansion-panel {
+  &:hover {
+    background-color: #ebf4ff;
+  }
+
+  &::before {
+    box-shadow: none;
+  }
+}
+
+.claimcase-card {
+  display: flex;
+  justify-content: space-around;
+
+  div {
+    width: 22%;
+
+  }
+
+  .label {
+    color: #888;
+  }
+
+  .claimcase-card-actions {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+
+  }
+}
+
+.chip {
+  border-radius: 100px;
+  margin: auto 0;
+  padding: 2px 16px;
+  width: max-content;
+}
+
+.finished-chip {
+  background-color: #9ae6b4;
+  border: 1px solid #48bb78;
+  color: #22543d;
+}
+
+.progress-chip {
+  background-color: #faf089;
+  border: 1px solid #ecc94b;
+  color: #744210;
+}
+
+.pending-chip {
+  background-color: #e2e8f0;
+  border: 1px solid #a0aec0;
+  color: #1a202c;
+}
+
+.declined-chip {
+  background-color: #feb2b2;
+  border: 1px solid #f56565;
+  color: #742a2a;
+}
+
+.none-chip {
+  background-color: #e2e8f0;
+  border: 1px solid #a0aec0;
+  color: #1a202c;
+}

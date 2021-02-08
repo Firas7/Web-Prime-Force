@@ -1,0 +1,164 @@
+{
+  "_id": "5e84ecbe93ce844460d4f455",
+  "branch": "Test",
+  "info": "Schadenanzeige für Kraftfahrzeug-Haftpflicht- und Kaskoschäden",
+  "version": "1.0",
+  "active": true,
+  "steps": [
+    {
+      "name": "Allgemeine Information",
+      "step": 1,
+      "fields": [
+        {
+          "nr": 1,
+          "id": 1,
+          "type": "textfield",
+          "attributes": {
+            "label": "Autokennzeichen (Plichtfeld)",
+            "isRequired": true,
+            "length": 255
+          }
+        },
+        {
+          "nr": 2,
+          "id": 2,
+          "type": "date",
+          "attributes": { "label": "Datum (Pflichtfeld)", "isRequired": true }
+        },
+        {
+          "nr": 3,
+          "id": 3,
+          "type": "time",
+          "attributes": { "label": "Uhrzeit", "isRequired": false }
+        },
+        {
+          "nr": 4,
+          "id": 4,
+          "type": "textfield",
+          "attributes": {
+            "label": "Fahrzeugidentifikationsnummer (Plichtfeld)",
+            "isRequired": true,
+            "length": 255
+          }
+        },
+        {
+          "nr": 5,
+          "id": 5,
+          "type": "textarea",
+          "attributes": {
+            "label": "Kilometerstand",
+            "isRequired": false,
+            "length": 255
+          }
+        }
+      ]
+    },
+    {
+      "name": "Fragen zum Fahrer",
+      "step": 2,
+      "fields": [
+        {
+          "nr": 1,
+          "id": 6,
+          "type": "radio",
+          "attributes": {
+            "label": "Fahrer war: ",
+            "isRequired": true,
+            "group": [
+              { "id": 1, "labelRadio": "Versicherungsnehmer" },
+              { "id": 2, "labelRadio": "Sohn/Tocher" },
+              { "id": 3, "labelRadio": "Ehepartner/Lebensgefährte" },
+              { "id": 4, "labelRadio": "Unbekannt" },
+              { "id": 5, "labelRadio": "Sonstiges" }
+            ]
+          }
+        },
+        {
+          "nr": 2,
+          "id": 7,
+          "type": "textfield",
+          "enableWhen": { "id": 6, "value": 5 },
+          "attributes": {
+            "label": "Wenn Sonstiges",
+            "isRequired": false,
+            "length": 255
+          }
+        },
+        {
+          "nr": 3,
+          "id": 8,
+          "type": "date",
+          "attributes": {
+            "label": "Geburstsdaum des Fahrers",
+            "isRequired": true
+          }
+        }
+      ]
+    },
+    {
+      "name": "Fragen zum Fahrzeug / Gespann",
+      "step": 3,
+      "fields": [
+        {
+          "nr": 1,
+          "id": 9,
+          "type": "checkbox",
+          "attributes": {
+            "label": "Fahrzeug",
+            "isRequired": false,
+            "length": 255
+          }
+        }
+      ]
+    },
+    {
+      "name": "Fragen zum Schadenshergang",
+      "step": 4,
+      "fields": [
+        {
+          "nr": 1,
+          "id": 10,
+          "type": "checkbox",
+          "attributes": { "label": "Wenn", "isRequired": true, "length": 255 }
+        }
+      ]
+    },
+    {
+      "name": "Bilden zum Schadensfall hochladen",
+      "step": 5,
+      "fields": [
+        {
+          "nr": 1,
+          "id": 11,
+          "type": "upload",
+          "attributes": {
+            "label": "Bilder",
+            "isRequired": false,
+            "length": 255
+          }
+        }
+      ]
+    },
+    {
+      "name": "Schadensfall abschicken",
+      "step": 6,
+      "fields": [
+        {
+          "nr": 1,
+          "id": 12,
+          "type": "dropdown",
+          "attributes": {
+            "content": [
+              { "value": 1, "text": "TEST1" },
+              { "value": 2, "text": "TEST2" },
+              { "value": 3, "text": "TEST3" }
+            ],
+            "label": "Dropdown",
+            "isRequired": true,
+            "length": 255
+          }
+        }
+      ]
+    }
+  ]
+}

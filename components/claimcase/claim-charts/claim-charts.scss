@@ -1,0 +1,24 @@
+.card {
+  height: 100%;
+  margin-left: 2.5%;
+  margin-right: 2.5%;
+  width: 45%;
+}
+
+.card-full {
+  height: 100%;
+  margin-left: 2.5%;
+  margin-right: 2.5%;
+  width: 95%;
+}
+
+section {
+  display: flex;
+  flex-direction: row-reverse;
+  margin-bottom: 1em;
+  width: 100%;
+}
+
+.charts {
+  padding-bottom: 10px;
+}

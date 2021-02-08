@@ -1,0 +1,60 @@
+<div>
+  <div v-if="!!claimcases && claimcases.length !== 0" class="bb-conatiner">
+    <h3 class="bb-name" v-if="!!claimcases">
+      {{ $t('components.claimcase.claimcaseView.title', 'Schadensübersicht') }}
+    </h3>
+    <v-simple-table>
+      <thead>
+        <tr class="tb-header">
+          <th>{{ $t('components.claimcase.claimcaseView.claimNumber', 'Schadensfallnummer') }}</th>
+          <th>{{ $t('components.claimcase.claimcaseView.contractNumber', 'Vertragsnummer') }}</th>
+          <th>{{ $t('components.claimcase.claimcaseView.branch', 'Sparte') }}</th>
+          <th>{{ $t('components.claimcase.claimcaseView.status', 'Status') }}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          v-for="claimcase in claimcases"
+          :key="claimcase._id"
+          @click="showDetail(claimcase)"
+        >
+          <td>{{ claimcase._id }}</td>
+          <td>{{ claimcase.contractId }}</td>
+          <td>{{ claimcase.branch }}</td>
+          <td>
+            <p class="none-chip chip" v-if="claimcase.status===Status.NONE">
+              <statuscomponent v-bind:status="claimcase.status" />
+            </p>
+            <p
+              class="pending-chip chip"
+              v-if="claimcase.status===Status.PENDING"
+            >
+              <statuscomponent v-bind:status="claimcase.status" />
+            </p>
+            <p
+              class="declined-chip chip"
+              v-if="claimcase.status===Status.DECLINED"
+            >
+              <statuscomponent v-bind:status="claimcase.status" />
+            </p>
+            <p
+              class="progress-chip chip"
+              v-if="claimcase.status===Status.PROGRESS"
+            >
+              <statuscomponent v-bind:status="claimcase.status" />
+            </p>
+            <p
+              class="finished-chip chip"
+              v-if="claimcase.status===Status.FINISHED"
+            >
+              <statuscomponent v-bind:status="claimcase.status" />
+            </p>
+          </td>
+        </tr>
+      </tbody>
+    </v-simple-table>
+  </div>
+  <div v-else class="bb-conatiner">
+    <h3 class="bb-name">{{ $t('components.claimcase.claimcaseView.notFound', 'Keine Schadensfälle gefunden') }}</h3>
+  </div>
+</div>

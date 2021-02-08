@@ -1,0 +1,105 @@
+<section>
+  <div>
+    <v-app-bar flat color="#667EEA" app>
+      <img alt="ClaimNow Logo" src="/blue-bug-logo.svg" class="logo" />
+      <h1 class="logo-text">Blue bug</h1>
+      <div class="login-wrapper">
+        <v-btn
+          data-cy="show-register-btn"
+          depressed
+          class="button"
+          outlined
+          color="#EBF4FF"
+          @click.stop="showRegister = true"
+          ><p class="buttom-text register">
+            {{ $t('navigation.links.register', 'Registrieren') }}
+          </p>
+          <v-icon class="icon">mdi-account-plus</v-icon>
+        </v-btn>
+        <v-btn
+          data-cy="showLogin"
+          class="button"
+          depressed
+          outlined
+          color="#EBF4FF"
+          @click.stop="showLogin = true"
+          ><p class="buttom-text login">{{ $t('navigation.links.login', 'Einloggen') }}</p>
+          <v-icon class="icon">mdi-account-key</v-icon>
+        </v-btn>
+        <v-tooltip bottom>
+          <template v-slot:activator="{ on }">
+            <v-btn
+              icon
+              depressed
+              class="language button"
+              v-on="on"
+              @click="changeLanguage"
+              color="#EBF4FF"
+              exact
+            >
+              <v-icon medium>mdi-translate</v-icon>
+              <p>{{ activeLanguage }}</p>
+            </v-btn>
+          </template>
+          <span>{{ $t('components.layout.head-bar.language', 'Sprache wechseln') }}</span>
+        </v-tooltip>
+        <register
+          v-bind:show.sync="showRegister"
+          @switch="onSwitchToRegister"
+        />
+        <login v-bind:show.sync="showLogin" @switch="onSwitchToRegister" />
+      </div>
+    </v-app-bar>
+
+    <div class="section first-section">
+      <div class="section-image">
+        <img alt="Hero Image" src="/hero-image.svg" />
+      </div>
+      <div class="section-text">
+        <h1>{{ $t('pages.index.headline', 'Mache mehr aus deiner Zeit') }}</h1>
+        <h2>{{ $t('pages.index.subheadline', 'Keine Warteschlangen, wenn es schnell gehen muss.') }}</h2>
+      </div>
+    </div>
+    <div class="section second-section">
+      <div class="section-text">
+        <h1>{{ $t('pages.index.subsection.headline', 'Alle Versicherungen auf einen Blick') }}</h1>
+        <h2>{{ $t('pages.index.subsection.subheadline', 'Eine schnelle Übersicht all deiner laufenden Claims') }}</h2>
+      </div>
+      <div class="section-image">
+        <img
+          alt="Hero Image"
+          src="https://via.placeholder.com/1920x1080/888888/333333"
+        />
+      </div>
+    </div>
+
+    <v-footer
+      color="primary lighten-1"
+      padless
+      >
+        <v-row
+          justify="center"
+          no-gutters
+        >
+          <v-btn
+            v-for="link in links"
+            :key="link"
+            color="white"
+            text
+            rounded
+            class="footer Button"
+            @click="footerBtn(link)"
+          >
+          {{ link }}
+          </v-btn>
+
+          <v-col
+            class="primary lighten-2 py-4 text-center white--text"
+            cols="12"
+          >
+          {{ new Date().getFullYear() }} -- <strong>Prime Force</strong>
+          </v-col>
+        </v-row>
+    </v-footer>
+  </div>
+</section>

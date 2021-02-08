@@ -1,0 +1,729 @@
+{
+  "navigation": {
+    "links": {
+      "register": "Register",
+      "login": "Login",
+      "home": "Home",
+      "german": "DE",
+      "english": "EN"
+    }
+  },
+  "components": {
+    "admin": {
+      "contracts": {
+        "contractView": {
+          "title": "Contract Overview",
+          "tableHeaders": {
+            "id": "Contract number",
+            "productname": "Contract name",
+            "insurancepapernumber": "Insurance number",
+            "startdate": "Start of contract"
+          },
+          "error": {
+            "notFound": "No contracts found or connected"
+          }
+        },
+        "contractsTable": {
+          "title": "Contracts Overview",
+          "tableHeaders": {
+            "productname": "Contract name",
+            "branch": "Branch",
+            "id": "Contract number",
+            "partnerId": "Partner number",
+            "action": "Actions"
+          },
+          "buttons": {
+            "add": "add"
+          },
+          "messages": {
+            "delete": "Delete contract?",
+            "load": "Contracts are loading, please wait..."
+          },
+          "pagination": {
+            "itemsPerPage": "Contracts per page",
+            "contracts": "Contracts",
+            "of": "of"
+          },
+          "tooltips": {
+            "detail": "Show contract details",
+            "delete": "Delete contract",
+            "claimcase": "Create a new claim",
+            "loadPrevious": "load previous page",
+            "loadNext": "load next page"
+          }
+        },
+        "detailDialog": {
+          "title": "Contract data",
+          "contractData": {
+            "productname": "Contract name",
+            "id": "Contract number",
+            "partnerId": "Partner number"
+          },
+          "partnerTitle": "Contractual partner",
+          "partnerData": {
+            "name": "Name",
+            "birthday": "Birthday",
+            "address": "Address"
+          },
+          "detailTitle": "Contract details",
+          "contractDetailsData": {
+            "branch": "Branch",
+            "insurancepapernumber": "Insurance number",
+            "startdate": "Start of contract"
+          },
+          "buttons": {
+            "close": "close"
+          },
+          "tooltips": {
+            "edit": "edit"
+          }
+        },
+        "formDialog": {
+          "addTitle": "Create contract",
+          "editTitle": "Edit contract",
+          "productname": "Contract name",
+          "insurancepapernumber": "Insurance numbe",
+          "branch": "Branch",
+          "partnerId": "Partner number",
+          "startdate": "Start of contract",
+          "buttons": {
+            "cancel": "cancel",
+            "save": "save"
+          }
+        }
+      },
+      "insured": {
+        "insured": {
+          "title": "Insured profile",
+          "tableHeaders": {
+            "name": "Name",
+            "gender": "Gender",
+            "birthday": "Birthday",
+            "address": "Address",
+            "city": "City",
+            "country": "Country",
+            "state": "State",
+            "email": "E-Mail",
+            "telefon": "Phone",
+            "cellphoneNumber": "Mobile phone",
+            "postOfficeBox": "Post offie box"
+          },
+          "labels": {
+            "salutation": "Salutation",
+            "firstname": "First name",
+            "lastname": "Last name",
+            "street": "Street",
+            "housenumber": "House number",
+            "postcode": "Post code",
+            "city": "City"
+          },
+          "buttons": {
+            "back": "back",
+            "add": "add"
+          }
+        },
+        "insuredTable": {
+          "title": "Insured",
+          "tableHeaders": {
+            "salutation": "Salutation",
+            "firstname": "First name",
+            "lastname": "Last name",
+            "gender": "Gender",
+            "birthday": "Birthday",
+            "street": "Street",
+            "postcode": "Post code",
+            "postOfficeBox": "Post office box",
+            "email": "E-Mail",
+            "cellphoneNumber": "Mobile Phone",
+            "partnerId": "Partner ID",
+            "action": "Actions"
+          },
+          "empty": {
+            "salutation": "Unknown",
+            "firstname": "Error",
+            "lastname": "Error",
+            "gender": "Unknown",
+            "birthday": "Unknown",
+            "address": "Unknown",
+            "postcode": "Unknown",
+            "postOfficeBox": "Unknown",
+            "email": "Unknown",
+            "cellphoneNumber": "Unknown",
+            "partnerId": "Unknown"
+          },
+          "buttons": {
+            "add": "add",
+            "loadDataButton": "Load more data"
+          },
+          "tooltips": {
+            "add": "Create new insured",
+            "delete": "Delete insured",
+            "edit": "Edit insured"
+          }
+        }
+      },
+      "search": {
+        "searchTitle": "Contracts",
+        "damage": "Damage"
+      },
+      "tenant": {
+        "formDialog": {
+          "addTitle": "Create Tenant",
+          "editTitle": "Edit Tenant",
+          "firstName": "First Name",
+          "lastName": "Last Name",
+          "url": "Website",
+          "pathName": "Pathname",
+          "buttons": {
+            "cancel": "cancel",
+            "save": "save"
+          }
+        },
+        "tenantTable": {
+          "title": "Tenant Overview",
+          "tableHeaders": {
+            "id": "Tenant number",
+            "firstName": "First name",
+            "lastName": "Last name",
+            "url": "Website",
+            "pathName": "Pathname",
+            "actions": "Actions"
+          },
+          "empty": {
+            "id": "unknown",
+            "firstName": "error",
+            "lastName": "error",
+            "url": "unknown",
+            "pathName": "unknown"
+          },
+          "buttons": {
+            "add": "add"
+          },
+          "pagination": {
+            "itemsPerPage": "Tenants per page",
+            "of": "off"
+          },
+          "tooltips": {
+            "delete": "Delete tenant",
+            "edit": "Edit tenant",
+            "tenant": "Create new tenant",
+            "loadPrevious": "Load previous page",
+            "loadNext": "Load next page"
+          }
+        }
+      },
+      "createUser": {
+        "title": "Create User",
+        "email": "Email",
+        "firstname": "Firstname",
+        "lastname": "Lastname",
+        "authorization": {
+          "title": "Authorization",
+          "branch": "Branch",
+          "level": "Level"
+        },
+        "buttons": {
+          "create": "CREATE",
+          "back": "BACK"
+        }
+      }
+    },
+    "appHeader": {
+      "links": {
+        "register": "Register",
+        "login": "Login",
+        "german": "DE",
+        "english": "EN"
+      }
+    },
+    "authentication": {
+      "login": {
+        "title": "Login",
+        "email": "E-Mail",
+        "password": "Password",
+        "passwordForget": "Forgot Password?",
+        "passwordForgetLink": "Restore now",
+        "noAccount": "No account yet?",
+        "nowRegisterLink": "Join Now",
+        "buttons": {
+          "login": "Login"
+        }
+      },
+      "register": {
+        "title": "Register",
+        "email": "E-Mail",
+        "password": "Password",
+        "firstName": "First name",
+        "lastName": "Last name",
+        "registerText": "By clicking on >>Register<< you agree with our ",
+        "terms": "Terms",
+        "dataPolicyText": "Learn how we use your data in our ",
+        "dataPolicy": "Data Policy",
+        "sendEmailText": "An email with a confirmation link was sent to: ",
+        "haveAccount": "Already have an account?",
+        "nowLoginLink": "Log in now",
+        "buttons": {
+          "register": "Register",
+          "close": "close"
+        }
+      }
+    },
+    "claimcase": {
+      "claimAnswers": {
+        "answers": "Completed answers"
+      },
+      "claimCharts": {
+        "notUsed": "No translation used"
+      },
+      "claimDetails": {
+        "status": "STATUS"
+      },
+      "claimFiles": {
+        "files": "Files",
+        "noTags": "No tags added",
+        "noFiles": "No files found"
+      },
+      "claimTable": {
+        "title": "Damages"
+      },
+      "claimcaseView": {
+        "title": "Damage overview",
+        "claimNumber": "Claim number",
+        "contractNumber": "Contract number",
+        "branch": "Branch",
+        "status": "Status",
+        "notFound": "No damage cases found"
+      },
+      "imageUpload": {
+        "info": "Upload image to a category",
+        "labels": {
+          "tags": "choose category",
+          "imageUpload": "choose pictures"
+        },
+        "buttons": {
+          "upload": "Upload pictures"
+        },
+        "imageCard": {
+          "imageInfo": "Image of the claim",
+          "buttons": {
+            "close": "close"
+          }
+        }
+      },
+      "rating": {
+        "damageAssessmentText": "Bewerten Sie bitte die Bearbeitung des Schadenfalls",
+        "suggestionsForImprovementText": "Please tell us what we can improve",
+        "thankYouText": "Thanks for your review",
+        "buttons": {
+          "send": "send"
+        }
+      },
+      "damageAmount": {
+        "title": "Damage amount",
+        "damageAmountToBePaidOut": "Damage amount to be paid out",
+        "fixedPaymentAmount": "The fixed payment amount is",
+        "buttons": {
+          "set": "set"
+        }
+      }
+    },
+    "common": {
+      "auth": {
+        "title": "Authorization",
+        "branch": "Branch",
+        "level": "Level",
+        "noAuthorization": "This object has no authorization protection"
+      },
+      "statusComponent": {
+        "success": "Successful",
+        "unknown-user": "Unknown user",
+        "unknown-error": "Unknown error",
+        "pending": "Pending",
+        "progress": "In processing",
+        "finished": "Completed",
+        "declined": "Declined",
+        "none": "Ready to send"
+      },
+      "toolbar": {
+        "notUsed": "No translation used"
+      }
+    },
+    "insured": {
+      "enum": {
+        "undefined": "Undefined",
+        "neutral": "Neutral",
+        "female": "Female",
+        "male": "Male"
+      },
+      "birthday": "Birthday",
+      "gender": "Gender",
+      "address": "Address",
+      "handy": "Mobile phone",
+      "telefon": "Phone",
+      "email": "E-Mail"
+    },
+    "layout": {
+      "main-bar": {
+        "claim": "Your Claims",
+        "user": "User Data",
+        "insured": "Insured",
+        "contract": "Contracts",
+        "tenant": "Tenants",
+        "claimcase": "Claimcases",
+        "createUser": "Create User",
+        "createClaim": "New Claim",
+        "menu": "Close menu"
+      },
+      "head-bar": {
+        "logout": "Log out",
+        "language": "Switch language",
+        "search": "Search",
+        "menu": "Open menu"
+      }
+    },
+    "user": {
+      "clerk": {
+        "telefon": "Phone:",
+        "email": "E-Mail:"
+      },
+      "insuredCard": {
+        "title": "Insured profile",
+        "tableHeaders": {
+          "name": "Name",
+          "gender": "Gender",
+          "birthday": "Birthday",
+          "address": "Address",
+          "city": "City",
+          "country": "Country",
+          "state": "State",
+          "email": "E-Mail",
+          "telefon": "Phone",
+          "cellphoneNumber": "Mobile phone",
+          "postOfficeBox": "Post office Box"
+        },
+        "labels": {
+          "salutation": "Salutation",
+          "firstname": "First name",
+          "lastname": "Last name",
+          "street": "Street",
+          "housenumber": "House number",
+          "postcode": "Post code",
+          "city": "city"
+        },
+        "tooltips": {
+          "edit": "edit the insured"
+        },
+        "buttons": {
+          "back": "back",
+          "update": "update"
+        }
+      },
+      "insuredAgent": {
+        "phone": "Phone",
+        "email": "E-Mail"
+      },
+      "userCard": {
+        "userTitle": "Your user data",
+        "clerkTitle": "Your clerk",
+        "agentTitle": "Your Agent",
+        "insuranceTitle": "Your insurance",
+        "tableHeaders": {
+          "name": "Name",
+          "email": "E-Mail",
+          "partnerId": "Partner ID"
+        },
+        "labels": {
+          "firstName": "First name",
+          "lastName": "Last name",
+          "email": ""
+        },
+        "buttons": {
+          "submitChanges": "Apply changes",
+          "submitCode": "Check code",
+          "submit": "submit"
+        },
+        "tooltips": {
+          "edit": "Edit user data",
+          "email": {
+            "validated": "E-Mail validated",
+            "unconfirmed": "Your e-mail is not yet confirmed"
+          },
+          "linkedPartner": {
+            "confirmed": "Partner ID confirmed",
+            "unconfirmed": "Your partner ID has not been confirmed yet"
+          },
+          "insurance": {
+            "add": "Add new insurance"
+          }
+        },
+        "linkedPartner": {
+          "addPartnerIdHint": "Enter your partner ID now:",
+          "confirmText": "Your PartnerId has been entered, but has not yet been confirmed. We have sent a confirmation code to the stored email address of the PartnerId. Please enter the confirmation code here:"
+        },
+        "insurance": {
+          "notFound": "No insurances found"
+        }
+      }
+    }
+  },
+  "pages": {
+    "index": {
+      "headline": "Do more with your time",
+      "subheadline": "No queues when things need to go fast.",
+      "subsection": {
+        "headline": "All insurances at a glance",
+        "subheadline": "A quick overview of all your ongoing claims."
+      }
+    },
+    "admin": {
+      "tenants": {
+        "index": {
+          "title": "Tenants",
+          "tableHeader": {
+            "id": "Tenant number",
+            "firstName": "Firstname",
+            "lastName": "Lastname",
+            "url": "URL",
+            "pathName": "Pathname",
+            "actions": "Actions"
+          },
+          "empty": {
+            "id": "Unbekannt",
+            "firstName": "Unbekannt",
+            "lastName": "Unbekannt",
+            "url": "Unbekannt",
+            "pathName": "Unbekannt"
+          },
+          "button": {
+            "add": "Create tenant",
+            "delete": "Delete",
+            "edit": "Edit"
+          },
+          "messages": {
+            "deleteMessage": "Delete tenant?",
+            "loadingMessage": "Tenants are loading, please wait..."
+          },
+          "pagignation": {
+            "tenants": "Tenants",
+            "of": "of",
+            "itemsPerPage": "Tenants per page"
+          }
+        },
+        "addEditDialog": {
+          "title": {
+            "addTitle": "Create tenant:",
+            "editTitle": "Edit tenant:"
+          },
+          "index": {
+            "firstName": "Firstname",
+            "lastName": "Lastname",
+            "url": "URL",
+            "pathName": "Pathname"
+          },
+          "button": {
+            "cancel": "Close",
+            "save": "Save"
+          }
+        },
+        "tooltip": {
+          "edit": "Edit a tentnt",
+          "delete": "Delete a tenant",
+          "tenant": "Create new tenant",
+          "loadNext": "Load next page",
+          "loadPrevious": "Load previous page"
+        }
+      },
+      "contracts": {
+        "addContract": "Add new contract",
+        "notFound": "No Contracts found",
+        "index": {
+          "title": "Contracts",
+          "add": "Add",
+          "cancel": "Cancel",
+          "save": "Save",
+          "id": "ID",
+          "productname": "Product name",
+          "linkedPartnerId": "Insured / PartnerId",
+          "startdate": "Date",
+          "branch": "Branch",
+          "insurancepapernumber": "Insureance-number",
+          "delete": "Delete",
+          "edit": "Edit",
+          "show": "show",
+          "personnotfound": "The assigned person could not be found.",
+          "tooltip": {
+            "edit": "Edit",
+            "delete": "Delete"
+          },
+          "loadDataButton": "Load more data",
+          "expand": "expand",
+          "decrease": "decrease"
+        },
+        "add": {
+          "title": "Here you can create a new Contract",
+          "cancel": "Cancel",
+          "save": "Save",
+          "productname": "Product name",
+          "insured": "Insured",
+          "branch": "Branch",
+          "startdate": "Contract start",
+          "options": "Options",
+          "insurancepapernumber": "Insurance number"
+        },
+        "DetailDialog": {
+          "title": "Details of contract",
+          "insurancepapernumber": "Insurance paper number",
+          "branch": "Branch",
+          "productname": "Productname",
+          "startdate": "Startdate",
+          "closeButton": "Close",
+          "firstName": "Firstname",
+          "lastName": "Lastname",
+          "streetAddress": "Street"
+        }
+      },
+      "search": "Search",
+      "detail": {
+        "tabs": {
+          "insured": "Insured",
+          "contract": "Contracts",
+          "claimcase": "Claimcases"
+        }
+      }
+    },
+    "user": {
+      "index": {
+        "userData": "User Data",
+        "insuredData": "Insured Data"
+      },
+      "contracts": {
+        "index": {
+          "title": "Your contracts",
+          "notFound": "No Contracts found",
+          "id": "ID",
+          "productname": "Product name",
+          "branch": "Branch",
+          "startdate": "Startdate",
+          "insurancepapernumber": "Insurance paper number",
+          "action": "Actions",
+          "delete": "Delete",
+          "edit": "Edit",
+          "show": "Show",
+          "options": "Options",
+          "claimcase": "New claimcase"
+        }
+      },
+      "cardaction": {
+        "submitChanges": "Save changes",
+        "submitCode": "Verify code",
+        "submit": "Submit"
+      },
+      "card": {
+        "userdata": {
+          "title": "Your Userdata",
+          "name": "Name",
+          "firstname": "Firstname",
+          "lastname": "Lastname",
+          "email": {
+            "email": "E-Mail",
+            "tooltip": {
+              "validated": "E-Mail validated",
+              "unconfirmed": "Your e-mail is not yet confirmed"
+            }
+          },
+          "tooltip": {
+            "edit": "Edit"
+          },
+          "linkedPartner": {
+            "partnerId": "Partner ID",
+            "confirmed": "Confirmed",
+            "addPartnerIdHint": "Enter your partner ID now:",
+            "confirmText": "Your PartnerId has been entered, but has not yet been confirmed. We have sent a confirmation code to the stored email address of the PartnerId. Please enter the confirmation code here:",
+            "tooltip": {
+              "confirmed": "Partner ID confirmed",
+              "unconfirmed": "Your partner ID has not been confirmed yet"
+            }
+          }
+        },
+        "insurance": {
+          "title": "Your Insurance",
+          "notFound": "No insurances found",
+          "tooltip": {
+            "add": "Add new insurance"
+          }
+        },
+        "clerk": {
+          "title": "Your Clerk"
+        },
+        "insuredAgent": {
+          "title": "Your Agent"
+        }
+      }
+    },
+    "claimcase": {
+      "index": {
+        "title": "Claimcases",
+        "notFound": "No Claimcases found"
+      },
+      "table": {
+        "status": "Status",
+        "productname": "productname",
+        "licensePlate": "license plate",
+        "startdate": "contract start",
+        "contractID": "contract id",
+        "carID": "car ID",
+        "mileage": "mileage",
+        "place": "accident place",
+        "driverInformation": "driver informations",
+        "driverBirth": "birthday",
+        "driverIdentify": "name",
+        "description": "description",
+        "time": "accident time",
+        "branch": "Branch",
+        "version": "Version",
+        "details": "show details"
+      }
+    },
+    "claim": {
+      "detail": {
+        "aboutPage": "Go to my About Page",
+        "tabs": {
+          "overview": "Overview",
+          "answers": "Answers",
+          "insured": "Insured",
+          "files": "Files",
+          "amountOfLoss": "Amount Of Loss"
+        },
+        "buttons": {
+          "openDetail": "Open Detail"
+        }
+      }
+    },
+    "setPassword": {
+      "title": "Create New Password",
+      "text": "Please insert the token in the E-Mail and new Password",
+      "form": {
+        "token": "Token",
+        "newPassword": "New Password",
+        "repeatPassword": "Repeat Password"
+      },
+      "button": {
+        "save": "Save Password"
+      }
+    },
+    "passwordForget": {
+      "title": "Passwort Forgotten",
+      "text": "If you have forgotten your password, send us your email address and we'll send you an email with instructions on how to restore your password.",
+      "form": {
+        "email": "E-Mail"
+      },
+      "buttons": {
+        "send": "Send",
+        "close": "Close"
+      },
+      "sendMail": {
+        "title": "Successfully"
+      }
+    }
+  }
+}

@@ -1,0 +1,20 @@
+<div class="agent-container">
+  <div class="contact-data">
+    <h3 class="name">{{agent.name}}</h3>
+    <h4 class="insurece">{{agent.insurence}}</h4>
+  <div class="phone contact-data">
+    <span class="phone-label">{{ $t('components.user.insuredAgent.phone', 'Telefon') }}:</span>
+    <a class="phone-number" :href="'tel:'+agent.phoneNumber">{{agent.phoneNumber}}</a>
+  </div>
+    <div class="email contact-data">
+      <span class="phone-label">{{ $t('components.user.insuredAgent.email', 'E-Mail') }}:</span>
+      <a class="email-adress" :href="'mailto:'+agent.email">{{agent.email}}</a>
+    </div>
+  </div>
+  <div class="agent-image">
+    <img
+      class="face-image"
+      :src="agent.faceImage"
+      alt="image not found">
+  </div>
+</div>

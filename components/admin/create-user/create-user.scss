@@ -1,0 +1,29 @@
+.create {
+  max-width: 375px;
+  width: 100%;
+
+  h1 {
+    color: #3c366b;
+  }
+
+  .card-action {
+    display: flex;
+    justify-content: flex-end;
+
+    button {
+      margin: 8px 0 0 !important;
+
+      &:first-child {
+        margin: 0;
+      }
+    }
+
+    .text-light {
+      color: #ebf4ff;
+    }
+
+    .highlight {
+      color: #667eea;
+    }
+  }
+}

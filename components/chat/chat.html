@@ -1,0 +1,18 @@
+<div class="chat">
+  <div class="card-chat">
+    <div class="messages-list">
+      <messages class="message">
+      </messages>
+    </div>
+  </div>
+  <v-spacer></v-spacer>
+  <div class="chat-input">
+    <v-textarea outlined auto-grow class="textarea-chat" label="write a new Message" rows="4" row-height="10"
+      v-model="text" :rules="[validateTextField(text)]" required>
+    </v-textarea>
+    <v-btn icon class="send-button" v-on:click="saveMessage" color="primary" dark large>
+      <v-icon>mdi-send-outline</v-icon>
+    </v-btn>
+  </div>
+</div>
+</div>

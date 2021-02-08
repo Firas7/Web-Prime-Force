@@ -1,0 +1,64 @@
+.messages-card {
+  .message-card {
+    width: 900px;
+
+    .agent-image {
+      align-content: center;
+      align-items: center;
+      display: flex;
+      flex-direction: column;
+      float: left;
+      width: 180px;
+    }
+      
+    .face-image {
+      border-radius: 40px;
+      height: 4.25rem;
+      width: max-content;
+      width: 6.25rem;
+    }
+
+    .message-date {
+      align-items: center !important;
+      background-color: darken($color: #92bcdf, $amount: 0);
+      border-bottom-left-radius: 25px;
+      border-bottom-right-radius: 25px;
+      border-top-left-radius: 25px;
+      border-top-right-radius: 25px;
+      flex-direction: row !important;
+      justify-content: center !important;
+      margin-bottom: 10px;
+      text-align: center !important;
+      width: 200px;
+    }
+
+    .message-content {
+      background-color: darken($color: #e9e9e9, $amount: 0);
+      border-bottom-left-radius: 25px;
+      border-bottom-right-radius: 25px;
+      border-top-left-radius: 25px;
+      border-top-right-radius: 25px;
+      min-height: 5em;
+
+      .message-time {
+        float: right;
+        margin-top: 10px;
+      }
+    }
+
+    .chat-input {
+      display: flex;
+      flex-direction: row;
+      padding-bottom: 20px;
+      width: 945px;
+      
+      .textarea-chat {
+        background-color: darken($color: #fff, $amount: 0);
+      }
+
+      .send-button {
+        margin-top: 5px;
+      }
+    }
+  }
+}

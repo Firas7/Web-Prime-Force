@@ -1,0 +1,43 @@
+<div class="charts">
+  <v-tabs v-model="tab">
+    <v-tab :key="1" value="overview" ref="overview" href="#overview"
+      >Übersicht</v-tab
+    >
+    <v-tab :key="2" value="payment" ref="payment" href="#payment"
+      >Auzahlungen</v-tab
+    >
+  </v-tabs>
+  <v-tabs-items v-model="tab">
+    <v-tab-item :key="1" value="overview" ref="overview">
+      <section>
+        <v-card class="card" v-if="!isInsured">
+          <v-card-text class="pa-3">
+            <line-chart :data="data" xtitle="Tag" ytitle="Aktive Schadensfälle" />
+          </v-card-text>
+        </v-card>
+
+        <v-card class="card" v-if="countByState">
+          <v-card-text class="pa-2">
+            <pie-chart
+              :data="countByState"
+              legend="right"
+              :donut="true"
+            ></pie-chart>
+          </v-card-text>
+        </v-card>
+      </section>
+    </v-tab-item>
+    <v-tab-item :key="2" value="payment" ref="payment">
+      <v-card class="card-full" v-if="!isInsured">
+        <v-card-text class="pa-3">
+          <bar-chart
+            :stacked="true"
+            :data="paymentdata"
+            xtitle="Auszahlungen in Tausend"
+            ytitle="Jahr"
+          ></bar-chart>
+        </v-card-text>
+      </v-card>
+    </v-tab-item>
+  </v-tabs-items>
+</div>

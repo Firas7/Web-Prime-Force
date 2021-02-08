@@ -1,0 +1,95 @@
+<section class="main-bar-component">
+  <v-tooltip bottom>
+    <template v-slot:activator="{ on }">
+      <v-btn icon class="menu" depressed v-on="on" @click="closeMenu">
+        <v-icon medium>mdi-close</v-icon>
+      </v-btn>
+    </template>
+    <span>{{ $t('components.layout.main-bar.menu', 'Schließe Menü') }}</span>
+  </v-tooltip>
+
+  <div>
+    <div class="logo">
+      <img alt="Blue bug Logo" src="/blue-bug-logo.svg" class="logo-img" />
+    </div>
+    <div
+      class="link"
+      v-if="scopeAll"
+      v-bind:class="{ active: isActive('claim') }"
+      @click="navigatTo('claim')"
+    >
+      <v-icon medium>mdi-file-document-outline</v-icon>
+      <p v-if="scopeInsured" class="label">
+        {{ $t('components.layout.main-bar.claim', 'Deine Claims') }}
+      </p>
+      <p v-else class="label">
+        {{ $t('components.layout.main-bar.claimcase', 'Schadensfälle') }}
+      </p>
+    </div>
+    <div
+      class="link"
+      v-if="scopeInsured"
+      v-bind:class="{ active: isActive('user') }"
+      @click="navigatTo('user')"
+    >
+      <v-icon medium>mdi-account-outline</v-icon>
+      <p class="label">{{ $t('components.layout.main-bar.user', 'Nutzerdaten') }}</p>
+    </div>
+    <div
+      class="link"
+      v-if="scopeInsured"
+      v-bind:class="{ active: isActive('user/claim/claimcase') }"
+      @click="navigatTo('user/claim/claimcase')"
+    >
+      <v-icon medium>mdi-shield-plus-outline</v-icon>
+      <p class="label">{{ $t('components.layout.main-bar.createClaim', 'Schadensfall Anlegen') }}</p>
+    </div>
+    <div
+      class="link"
+      v-if="scopeInsured"
+      v-bind:class="{ active: isActive('user/contracts') }"
+      @click="navigatTo('user/contracts')"
+    >
+      <v-icon medium>mdi-account-outline</v-icon>
+      <p>{{ $t('components.layout.main-bar.contract', 'Verträge') }}</p>
+    </div>
+    <!-- Admin -->
+    <div
+      class="link"
+      v-if="scopeAdminClerkAgent"
+      v-bind:class="{ active: isActive('admin/insured') }"
+      @click="navigatTo('admin/insured')"
+    >
+      <v-icon medium>mdi-account-multiple-outline</v-icon>
+      <p class="label">{{ $t('components.layout.main-bar.insured', 'Versicherte') }}</p>
+    </div>
+    <div
+      class="link"
+      v-if="scopeAdminClerkAgent"
+      v-bind:class="{ active: isActive('admin/contracts') }"
+      @click="navigatTo('admin/contracts')"
+    >
+      <v-icon medium>mdi-file-multiple-outline</v-icon>
+      <p class="label">{{ $t('components.layout.main-bar.contract', 'Verträge') }}</p>
+    </div>
+    <div
+      class="link"
+      v-if="scopeAdmin"
+      v-bind:class="{ active: isActive('admin/tenants') }"
+      @click="navigatTo('admin/tenants')"
+    >
+      <v-icon medium>mdi-home-city-outline</v-icon>
+      <p class="label">{{ $t('components.layout.main-bar.tenant', 'Tenants') }}</p>
+    </div>
+
+    <div
+      class="link"
+      v-if="scopeAdmin"
+      v-bind:class="{ active: isActive('admin/create') }"
+      @click="navigatTo('admin/create')"
+    >
+      <v-icon medium>mdi-account-multiple-plus-outline</v-icon>
+      <p class="label">{{ $t('components.layout.main-bar.createUser', 'User Anlegen') }}</p>
+    </div>
+  </div>
+</section>

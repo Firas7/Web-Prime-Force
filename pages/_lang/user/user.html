@@ -1,0 +1,16 @@
+<section class="usercard ">
+  <div>
+    <div class="links mx-auto">
+      <div @click="changeState(0)" class="link" v-bind:class="{ active: isActive(0) }">
+        <p>{{ $t('pages.user.index.userData', 'User Daten') }}</p>
+      </div>
+      <div class="link" v-if="insuredExists" @click="changeState(1)" v-bind:class="{ active: isActive(1) }" >
+        <p>{{ $t('pages.user.index.insuredData', 'Verischerten Daten') }}</p>
+      </div>
+    </div>
+    <div class="data mx-auto">
+      <userCard v-bind:user="user" v-if="state===0"></userCard>
+      <insuredCard v-bind:insured="insured" v-if="insuredExists&&state===1"></insuredCard>
+    </div>
+  </div>
+</section>

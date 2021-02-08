@@ -1,0 +1,16 @@
+.user {
+  .v-card-title {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  .edit-name {
+    display: flex;
+    gap: 1rem;
+  }
+
+  .save-button {
+    color: #ebf4ff;
+  }
+}

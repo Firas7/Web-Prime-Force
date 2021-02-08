@@ -1,0 +1,43 @@
+<section class="app-header">
+    <v-app-bar
+        flat
+        color="#667EEA"
+        app>
+      <img alt="Blue bug Logo"
+           src="/blue-bug-logo.svg"
+           class="logo"/>
+      <h1><nuxt-link to="/" class="logo-text">Claim-Now</nuxt-link></h1>
+
+      <div class="login-wrapper">
+        <v-btn
+            class="button register"
+            depressed
+            outlined
+            color="#EBF4FF"
+            @click.stop="showRegister=true">
+            {{$t('components.appHeader.links.register', 'Registrieren')}}
+        </v-btn>
+        <v-btn
+            class="button login"
+            depressed
+            outlined
+            color="#EBF4FF"
+            @click.stop="showLogin=true">
+            {{$t('components.appHeader.links.login', 'Einloggen')}}
+        </v-btn>
+        <v-btn
+            class="login-responsive"
+            depressed
+            icon
+            color="#EBF4FF"
+            @click.stop="showLogin=true">
+          <v-icon>
+            mdi-account-outline
+          </v-icon>
+        </v-btn>
+        <register v-bind:show.sync="showRegister" @switch="onSwitchToRegister"/>
+        <login v-bind:show.sync="showLogin" @switch="onSwitchToRegister"/>
+      </div>
+    </v-app-bar>
+</section>
+

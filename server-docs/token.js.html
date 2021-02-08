@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="utf-8">
+    <title>token.js - Documentation</title>
+    
+    
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
+    <script src="scripts/nav.js" defer></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav >
+    
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-controller_claim.html">controller/claim</a><ul class='methods'><li data-type='method'><a href="module-controller_claim.html#~checkAuth">checkAuth</a></li><li data-type='method'><a href="module-controller_claim.html#~checkAuthForGet">checkAuthForGet</a></li><li data-type='method'><a href="module-controller_claim.html#~validateClaim">validateClaim</a></li></ul></li><li><a href="module-controller_image.html">controller/image</a><ul class='methods'><li data-type='method'><a href="module-controller_image.html#~deleteImages">deleteImages</a></li><li data-type='method'><a href="module-controller_image.html#~getImage">getImage</a></li><li data-type='method'><a href="module-controller_image.html#~safeImage">safeImage</a></li><li data-type='method'><a href="module-controller_image.html#~uploadImage">uploadImage</a></li></ul></li><li><a href="module-controller_mail.html">controller/mail</a><ul class='methods'><li data-type='method'><a href="module-controller_mail.html#~genClaimLink">genClaimLink</a></li><li data-type='method'><a href="module-controller_mail.html#~genRegLink">genRegLink</a></li><li data-type='method'><a href="module-controller_mail.html#~genRegLinkWithOTPW">genRegLinkWithOTPW</a></li><li data-type='method'><a href="module-controller_mail.html#~sendClaimMail">sendClaimMail</a></li><li data-type='method'><a href="module-controller_mail.html#~sendRegister">sendRegister</a></li><li data-type='method'><a href="module-controller_mail.html#~sendReset">sendReset</a></li><li data-type='method'><a href="module-controller_mail.html#~sendTokenToLinkUserInsured">sendTokenToLinkUserInsured</a></li></ul></li><li><a href="module-controller_search.html">controller/search</a><ul class='methods'><li data-type='method'><a href="module-controller_search.html#~contract">contract</a></li><li data-type='method'><a href="module-controller_search.html#~getLength">getLength</a></li><li data-type='method'><a href="module-controller_search.html#~getRegexScore">getRegexScore</a></li><li data-type='method'><a href="module-controller_search.html#~getResult">getResult</a></li><li data-type='method'><a href="module-controller_search.html#~insured">insured</a></li><li data-type='method'><a href="module-controller_search.html#~miniInsured">miniInsured</a></li><li data-type='method'><a href="module-controller_search.html#~search">search</a></li></ul></li><li><a href="module-controller_token.html">controller/token</a><ul class='methods'><li data-type='method'><a href="module-controller_token.html#~createClaimToken">createClaimToken</a></li><li data-type='method'><a href="module-controller_token.html#~createLinkUserInsuredToken">createLinkUserInsuredToken</a></li><li data-type='method'><a href="module-controller_token.html#~createRegisterToken">createRegisterToken</a></li><li data-type='method'><a href="module-controller_token.html#~createResetToken">createResetToken</a></li><li data-type='method'><a href="module-controller_token.html#~createToken">createToken</a></li></ul></li><li><a href="module-controller_user.html">controller/user</a><ul class='methods'><li data-type='method'><a href="module-controller_user.html#~checkUserObjectAuth">checkUserObjectAuth</a></li><li data-type='method'><a href="module-controller_user.html#~checkUserObjectPartner">checkUserObjectPartner</a></li><li data-type='method'><a href="module-controller_user.html#~generateRandomPassword">generateRandomPassword</a></li><li data-type='method'><a href="module-controller_user.html#~hashPassword">hashPassword</a></li><li data-type='method'><a href="module-controller_user.html#~verifyCredentials">verifyCredentials</a></li><li data-type='method'><a href="module-controller_user.html#~verifyUniqueUser">verifyUniqueUser</a></li></ul></li></ul>
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">token.js</h1>
+    
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>'use strict';
+
+const jwt = require('jsonwebtoken');
+const secret = require('../config/token');
+const bcrypt = require('bcrypt');
+const crypto = require('crypto');
+const ao = require('../database-service/user.service');
+
+/** @module controller/token */
+
+/**
+ *
+ *
+ * @param {*} user
+ * @param {*} app
+ * @returns token
+ */
+function createToken(user, app) {
+  let time = '2h';
+  if (app) {
+    time = '60 days';
+  }
+  return jwt.sign(
+    {
+      id: user._id,
+      firstname: user.coredata.firstname,
+      lastname: user.coredata.lastname,
+      email: user.email,
+      valid: user.valid,
+      scope: user.scope,
+    },
+    secret,
+    { algorithm: 'HS256', expiresIn: time }
+  );
+}
+
+/**
+ *
+ *
+ * @param {*} email
+ * @returns token
+ */
+function createRegisterToken(email) {
+  const saltRounds = 10;
+  let salt = bcrypt.genSaltSync(saltRounds);
+  return bcrypt.hashSync(email, salt);
+}
+
+/**
+ *
+ *
+ * @returns token
+ */
+async function createResetToken() {
+  let token = await crypto.randomBytes(20).toString('hex');
+  let user = await ao.getUserByResetToken(token);
+
+  while (user) {
+    token = await crypto.randomBytes(20).toString('hex');
+    user = await ao.getUserByResetToken(token);
+  }
+  return token;
+}
+
+/**
+ *
+ *
+ * @returns token
+ */
+async function createLinkUserInsuredToken() {
+  return await crypto.randomBytes(3).toString('hex');
+}
+
+/**
+ *
+ *
+ * @returns token
+ */
+async function createClaimToken() {
+  return await crypto.randomBytes(20).toString('hex');
+}
+
+module.exports = {
+  createToken: createToken,
+  createRegisterToken: createRegisterToken,
+  createResetToken: createResetToken,
+  createLinkUserInsuredToken: createLinkUserInsuredToken,
+  createClaimToken: createClaimToken,
+};
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+    
+    
+</div>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.4</a> on Thu Jun 11 2020 12:07:59 GMT+0200 (Mitteleuropäische Sommerzeit) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/polyfill.js"></script>
+<script src="scripts/linenumber.js"></script>
+
+
+
+</body>
+</html>

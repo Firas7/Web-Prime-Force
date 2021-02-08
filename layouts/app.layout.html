@@ -1,0 +1,9 @@
+<div>
+  <v-app class="inspire">
+    <div class="user-layout">
+      <mainbar class="mainbar" :class="{ 'open-menu' : isMenuOpenState }" @closeMenu="setMenu"/>
+      <headerbar class="headbar" :class="{ 'overlay' : isMenuOpenState }" @openMenu="setMenu"/>
+      <nuxt class="content" :class="{ 'overlay' : isMenuOpenState }"/>
+    </div>
+  </v-app>
+</div>

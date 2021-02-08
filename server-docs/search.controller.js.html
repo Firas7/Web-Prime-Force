@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="utf-8">
+    <title>search.controller.js - Documentation</title>
+    
+    
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
+    <script src="scripts/nav.js" defer></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav >
+    
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-controller_claim.html">controller/claim</a><ul class='methods'><li data-type='method'><a href="module-controller_claim.html#~checkAuth">checkAuth</a></li><li data-type='method'><a href="module-controller_claim.html#~checkAuthForGet">checkAuthForGet</a></li><li data-type='method'><a href="module-controller_claim.html#~validateClaim">validateClaim</a></li></ul></li><li><a href="module-controller_image.html">controller/image</a><ul class='methods'><li data-type='method'><a href="module-controller_image.html#~deleteImages">deleteImages</a></li><li data-type='method'><a href="module-controller_image.html#~getImage">getImage</a></li><li data-type='method'><a href="module-controller_image.html#~safeImage">safeImage</a></li><li data-type='method'><a href="module-controller_image.html#~uploadImage">uploadImage</a></li></ul></li><li><a href="module-controller_mail.html">controller/mail</a><ul class='methods'><li data-type='method'><a href="module-controller_mail.html#~genClaimLink">genClaimLink</a></li><li data-type='method'><a href="module-controller_mail.html#~genRegLink">genRegLink</a></li><li data-type='method'><a href="module-controller_mail.html#~genRegLinkWithOTPW">genRegLinkWithOTPW</a></li><li data-type='method'><a href="module-controller_mail.html#~sendClaimMail">sendClaimMail</a></li><li data-type='method'><a href="module-controller_mail.html#~sendRegister">sendRegister</a></li><li data-type='method'><a href="module-controller_mail.html#~sendReset">sendReset</a></li><li data-type='method'><a href="module-controller_mail.html#~sendTokenToLinkUserInsured">sendTokenToLinkUserInsured</a></li></ul></li><li><a href="module-controller_search.html">controller/search</a><ul class='methods'><li data-type='method'><a href="module-controller_search.html#~contract">contract</a></li><li data-type='method'><a href="module-controller_search.html#~getLength">getLength</a></li><li data-type='method'><a href="module-controller_search.html#~getRegexScore">getRegexScore</a></li><li data-type='method'><a href="module-controller_search.html#~getResult">getResult</a></li><li data-type='method'><a href="module-controller_search.html#~insured">insured</a></li><li data-type='method'><a href="module-controller_search.html#~miniInsured">miniInsured</a></li><li data-type='method'><a href="module-controller_search.html#~search">search</a></li></ul></li><li><a href="module-controller_token.html">controller/token</a><ul class='methods'><li data-type='method'><a href="module-controller_token.html#~createClaimToken">createClaimToken</a></li><li data-type='method'><a href="module-controller_token.html#~createLinkUserInsuredToken">createLinkUserInsuredToken</a></li><li data-type='method'><a href="module-controller_token.html#~createRegisterToken">createRegisterToken</a></li><li data-type='method'><a href="module-controller_token.html#~createResetToken">createResetToken</a></li><li data-type='method'><a href="module-controller_token.html#~createToken">createToken</a></li></ul></li><li><a href="module-controller_user.html">controller/user</a><ul class='methods'><li data-type='method'><a href="module-controller_user.html#~checkUserObjectAuth">checkUserObjectAuth</a></li><li data-type='method'><a href="module-controller_user.html#~checkUserObjectPartner">checkUserObjectPartner</a></li><li data-type='method'><a href="module-controller_user.html#~generateRandomPassword">generateRandomPassword</a></li><li data-type='method'><a href="module-controller_user.html#~hashPassword">hashPassword</a></li><li data-type='method'><a href="module-controller_user.html#~verifyCredentials">verifyCredentials</a></li><li data-type='method'><a href="module-controller_user.html#~verifyUniqueUser">verifyUniqueUser</a></li></ul></li></ul>
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">search.controller.js</h1>
+    
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>'use strict';
+const insuredService = require('../database-service/insure.service');
+const contractService = require('../database-service/contract.service');
+const claimcaseService = require('../database-service/get-claim-case.service');
+const logger = require('../logger');
+
+/** @module controller/search */
+
+/**
+ *
+ *
+ * @param {*} search
+ * @param {*} from
+ * @param {*} to
+ * @returns result array
+ */
+async function search(search, from, to) {
+  const start = +new Date();
+  let searchStrings = search.split(' ');
+  let regex = [];
+  for (var i = 0; i &lt; searchStrings.length; i++) {
+    regex[i] = new RegExp(searchStrings[i], 'i');
+  }
+  let result = [];
+  let returnobject = {
+    time: 0,
+    length_total: 0,
+    length_page: 0,
+    result: [],
+  };
+  let insureds = await insured(regex, to);
+  returnobject.length_total += getLength(insureds);
+  insureds = getResult(insureds);
+  let contracts = await contract(regex, to);
+  returnobject.length_total += getLength(contracts);
+  contracts = getResult(contracts);
+  result = insureds.concat(contracts);
+  result.sort((a, b) => (a.score &lt; b.score ? 1 : -1));
+  result = result.slice(from, to);
+  const end = +new Date();
+  logger.info(
+    'search (' +
+      from +
+      ', ' +
+      to +
+      ') brauchte dafür: ' +
+      (end - start) +
+      ' und gab ' +
+      result.length +
+      ' zurück'
+  );
+  returnobject.result = result;
+  returnobject.time = end - start;
+  returnobject.length_page = result.length;
+
+  return returnobject;
+}
+
+/**
+ *
+ *
+ * @param {*} object
+ * @returns int
+ */
+function getLength(object) {
+  let length = 0;
+  if (object != null) {
+    length = object.length;
+  }
+  return length;
+}
+
+/**
+ *
+ *
+ * @param {*} object
+ * @returns result
+ */
+function getResult(object) {
+  let result = [];
+  if (object != null) {
+    result = object.result;
+  }
+  return result;
+}
+
+/**
+ *
+ *
+ * @param {*} regex
+ * @param {*} to
+ * @returns result
+ */
+async function insured(regex, to) {
+  let insureds = await insuredService.search(regex);
+  let totalresult = { result: [], length: 0 };
+  totalresult.length = insureds.length;
+  let searchresults = [];
+  for (let index = 0; index &lt; insureds.length; index++) {
+    insureds[index] = getRegexScore(insureds[index], regex);
+  }
+  insureds.sort((a, b) => (a.score &lt; b.score ? 1 : -1));
+  insureds = insureds.slice(0, to);
+  for (let index = 0; index &lt; insureds.length; index++) {
+    searchresults.push({
+      claimCases: await claimcaseService.getByPartnerId(insured.partnerId),
+      contracts: await contractService.getByPartnerId(insured.partnerId),
+      score: insureds[index]['score'],
+      found: insureds[index]['found'],
+      insured: miniInsured(insureds[index]),
+    });
+  }
+  totalresult.result = searchresults;
+  return totalresult;
+}
+
+/**
+ *
+ *
+ * @param {*} object
+ * @returns insured
+ */
+function miniInsured(object) {
+  let o = {};
+  o['_id'] = object._id;
+  o['salutation'] = object.salutation;
+  o['lastname'] = object.lastname;
+  o['firstname'] = object.firstname;
+  o['partnerId'] = object.partnerId;
+  return o;
+}
+
+/**
+ *
+ *
+ * @param {*} regex
+ * @param {*} to
+ * @returns result
+ */
+async function contract(regex, to) {
+  let contracts = await contractService.search(regex);
+  let totalresult = { result: [], length: 0 };
+  totalresult.length = contracts.length;
+  let searchresults = [];
+  for (let index = 0; index &lt; contracts.length; index++) {
+    contracts[index] = getRegexScore(contracts[index], regex);
+  }
+  contracts.sort((a, b) => (a.score &lt; b.score ? 1 : -1));
+  contracts = contracts.slice(0, to);
+  for (let index = 0; index &lt; contracts.length; index++) {
+    searchresults.push({
+      contracts: contracts[index],
+      claimCases: await claimcaseService.getClaimCasesByContractID(
+        contracts[index]._id
+      ),
+      insured: await insuredService.getByPartnerId(contracts[index].partnerId),
+      score: contracts[index]['score'],
+      found: contracts[index]['found'],
+    });
+    totalresult.result = searchresults;
+    return totalresult;
+  }
+}
+
+/**
+ *
+ *
+ * @param {*} object
+ * @param {*} regexArray
+ * @returns score
+ */
+function getRegexScore(object, regexArray) {
+  let score = 0;
+  let found = [];
+  for (const key in object) {
+    if (typeof object[key] == 'object') {
+      let r = getRegexScore(object[key], regexArray);
+      score += r['score'];
+      if (r['found'].length > 0) {
+        found.push(r['found']);
+      }
+    } else {
+      const test = object[key];
+      for (let index = 0; index &lt; regexArray.length; index++) {
+        const result = test.toString().match(regexArray[index]);
+        if (result != null) {
+          score = score + result[0].length;
+          found.push(test.replace(result[0], '&lt;b>' + result[0] + '&lt;/b>'));
+        }
+      }
+    }
+  }
+  object['score'] = score;
+  object['found'] = found;
+  return object;
+}
+
+module.exports = {
+  search: search,
+};
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+    
+    
+</div>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.4</a> on Thu Jun 11 2020 12:07:59 GMT+0200 (Mitteleuropäische Sommerzeit) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/polyfill.js"></script>
+<script src="scripts/linenumber.js"></script>
+
+
+
+</body>
+</html>

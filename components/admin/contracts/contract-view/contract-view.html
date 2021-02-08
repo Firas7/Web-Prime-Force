@@ -1,0 +1,45 @@
+<div>
+  <div v-if="!!contracts && contracts.length !== 0" class="bb-conatiner">
+    <h3 class="bb-name" v-if="!!contracts">
+      {{ $t('components.admin.contracts.contractView.title', 'Vertragsübersicht') }}
+    </h3>
+    <div :key="contract._id" class="table-loop" v-for="contract in contracts">
+      <div
+        :key="contract._id"
+        @click="showDetail(contract)"
+        class="mobile-table"
+      >
+        <div class="header id-header">
+          {{ $t('components.admin.contracts.contractView.tableHeaders.id', 'Vertragsnummer') }}
+        </div>
+        <div class="header productname-header">
+          {{
+          $t('components.admin.contracts.contractView.tableHeaders.productname', 'Produktname')
+          }}
+        </div>
+        <div class="header insurancepapernumber-header">
+          {{
+          $t('components.admin.contracts.contractView.tableHeaders.insurancepapernumber', 'Versicherungsnummer')
+          }}
+        </div>
+        <div class="header startdate-header">
+          {{ $t('components.admin.contracts.contractView.tableHeaders.startdate', 'Vertragsbeginn')
+          }}
+        </div>
+        <div class="data id-data">{{ contract._id }}</div>
+        <div class="data productname-data">{{ contract.productname }}</div>
+        <div class="data insurancepapernumber-data">
+          {{ contract.insurancepapernumber }}
+        </div>
+        <div class="data startdate-data">
+          {{ formatDate(contract.startdate) }}
+        </div>
+      </div>
+    </div>
+  </div>
+  <div v-else class="bb-conatiner">
+    <h3 class="bb-name">
+      {{ $t('components.admin.contracts.contractView.error.notFound', 'Noch kein Vertag vorhanden oder verknüpft') }}
+    </h3>
+  </div>
+</div>

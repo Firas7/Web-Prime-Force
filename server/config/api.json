@@ -1,0 +1,926 @@
+{
+  "swagger": "2.0",
+  "host": "localhost",
+  "basePath": "/",
+  "schemes": ["http"],
+  "info": {
+    "title": "APP-Server API Documentation",
+    "version": "1.0.0",
+    "contact": {
+      "name": "Simon Süwer",
+      "email": "simon.suewer@stud.hs-hannover.de"
+    }
+  },
+  "tags": [],
+  "paths": {
+    "/api/claimcase": {
+      "post": {
+        "summary": "Create new claimcase",
+        "operationId": "postApiClaimcase",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": { "$ref": "#/definitions/Model1" }
+          }
+        ],
+        "tags": ["claim-case"],
+        "responses": {
+          "default": {
+            "schema": { "type": "string" },
+            "description": "Successful"
+          }
+        }
+      },
+      "get": {
+        "summary": "Get all claimcases",
+        "operationId": "getApiClaimcase",
+        "tags": ["claim-case"],
+        "responses": {
+          "default": {
+            "schema": { "type": "string" },
+            "description": "Successful"
+          }
+        }
+      }
+    },
+    "/api/contracts": {
+      "post": {
+        "operationId": "postApiContracts",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": { "$ref": "#/definitions/create%20contractSchema" }
+          }
+        ],
+        "tags": ["contracts"],
+        "responses": {
+          "default": {
+            "schema": { "type": "string" },
+            "description": "Successful"
+          }
+        }
+      },
+      "get": {
+        "summary": "Get all conracts",
+        "operationId": "getApiContracts",
+        "tags": ["contracts"],
+        "responses": {
+          "200": {
+            "schema": { "$ref": "#/definitions/Model6" },
+            "description": "Success"
+          },
+          "400": {
+            "schema": { "$ref": "#/definitions/Error" },
+            "description": "Bad Request"
+          },
+          "500": {
+            "schema": { "$ref": "#/definitions/Error" },
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/api/insured": {
+      "post": {
+        "summary": "Create an insured.",
+        "operationId": "postApiInsured",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": { "$ref": "#/definitions/insuredInputPayload" }
+          }
+        ],
+        "tags": ["insured"],
+        "responses": {
+          "default": {
+            "schema": { "type": "string" },
+            "description": "Successful"
+          }
+        }
+      },
+      "get": {
+        "summary": "Get all insured",
+        "operationId": "getApiInsured",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "A valid Json Web Token",
+            "name": "Authorization",
+            "in": "header",
+            "required": false
+          },
+          { "type": "number", "name": "beginAtIndex", "in": "query" },
+          { "type": "number", "name": "limit", "in": "query" }
+        ],
+        "tags": ["insured"],
+        "responses": {
+          "200": {
+            "schema": { "$ref": "#/definitions/Result" },
+            "description": "Success"
+          },
+          "400": {
+            "schema": { "$ref": "#/definitions/Error" },
+            "description": "Bad Request"
+          },
+          "500": {
+            "schema": { "$ref": "#/definitions/Error" },
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/api/tenants": {
+      "post": {
+        "operationId": "postApiTenants",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": { "$ref": "#/definitions/tenantSchema" }
+          }
+        ],
+        "tags": ["tenants"],
+        "responses": {
+          "default": {
+            "schema": { "type": "string" },
+            "description": "Successful"
+          }
+        }
+      },
+      "get": {
+        "operationId": "getApiTenants",
+        "tags": ["tenants"],
+        "responses": {
+          "default": {
+            "schema": { "type": "string" },
+            "description": "Successful"
+          }
+        }
+      }
+    },
+    "/api/insured/link": {
+      "post": {
+        "summary": "Initialise Link between User and Insured",
+        "operationId": "postApiInsuredLink",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": { "$ref": "#/definitions/Model2" }
+          }
+        ],
+        "tags": ["insured"],
+        "responses": {
+          "default": {
+            "schema": { "type": "string" },
+            "description": "Successful"
+          }
+        }
+      }
+    },
+    "/api/users/authenticate": {
+      "post": {
+        "operationId": "postApiUsersAuthenticate",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": { "$ref": "#/definitions/authenticateUserSchema" }
+          }
+        ],
+        "tags": ["user"],
+        "responses": {
+          "default": {
+            "schema": { "type": "string" },
+            "description": "Successful"
+          }
+        }
+      }
+    },
+    "/api/users/recover": {
+      "post": {
+        "operationId": "postApiUsersRecover",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": { "$ref": "#/definitions/recoverPasswordSchema" }
+          }
+        ],
+        "tags": ["user"],
+        "responses": {
+          "default": {
+            "schema": { "type": "string" },
+            "description": "Successful"
+          }
+        }
+      }
+    },
+    "/api/users/register": {
+      "post": {
+        "operationId": "postApiUsersRegister",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": { "$ref": "#/definitions/userSchema" }
+          }
+        ],
+        "tags": ["user"],
+        "responses": {
+          "default": {
+            "schema": { "type": "string" },
+            "description": "Successful"
+          }
+        }
+      }
+    },
+    "/api/users/reset": {
+      "post": {
+        "operationId": "postApiUsersReset",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": { "$ref": "#/definitions/resetPasswordSchema" }
+          }
+        ],
+        "tags": ["user"],
+        "responses": {
+          "default": {
+            "schema": { "type": "string" },
+            "description": "Successful"
+          }
+        }
+      }
+    },
+    "/api/insured/link/confirm": {
+      "post": {
+        "summary": "Confirm Link between User and Insured",
+        "operationId": "postApiInsuredLinkConfirm",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": { "$ref": "#/definitions/Model3" }
+          }
+        ],
+        "tags": ["insured"],
+        "responses": {
+          "default": {
+            "schema": { "type": "string" },
+            "description": "Successful"
+          }
+        }
+      }
+    },
+    "/api/contracts/{id}": {
+      "put": {
+        "operationId": "putApiContractsId",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": { "$ref": "#/definitions/contractSchema" }
+          }
+        ],
+        "tags": ["contracts"],
+        "responses": {
+          "default": {
+            "schema": { "type": "string" },
+            "description": "Successful"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "deleteApiContractsId",
+        "tags": ["contracts"],
+        "responses": {
+          "default": {
+            "schema": { "type": "string" },
+            "description": "Successful"
+          }
+        }
+      }
+    },
+    "/api/insured/contracts": {
+      "put": {
+        "summary": "Get conract by partnerId (insured)",
+        "operationId": "putApiInsuredContracts",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": { "$ref": "#/definitions/Model4" }
+          }
+        ],
+        "tags": ["contracts"],
+        "responses": {
+          "200": { "schema": { "type": "string" }, "description": "Success" },
+          "400": {
+            "schema": { "$ref": "#/definitions/Error" },
+            "description": "Bad Request"
+          },
+          "500": {
+            "schema": { "$ref": "#/definitions/Error" },
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/api/insured/{id}": {
+      "put": {
+        "summary": "Update an insured",
+        "operationId": "putApiInsuredId",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": { "$ref": "#/definitions/insuredInputPayload" }
+          }
+        ],
+        "tags": ["insured"],
+        "responses": {
+          "default": {
+            "schema": { "type": "string" },
+            "description": "Successful"
+          }
+        }
+      },
+      "get": {
+        "summary": "Get an insured by Partnerid",
+        "operationId": "getApiInsuredId",
+        "tags": ["insured"],
+        "responses": {
+          "200": {
+            "schema": { "$ref": "#/definitions/Model11" },
+            "description": "Success"
+          },
+          "400": {
+            "schema": { "$ref": "#/definitions/Error" },
+            "description": "Bad Request"
+          },
+          "500": {
+            "schema": { "$ref": "#/definitions/Error" },
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete an insured",
+        "operationId": "deleteApiInsuredId",
+        "tags": ["insured"],
+        "responses": {
+          "default": {
+            "schema": { "type": "string" },
+            "description": "Successful"
+          }
+        }
+      }
+    },
+    "/api/profile/{id}": {
+      "put": {
+        "operationId": "putApiProfileId",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": { "$ref": "#/definitions/profileSchema" }
+          }
+        ],
+        "tags": ["profile"],
+        "responses": {
+          "default": {
+            "schema": { "type": "string" },
+            "description": "Successful"
+          }
+        }
+      },
+      "get": {
+        "operationId": "getApiProfileId",
+        "tags": ["profile"],
+        "responses": {
+          "default": {
+            "schema": { "type": "string" },
+            "description": "Successful"
+          }
+        }
+      }
+    },
+    "/api/tenants/{id}": {
+      "put": {
+        "operationId": "putApiTenantsId",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": { "$ref": "#/definitions/tenantSchema" }
+          }
+        ],
+        "tags": ["tenants"],
+        "responses": {
+          "default": {
+            "schema": { "type": "string" },
+            "description": "Successful"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "deleteApiTenantsId",
+        "tags": ["tenants"],
+        "responses": {
+          "default": {
+            "schema": { "type": "string" },
+            "description": "Successful"
+          }
+        }
+      }
+    },
+    "/api/claim/case/{id}": {
+      "put": {
+        "summary": "Update Claim-Case",
+        "operationId": "putApiClaimCaseId",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": { "$ref": "#/definitions/Model5" }
+          }
+        ],
+        "tags": ["claim-case"],
+        "responses": {
+          "200": { "schema": { "type": "string" }, "description": "Success" },
+          "400": {
+            "schema": { "$ref": "#/definitions/Error" },
+            "description": "Bad Request"
+          },
+          "500": {
+            "schema": { "$ref": "#/definitions/Error" },
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/api/users/authenticate/validMail": {
+      "put": {
+        "operationId": "putApiUsersAuthenticateValidmail",
+        "parameters": [
+          { "type": "string", "name": "token", "in": "query", "required": true }
+        ],
+        "tags": ["user"],
+        "responses": {
+          "default": {
+            "schema": { "type": "string" },
+            "description": "Successful"
+          }
+        }
+      }
+    },
+    "/api/claim/case/uploadImage/{id}": {
+      "put": {
+        "summary": "Upload an image to an claim case",
+        "operationId": "putApiClaimCaseUploadimageId",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": { "$ref": "#/definitions/Upload%20single%20file" }
+          }
+        ],
+        "tags": ["claim-case"],
+        "responses": {
+          "200": { "schema": { "type": "string" }, "description": "Success" },
+          "400": {
+            "schema": { "$ref": "#/definitions/Error" },
+            "description": "Bad Request"
+          },
+          "500": {
+            "schema": { "$ref": "#/definitions/Error" },
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/api/claim/case/{id}/{secret}": {
+      "put": {
+        "summary": "Update Claim-Case With secret",
+        "operationId": "putApiClaimCaseIdSecret",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": { "$ref": "#/definitions/Model5" }
+          }
+        ],
+        "tags": ["claim-case"],
+        "responses": {
+          "200": { "schema": { "type": "string" }, "description": "Success" },
+          "400": {
+            "schema": { "$ref": "#/definitions/Error" },
+            "description": "Bad Request"
+          },
+          "500": {
+            "schema": { "$ref": "#/definitions/Error" },
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "get": {
+        "summary": "Get Claim-Case with id and secret",
+        "operationId": "getApiClaimCaseIdSecret",
+        "tags": ["claim-case"],
+        "responses": {
+          "200": { "schema": { "type": "string" }, "description": "Success" },
+          "400": {
+            "schema": { "$ref": "#/definitions/Error" },
+            "description": "Bad Request"
+          },
+          "500": {
+            "schema": { "$ref": "#/definitions/Error" },
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/api/claim/case/uploadImage/{id}/{secret}": {
+      "put": {
+        "summary": "Upload an image to an claim case with secret",
+        "operationId": "putApiClaimCaseUploadimageIdSecret",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": { "$ref": "#/definitions/Upload%20single%20file" }
+          }
+        ],
+        "tags": ["claim-case"],
+        "responses": {
+          "200": { "schema": { "type": "string" }, "description": "Success" },
+          "400": {
+            "schema": { "$ref": "#/definitions/Error" },
+            "description": "Bad Request"
+          },
+          "500": {
+            "schema": { "$ref": "#/definitions/Error" },
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/api/insured/{id}/contracts": {
+      "get": {
+        "summary": "Get conract by partnerId (insured)",
+        "operationId": "getApiInsuredIdContracts",
+        "tags": ["contracts"],
+        "responses": {
+          "200": {
+            "schema": { "$ref": "#/definitions/Model6" },
+            "description": "Success"
+          },
+          "400": {
+            "schema": { "$ref": "#/definitions/Error" },
+            "description": "Bad Request"
+          },
+          "500": {
+            "schema": { "$ref": "#/definitions/Error" },
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/api/claim/case/getImage/{id}/{imageid}": {
+      "get": {
+        "summary": "get an image from an claim case",
+        "operationId": "getApiClaimCaseGetimageIdImageid",
+        "tags": ["claim-case"],
+        "responses": {
+          "200": { "schema": { "type": "string" }, "description": "Success" },
+          "400": {
+            "schema": { "$ref": "#/definitions/Error" },
+            "description": "Bad Request"
+          },
+          "500": {
+            "schema": { "$ref": "#/definitions/Error" },
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "driver": {
+      "type": "object",
+      "properties": {
+        "driverBirth": { "type": "string" },
+        "driverIdentify": { "type": "string" },
+        "other": { "type": "string" }
+      }
+    },
+    "questions": {
+      "type": "object",
+      "properties": {
+        "validDriven": { "type": "string" },
+        "driverHasLicense": { "type": "string" },
+        "hitAndRun": { "type": "string" },
+        "alcoholOrDrugs": { "type": "string" },
+        "bloodTest": { "type": "string" },
+        "drivenAsTeam": { "type": "string" },
+        "alcoholLevel": { "type": "number" }
+      }
+    },
+    "Model1": {
+      "type": "object",
+      "properties": {
+        "contractID": { "type": "string" },
+        "status": { "type": "string" },
+        "date": { "type": "string" },
+        "time": { "type": "string" },
+        "carID": { "type": "string" },
+        "licensePlate": { "type": "string" },
+        "mileage": { "type": "number" },
+        "place": { "type": "string" },
+        "description": { "type": "string" },
+        "licensePlateOfTrailor": { "type": "string" },
+        "driver": { "$ref": "#/definitions/driver" },
+        "questions": { "$ref": "#/definitions/questions" },
+        "sendMail": { "type": "boolean" }
+      },
+      "required": ["contractID", "date", "carID", "licensePlate"]
+    },
+    "create contractSchema": {
+      "type": "object",
+      "description": "Verträge anlegen",
+      "properties": {
+        "insurancepapernumber": { "type": "string" },
+        "branch": { "type": "string" },
+        "productname": { "type": "string" },
+        "startdate": { "type": "string", "format": "date" },
+        "insured": { "type": "string" }
+      },
+      "required": ["insurancepapernumber"]
+    },
+    "address": {
+      "type": "object",
+      "properties": {
+        "streetaddress": { "type": "string" },
+        "postcode": { "type": "string" },
+        "country": { "type": "string" },
+        "state": { "type": "string" }
+      }
+    },
+    "contactData": {
+      "type": "object",
+      "properties": {
+        "postOfficeBox": { "type": "string" },
+        "mail": { "type": "string" },
+        "telefon": { "type": "string" },
+        "cellphonenumber": { "type": "string" }
+      }
+    },
+    "insuredInputPayload": {
+      "type": "object",
+      "description": "Insured data model.",
+      "properties": {
+        "salutation": { "type": "string" },
+        "firstname": { "type": "string" },
+        "lastname": { "type": "string" },
+        "gender": { "type": "number" },
+        "birthday": { "type": "string" },
+        "address": { "$ref": "#/definitions/address" },
+        "contactData": { "$ref": "#/definitions/contactData" },
+        "partnerId": { "type": "string" },
+        "mandantenId": { "type": "string" }
+      },
+      "required": ["firstname", "lastname"]
+    },
+    "tenantSchema": {
+      "type": "object",
+      "description": "Versicherungen",
+      "properties": {
+        "_id": { "type": "string" },
+        "firstname": { "type": "string" },
+        "lastname": { "type": "string" },
+        "url": { "type": "string" },
+        "pathname": { "type": "string" }
+      },
+      "required": ["firstname"]
+    },
+    "Model2": {
+      "type": "object",
+      "properties": { "partnerId": { "type": "string" } },
+      "required": ["partnerId"]
+    },
+    "authenticateUserSchema": {
+      "type": "object",
+      "description": "login",
+      "properties": {
+        "email": { "type": "string", "x-format": { "email": true } },
+        "password": { "type": "string" }
+      },
+      "required": ["email", "password"]
+    },
+    "recoverPasswordSchema": {
+      "type": "object",
+      "description": "Password Recovery",
+      "properties": {
+        "email": { "type": "string", "x-format": { "email": true } }
+      },
+      "required": ["email"]
+    },
+    "userSchema": {
+      "type": "object",
+      "description": "Regestrieren",
+      "properties": {
+        "firstname": {
+          "type": "string",
+          "minLength": 2,
+          "maxLength": 30,
+          "pattern": "^[A-Za-z\\u00c0-\\u00d6\\u00d9-\\u00f6\\u00f9-\\u01bf]+$"
+        },
+        "lastname": {
+          "type": "string",
+          "minLength": 2,
+          "maxLength": 30,
+          "pattern": "^[A-Za-z\\u00c0-\\u00d6\\u00d9-\\u00f6\\u00f9-\\u01bf]+$"
+        },
+        "email": { "type": "string", "x-format": { "email": true } },
+        "password": { "type": "string" }
+      },
+      "required": ["firstname", "lastname", "email", "password"]
+    },
+    "resetPasswordSchema": {
+      "type": "object",
+      "description": "Update User password",
+      "properties": {
+        "password": { "type": "string" },
+        "resetPasswordToken": { "type": "string" }
+      },
+      "required": ["password", "resetPasswordToken"]
+    },
+    "Model3": {
+      "type": "object",
+      "properties": { "linkToken": { "type": "string" } },
+      "required": ["linkToken"]
+    },
+    "contractSchema": {
+      "type": "object",
+      "description": "Verträge",
+      "properties": {
+        "_id": { "type": "string" },
+        "insurancepapernumber": { "type": "string" },
+        "branch": { "type": "string" },
+        "productname": { "type": "string" },
+        "startdate": { "type": "string", "format": "date" },
+        "insured": { "type": "string" }
+      },
+      "required": ["insurancepapernumber"]
+    },
+    "Model4": {
+      "type": "object",
+      "description": "Verträge anlegen",
+      "properties": {
+        "insured": { "type": "string" },
+        "contract": { "type": "string" }
+      },
+      "required": ["insured", "contract"]
+    },
+    "Error": {
+      "type": "object",
+      "properties": {
+        "code": { "type": "number" },
+        "msg": { "type": "string" }
+      }
+    },
+    "profileSchema": {
+      "type": "object",
+      "description": "Updates für Profil",
+      "properties": {
+        "_id": { "type": "string" },
+        "firstname": {
+          "type": "string",
+          "minLength": 2,
+          "maxLength": 30,
+          "pattern": "^[A-Za-z\\u00c0-\\u00d6\\u00d9-\\u00f6\\u00f9-\\u01bf]+$",
+          "x-format": { "alphanum": true }
+        },
+        "lastname": {
+          "type": "string",
+          "minLength": 2,
+          "maxLength": 30,
+          "pattern": "^[A-Za-z\\u00c0-\\u00d6\\u00d9-\\u00f6\\u00f9-\\u01bf]+$",
+          "x-format": { "alphanum": true }
+        },
+        "email": { "type": "string", "x-format": { "email": true } }
+      },
+      "required": ["_id", "firstname", "lastname", "email"]
+    },
+    "images": { "type": "array", "items": { "type": "string" } },
+    "Model5": {
+      "type": "object",
+      "properties": {
+        "contractID": { "type": "string" },
+        "status": { "type": "string" },
+        "date": { "type": "string" },
+        "time": { "type": "string" },
+        "carID": { "type": "string" },
+        "licensePlate": { "type": "string" },
+        "mileage": { "type": "number" },
+        "place": { "type": "string" },
+        "description": { "type": "string" },
+        "licensePlateOfTrailor": { "type": "string" },
+        "driver": { "$ref": "#/definitions/driver" },
+        "questions": { "$ref": "#/definitions/questions" },
+        "sendMail": { "type": "boolean" },
+        "secret": { "type": "string" },
+        "images": { "$ref": "#/definitions/images" }
+      },
+      "required": ["contractID", "date", "carID", "licensePlate"]
+    },
+    "Upload single file": {
+      "type": "object",
+      "description": "FORM DATA KEY:file TYPE:FILE",
+      "properties": { "file": { "type": "string" } },
+      "required": ["file"]
+    },
+    "getInsured result": {
+      "type": "object",
+      "properties": {
+        "insurancepapernumber": { "type": "string" },
+        "_id": { "type": "string" },
+        "branch": { "type": "string" },
+        "productname": { "type": "string" },
+        "startdate": { "type": "string", "format": "date" },
+        "insured": { "type": "string" }
+      }
+    },
+    "Model6": {
+      "type": "array",
+      "items": { "$ref": "#/definitions/getInsured%20result" }
+    },
+    "Model7": {
+      "type": "object",
+      "properties": {
+        "streetaddress": { "type": "string" },
+        "postcode": { "type": "number" },
+        "country": { "type": "string" },
+        "state": { "type": "string" }
+      }
+    },
+    "Model8": {
+      "type": "object",
+      "properties": {
+        "postOfficeBox": { "type": "string" },
+        "mail": { "type": "string" },
+        "telefon": { "type": "number" },
+        "cellphonenumber": { "type": "string" }
+      }
+    },
+    "Model9": {
+      "type": "object",
+      "properties": {
+        "mandantenId": { "type": "string" },
+        "acronym": { "type": "string" },
+        "desiggnation": { "type": "string" }
+      }
+    },
+    "mandantenGruppenListen": {
+      "type": "array",
+      "items": { "$ref": "#/definitions/Model9" }
+    },
+    "Model10": {
+      "type": "object",
+      "properties": {
+        "salutation": { "type": "string" },
+        "firstname": { "type": "string" },
+        "lastname": { "type": "string" },
+        "gender": { "type": "number" },
+        "birthday": { "type": "string", "format": "date" },
+        "address": { "$ref": "#/definitions/Model7" },
+        "contactData": { "$ref": "#/definitions/Model8" },
+        "partnerId": { "type": "string" },
+        "mandantenGruppenListen": {
+          "$ref": "#/definitions/mandantenGruppenListen"
+        }
+      }
+    },
+    "Result": { "type": "array", "items": { "$ref": "#/definitions/Model10" } },
+    "Model11": {
+      "type": "object",
+      "properties": {
+        "salutation": { "type": "string" },
+        "firstname": { "type": "string" },
+        "lastname": { "type": "string" },
+        "gender": { "type": "number" },
+        "birthday": { "type": "string" },
+        "address": { "$ref": "#/definitions/address" },
+        "contactData": { "$ref": "#/definitions/contactData" },
+        "partnerId": { "type": "string" },
+        "mandantenId": { "type": "string" }
+      },
+      "required": ["firstname", "lastname"]
+    }
+  }
+}

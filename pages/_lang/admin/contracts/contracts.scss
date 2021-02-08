@@ -1,0 +1,17 @@
+.contracts {
+  display: flex;
+  flex-direction: column;
+
+  .contract-table {
+    margin: 20px 0 0;
+  }
+
+  .add-button-wrapper {
+    display: flex;
+    flex-direction: row-reverse;
+
+    .add-button {
+      margin: 0;
+    }
+  }
+}

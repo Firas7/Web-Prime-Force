@@ -1,0 +1,170 @@
+<div>
+  <v-container class="searchfield-container">
+    <div class="searchfield">
+      <v-select
+        :items="claimcases"
+        label="Wähle einen Schadenfall"
+        v-model="branch"
+        @input="changeBranch"
+        outlined
+      >
+      </v-select>
+    </div>
+  </v-container>
+  <v-toolbar flat color="white" v-if="branch.length != 0 && !!branchForm">
+    <v-toolbar-title>
+      {{ branchForm.info }}
+    </v-toolbar-title>
+    <v-divider class="mx-4" inset vertical />
+    <v-spacer />
+  </v-toolbar>
+  <v-form
+  v-model="valid"
+  >
+    <v-expansion-panels
+      multiple
+      accordion
+    >
+      <v-expansion-panel v-for="step of branchForm.steps" :key="step.step">
+        <v-expansion-panel-header>
+          {{step.step}}) {{step.name}}
+        </v-expansion-panel-header>
+        <v-expansion-panel-content>
+          <div v-for="(field, index) of step.fields" :key="field.id">
+            <v-text-field
+              v-if="field.type === 'textfield'"
+              v-model="field.value"
+              :label="field.attributes.label"
+              :required="field.attributes.isRequired"
+              :disabled="field.enableWhen && !(step.fields[index-1].value === field.enableWhen.value)"
+              :rules="[validateTextField(field.value)]"
+            />
+
+            <v-textarea
+              v-if="field.type === 'textarea'"
+              v-model="field.value"
+              :label="field.attributes.label"
+              :required="field.attributes.isRequired"
+              :disabled="field.enableWhen && !(step.fields[index-1].value === field.enableWhen.value)"
+              :rules="[validateTextField(field.value)]"
+            />
+
+            <v-menu
+              max-width="290"
+              :disabled="status"
+              v-if="field.type === 'date'"
+            >
+              <template v-slot:activator="{ on }">
+                <v-text-field
+                  :value="field.value"
+                  clearable
+                  :label="field.attributes.label"
+                  :rules="[validateDate(field.value)]"
+                  readonly
+                  v-on="on"
+                  @click:clear="field.value = null"
+                  prepend-icon="mdi-calendar-month-outline"
+                />
+              </template>
+              <v-date-picker v-model="field.value" @change="menuDate = false" />
+            </v-menu>
+
+            <v-menu
+              max-width="290"
+              :disabled="status"
+              v-if="field.type ==='time'"
+            >
+              <template v-slot:activator="{ on }">
+                <v-text-field
+                  :value="field.value"
+                  clearable
+                  :label="field.attributes.label"
+                  prepend-icon="mdi-watch"
+                  readonly
+                  v-on="on"
+                  @click:clear="field.value = null"
+                />
+              </template>
+              <v-time-picker
+                v-model="field.value"
+                :required="field.attributes.isRequired"
+                @change="menuTime = false"
+              />
+            </v-menu>
+
+            <v-radio-group
+              v-if="field.type === 'radio'"
+              v-model="field.value"
+            >
+              <h4 class="mb-5"> {{field.attributes.label}} </h4>
+              <v-radio 
+                v-for="radio in field.attributes.group"
+                :key="radio.id"
+                color="primary"
+                :value="radio.id"
+                :required="field.attributes.isRequired"
+                :label="radio.labelRadio"
+              />
+            </v-radio-group>
+            
+            <v-checkbox
+              v-if="field.type === 'checkbox'"
+              v-model="field.value"
+              :value="field.value"
+              :label="field.attributes.label"
+              :disabled="field.enableWhen && !(step.fields[index-1].value === field.enableWhen.value)"
+              :required="field.attributes.isRequired"
+            />
+            <div v-if="field.type === 'upload'">
+              <v-file-input 
+                multiple 
+                chips 
+                accept="image/*" 
+                prepend-icon="mdi-camera" 
+                :label="field.attributes.label"
+                v-model="file"
+              >
+                <template v-slot:selection="{ text, index, file }">
+                    <v-chip 
+                      small 
+                      close 
+                      @click:close="remove(index)"
+                    >
+                    {{ text }}
+                    </v-chip>
+                </template>
+          </v-file-input>
+            </div>
+            <v-select
+              v-if="field.type === 'dropdown'"
+              :items="field.attributes.content"
+              :label="field.attributes.label"
+              :disabled="field.enableWhen && !(step.fields[index-1].value === field.enableWhen.value)"
+              :required="field.attributes.isRequired"
+              v-model="field.value"
+            />
+          </div>
+        </v-expansion-panel-content>
+      </v-expansion-panel>
+      <v-btn
+        v-if="branch"
+        color="#667EEA" 
+        class="text-light"
+        depressed
+        @click="saveFormData"
+      >
+      Save
+      </v-btn>
+      <v-btn
+        v-if="branch"
+        :disabled="!valid"
+        color="#667EEA" 
+        class="text-light"
+        depressed
+        @click="submitForm"
+      >
+      Submit
+      </v-btn>
+    </v-expansion-panels>
+  </v-form>
+</div>

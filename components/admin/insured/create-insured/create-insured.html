@@ -1,0 +1,181 @@
+<section class="detail">
+  <v-card class="mx-auto" max-width="500">
+    <v-card-title class="v-card-title">
+      {{ $t('components.admin.insured.createInsured.title', 'Versicherte Profil') }}
+    </v-card-title>
+    <v-card-text>
+      <v-row>
+        <!--Anrede, Vorname, Nachname-->
+        <v-col cols="12" sm="12" md="12">
+          <h3>{{ $t('components.admin.insured.createInsured.tableHeaders.name', 'Name') }}</h3>
+        </v-col>
+        <v-col cols="12" sm="4" md="4" class="edit-name">
+          <v-text-field
+            class="edit-name"
+            :label="$t('components.admin.insured.createInsured.labels.salutation', 'Anrede')"
+            v-model="insured.salutation"
+          ></v-text-field>
+        </v-col>
+        <v-col cols="12" sm="4" md="4" class="edit-name">
+          <v-form ref="firstname">
+            <v-text-field
+              class="edit-name"
+              required
+              :label="$t('components.admin.insured.createInsured.labels.firstname', 'Vorname')"
+              v-model="insured.firstname"
+              :rules="[requiredField(insured.firstname)]"
+            ></v-text-field>
+          </v-form>
+        </v-col>
+        <v-col cols="12" sm="4" md="4" class="edit-name">
+          <v-form ref="lastname">
+            <v-text-field
+              class="edit-name"
+              required
+              :label="$t('components.admin.insured.createInsured.labels.lastname', 'Nachname')"
+              v-model="insured.lastname"
+              :rules="[requiredField(insured.lastname)]"
+            ></v-text-field>
+          </v-form>
+        </v-col>
+
+        <!--Geschlecht-->
+        <v-col cols="12" sm="12" md="12">
+          <h3>{{ $t('components.admin.insured.createInsured.tableHeaders.gender', 'Geschlecht') }}</h3>
+          <v-select
+            :items="['Undefined','Neutral','Female','Male']"
+            v-model="gender"
+          ></v-select>
+        </v-col>
+
+        <!--Geburtstag-->
+        <v-col cols="12" sm="12" md="12">
+          <h3>{{ $t('components.admin.insured.createInsured.tableHeaders.birthday', 'Geburtstag') }}</h3>
+          <v-menu
+            v-model="menu"
+            :close-on-content-click="false"
+            :nudge-right="40"
+            transition="scale-transition"
+            offset-y
+            min-width="290px">
+            <template v-slot:activator="{ on }">
+              <v-text-field
+                :value="computedDate"
+                prepend-icon="mdi-calendar"
+                readonly
+                v-on="on"
+              ></v-text-field>
+            </template>
+            <v-date-picker v-model="birthday" @input="menu = false"/>
+          </v-menu>
+        </v-col>
+
+        <!--Straße und Hausnummer-->
+        <v-col cols="12" md="12">
+          <h3>{{ $t('components.admin.insured.createInsured.tableHeaders.address', 'Adresse') }}</h3>
+        </v-col>
+        <v-col cols="12" md="8">
+          <v-text-field
+            :label="$t('components.admin.insured.createInsured.labels.street', 'Straße')"
+            v-model="insured.address.streetaddress"
+          ></v-text-field>
+        </v-col>
+        <v-col cols="12" md="4">
+          <v-text-field
+            :label="$t('components.admin.insured.createInsured.labels.housenumber', 'Hausnummer')"
+            v-model="insured.address.housenumber"
+          ></v-text-field>
+        </v-col>
+
+        <!--Stadt und Postleitzahl-->
+        <v-col cols="12" md="12">
+          <h3>{{ $t('components.admin.insured.createInsured.tableHeaders.city', 'Stadt') }}</h3>
+        </v-col>
+        <v-col cols="12" md="6">
+          <v-text-field
+            :label="$t('components.admin.insured.createInsured.labels.postcode', 'Postleitzahl')"
+            v-model="insured.address.postcode"
+          ></v-text-field>
+        </v-col>
+        <v-col cols="12" md="6">
+          <v-text-field
+            :label="$t('components.admin.insured.createInsured.labels.city', 'Stadt')"
+            v-model="insured.address.city"
+          ></v-text-field>
+        </v-col>
+
+        <!--Land-->
+        <v-col cols="12" md="12">
+          <h3>{{ $t('components.admin.insured.createInsured.tableHeaders.country', 'Land') }}</h3>
+          <v-text-field
+            v-model="insured.address.country"
+          ></v-text-field>
+        </v-col>
+
+        <!--Staat-->
+        <v-col cols="12" md="12">
+          <h3>{{ $t('components.admin.insured.createInsured.tableHeaders.state', 'Staat') }}</h3>
+          <v-text-field
+            v-model="insured.address.state"
+          ></v-text-field>
+        </v-col>
+
+        <!--E-Mail-->
+        <v-col cols="12" md="12">
+          <h3>{{ $t('components.admin.insured.createInsured.tableHeaders.email', 'E-Mail') }}</h3>
+          <v-text-field
+            v-model="insured.contactData.mail"
+            prepend-icon="mdi-email-outline"
+            :rules="[validateEmail(insured.contactData.mail)]"
+          ></v-text-field>
+        </v-col>
+
+        <!--Handy und Telefon-->
+        <v-col cols="12" md="6">
+          <h3>{{ $t('components.admin.insured.createInsured.tableHeaders.telefon', 'Telefon') }}</h3>
+          <v-text-field
+            v-model="insured.contactData.telefon"
+            prepend-icon="mdi-phone"
+          ></v-text-field>
+        </v-col>
+        <v-col cols="12" md="6">
+          <h3>{{ $t('components.admin.insured.createInsured.tableHeaders.cellphoneNumber', 'Handy') }}</h3>
+          <v-text-field
+            v-model="insured.contactData.cellphonenumber"
+            prepend-icon="mdi-cellphone"
+          ></v-text-field>
+        </v-col>
+
+        <!--Postfach-->
+        <v-col cols="12" md="12">
+          <h3>{{ $t('components.admin.insured.createInsured.tableHeaders.postOfficeBox', 'Postfach') }}</h3>
+          <v-text-field
+            v-model="insured.contactData.postOfficeBox"
+            prepend-icon="mdi-mailbox"
+          ></v-text-field>
+        </v-col>
+      </v-row>
+    </v-card-text>
+
+    <v-divider></v-divider>
+
+    <v-card-actions class="card-action justify-end">
+      <v-btn
+        text
+        depressed
+        color="#667EEA"
+        class="highlight"
+        @click="backToOverview">
+        {{ $t('components.admin.insured.createInsured.buttons.back', 'Zurück') }}
+      </v-btn>
+      <v-btn
+        depressed
+        color="#667EEA"
+        class="text-light"
+        @click="validateForm()&&addInsured()">
+        {{ $t('components.admin.insured.createInsured.buttons.add', 'Hinzufügen') }}
+      </v-btn>
+    </v-card-actions>
+  </v-card>
+</section>
+

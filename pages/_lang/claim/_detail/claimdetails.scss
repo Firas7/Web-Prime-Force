@@ -1,0 +1,51 @@
+bb-conatiner {
+  padding: 1rem 2rem;
+
+  .bb-name {
+    margin: 1rem 0;
+  }
+
+  .bb-key-value {
+    align-items: stretch;
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 1rem;
+
+    .bb-icon {
+      margin-right: 0.3rem;
+    }
+
+    .bb-edit-icon {
+      align-items: flex-end;
+    }
+
+    .bb-key {
+      color: #888;
+      font-size: 0.7rem;
+      height: 1.5rem;
+      margin: 0;
+      position: relative;
+      text-transform: uppercase;
+      width: 12.5rem;
+
+      span {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+      }
+    }
+
+    .bb-value {
+      margin: 0;
+      padding: 0;
+    }
+
+    .bb-address {
+      margin-bottom: 0.3rem;
+    }
+  }
+}
+
+.bb-v-toolbar {
+  padding: 0.6rem 1.1rem;
+}

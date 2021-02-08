@@ -1,0 +1,55 @@
+<section class="toolbar">
+
+    <v-toolbar app clipped-left
+               color="#667EEA"
+               dark>
+      <img class="logo" alt="ClaimNow Logo" src="/claim-now-logo.svg"/>
+      <h1 class="logo-text">User</h1>
+      <v-spacer></v-spacer>
+      <v-toolbar-items class="hidden-sm-and-down">
+        <v-btn
+          depressed
+          color="#667EEA"
+          v-for="item in menu"
+          :key="item.icon"
+          :to="item.link"
+          onclick="window.location.href=''">
+          {{item.title}}
+        </v-btn>
+      </v-toolbar-items>
+      <v-menu bottom left>
+        <template v-slot:activator="{ on }">
+          <v-btn 
+            class="hidden-md-and-up"
+            dark
+            depressed
+            icon
+            v-on="on">
+            <v-icon>mdi-menu</v-icon>
+          </v-btn>
+        </template>
+        <v-list>
+          <v-list-item v-for="item in menu" :key="item.icon" :to="item.link">
+            <v-list-item-title>{{ item.title }}</v-list-item-title>
+          </v-list-item>
+        </v-list>
+      </v-menu>
+      <v-btn
+        class="mx-2"
+        depressed
+        icon
+        dark
+        small>
+        <v-icon color="#EBF4FF" dark onclick="window.location.href  ='/user/profile'">mdi-account-outline</v-icon>
+      </v-btn>
+      <v-btn
+        class="mx-2"
+        depressed
+        icon
+        dark
+        small>
+        <v-icon color="#EBF4FF" dark onclick="window.location.href='/user/contracts'">mdi-file-document-outline</v-icon>
+      </v-btn>
+    </v-toolbar>
+</section>
+

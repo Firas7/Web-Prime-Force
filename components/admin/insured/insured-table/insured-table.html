@@ -1,0 +1,155 @@
+<div>
+  <div class="text-center">
+    <v-progress-circular
+      :size="50"
+      color="primary"
+      indeterminate
+      v-if="loading"
+    ></v-progress-circular>
+  </div>
+
+  <div v-if="!!insureds && !loading" class="bb-container">
+    <v-toolbar flat>
+      <v-toolbar-title>
+        <p class="headline">{{ $t('components.admin.insured.insuredTable.title', 'Versicherte') }}</p>
+      </v-toolbar-title>
+      <v-spacer></v-spacer>
+      <v-tooltip>
+        <template v-slot:activator="{ on }">
+          <v-btn
+            v-on="on"
+            depressed
+            id="btn-new"
+            color="#667EEA"
+            class="text-light"
+            @click="addInsured"
+          >
+            {{ $t('components.admin.insured.insuredTable.buttons.add', 'Hinzufügen') }}
+          </v-btn>
+        </template>
+        <span>{{ $t('components.admin.insured.insuredTable.tooltips.add', 'Neuen Versicherten anlegen') }}</span>
+      </v-tooltip>
+    </v-toolbar>
+
+    <div :key="insured._id" class="table-loop" v-for="insured in insureds">
+      <div
+        :key="insured._id"
+        class="mobile-table"
+        @click="showDetail(insured)"
+      >
+        <!--Kopfzeilen-->
+        <div class="header salutation-header">
+          {{ $t('components.admin.insured.insuredTable.tableHeaders.salutation', 'Anrede') }}
+        </div>
+        <div class="header firstname-header">
+          {{
+          $t('components.admin.insured.insuredTable.tableHeaders.firstname', 'Vorname')
+          }}
+        </div>
+        <div class="header lastname-header">
+          {{
+          $t('components.admin.insured.insuredTable.tableHeaders.lastname', 'Nachname')
+          }}
+        </div>
+        <div class="header gender-header">
+          {{
+          $t('components.admin.insured.insuredTable.tableHeaders.gender', 'Geschlecht')
+          }}
+        </div>
+        <div class="header birthday-header">
+          {{ $t('components.admin.insured.insuredTable.tableHeaders.birthday', 'Geburtstag') }}
+        </div>
+        <div class="header adress-header">
+          {{
+          $t('components.admin.insured.insuredTable.tableHeaders.street', 'Adresse')
+          }}
+        </div>
+        <div class="header postcode-header">
+          {{
+          $t('components.admin.insured.insuredTable.tableHeaders.postcode', 'Postleitzahl')
+          }}
+        </div>
+        <div class="header postofficebox-header">
+          {{
+          $t('components.admin.insured.insuredTable.tableHeaders.postOfficeBox', 'Postfach')
+          }}
+        </div>
+        <div class="header mail-header">
+          {{ $t('components.admin.insured.insuredTable.tableHeaders.email', 'E-Mail') }}
+        </div>
+        <div class="header cellphone-header">
+          {{
+          $t('components.admin.insured.insuredTable.tableHeaders.cellphoneNumber', 'Handy')
+          }}
+        </div>
+        <div class="header partnerid-header">
+          {{
+          $t('components.admin.insured.insuredTable.tableHeaders.partnerId', 'Partner ID')
+          }}
+        </div>
+        <div class="header action-header">
+          {{
+          $t('components.admin.insured.insuredTable.tableHeaders.action', 'Aktionen')
+          }}
+        </div>
+        <!--Daten-->
+        <div v-if="!!insured.salutation" class="salutatuon-data">{{ insured.salutation }}</div>
+        <div v-else class="data">{{$t('components.admin.insured.insuredTable.empty.salutation', 'Unbekannt') }}</div>
+        <div v-if="!!insured.firstname" class="firstname-data">{{ insured.firstname }}</div>
+        <div v-else class="data">{{$t('components.admin.insured.insuredTable.empty.firstname', 'Fehler') }}</div>
+        <div v-if="!!insured.lastname" class="lastname-data">{{ insured.lastname }}</div>
+        <div v-else class="data">{{$t('components.admin.insured.insuredTable.empty.lastname', 'Fehler') }}</div>
+        <div v-if="!!insured.gender" class="gender-data">{{ insured.gender }}</div>
+        <div v-else class="data">{{$t('components.admin.insured.insuredTable.empty.gender', 'Unbekannt') }}</div>
+        <div v-if="!!insured.birthday" class="birthday-data">{{ formatDate(insured.birthday.toISOString()) }}</div>
+        <div v-else class="data">{{$t('components.admin.insured.insuredTable.empty.birthday', 'Unbekannt') }}</div>
+        <div v-if="!!insured.address && (!!insured.address.streetaddress || !!insured.address.housenumber)" class="adress-data">{{ insured.address.streetaddress }} {{ insured.address.housenumber }}</div>
+        <div v-else class="data">{{$t('components.admin.insured.insuredTable.empty.address', 'Unbekannt') }}</div>
+        <div v-if="!!insured.address && !!insured.address.postcode" class="postcode-data">{{ insured.address.postcode }}</div>
+        <div v-else class="data">{{$t('components.admin.insured.insuredTable.empty.postcode', 'Unbekannt') }}</div>
+        <div v-if="!!insured.contactData && !!insured.contactData.postOfficeBox" class="postofficebox-data">{{insured.contactData.postOfficeBox}}</div>
+        <div v-else class="data">{{$t('components.admin.insured.insuredTable.empty.postOfficeBox', 'Unbekannt') }}</div>
+        <div v-if="!!insured.contactData && !!insured.contactData.mail" class="mail-data">{{ insured.contactData.mail }}</div>
+        <div v-else class="data">{{$t('components.admin.insured.insuredTable.empty.email', 'Unbekannt') }}</div>
+        <div v-if="!!insured.contactData && !!insured.contactData.cellphonenumber" class="cellphone-data">{{ insured.contactData.cellphonenumber }}</div>
+        <div v-else class="data">{{$t('components.admin.insured.insuredTable.empty.cellphoneNumber', 'Unbekannt') }}</div>
+        <div v-if="!!insured.partnerId" class="partnerid-data">{{ insured.partnerId }}</div>
+        <div v-else class="data">{{$t('components.admin.insured.insuredTable.empty.partnerId', 'Unbekannt') }}</div>
+        <div class="action-data">
+          <!--Knöpfe-->
+          <v-tooltip bottom>
+            <template v-slot:activator="{ on }">
+              <v-btn
+                icon
+                v-on="on"
+                depressed
+                @click="deleteInsured(insured)">
+                <v-icon>mdi-trash-can-outline</v-icon>
+              </v-btn>
+            </template>
+            <span>{{ $t('components.admin.insured.insuredTable.tooltips.delete', 'Versicherten löschen') }}</span>
+          </v-tooltip>
+          <v-tooltip bottom>
+            <template v-slot:activator="{ on }">
+              <v-btn
+                icon
+                v-on="on"
+                depressed
+                @click="editInsured(insured)">
+                <v-icon>mdi-pencil-outline</v-icon>
+              </v-btn>
+            </template>
+            <span>{{ $t('components.admin.insured.insuredTable.tooltips.edit', 'Versicherten bearbeiten') }}</span>
+          </v-tooltip>
+        </div>
+      </div>
+    </div>
+    <v-btn
+      color="#667EEA"
+      class="text-light load-button"
+      depressed
+      @click="loadNextInsured(100)">
+      {{ $t('components.admin.insured.insuredTable.buttons.loadDataButton', 'Weitere Daten laden') }}
+    </v-btn>
+  </div>
+</div>
