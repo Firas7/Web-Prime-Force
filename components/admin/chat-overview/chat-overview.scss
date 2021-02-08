@@ -1,0 +1,39 @@
+.chat-overview{
+    
+}
+.chat-overview-card{
+    padding: 10px;
+    margin: 10px 0;
+    &:hover{
+        cursor: pointer;
+    }
+    h2{
+        color:#000;
+        font-size: 20px;
+        font-weight: normal;
+    }
+    h3{
+        color:#aaa;
+        font-size: 12px;
+        font-weight: normal;
+    } 
+    .profile-image-holder{
+        max-width: 120px;
+        max-height: 120px;
+        height: auto;
+        float: left;
+    }
+    .profile-image{
+        max-width: 100%;
+        height:auto;
+    }
+    .display-text{
+        float: left;
+    }
+    &:after{
+        content:" ";
+        clear: both;
+        height:0;
+        display: block;        
+    }
+}

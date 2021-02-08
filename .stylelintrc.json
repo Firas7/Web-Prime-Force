@@ -1,0 +1,23 @@
+{
+  "extends": [
+    "stylelint-config-sass-guidelines"
+  ],
+  "plugins": [
+    "stylelint-scss"
+  ],
+  "ignoreFiles": [
+    "**/*.js",
+    "**/*.ts",
+    "**/*.md",
+    "**/*.yaml",
+    "**/*.yml",
+    "**/*.json",
+    "node_modules/"
+  ],
+  "rules": {
+    "scss/dollar-variable-pattern": "^color-",
+    "scss/at-extend-no-missing-placeholder": true,
+    "max-nesting-depth": 10,
+    "selector-max-compound-selectors": 10
+  }
+}

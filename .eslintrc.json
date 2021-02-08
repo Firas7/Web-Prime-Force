@@ -1,0 +1,66 @@
+{
+  "env": {
+    "browser": true,
+    "es6": true,
+    "node": true
+  },
+  "extends": [
+    "eslint:recommended",
+    "plugin:vue/essential",
+    "plugin:@typescript-eslint/eslint-recommended",
+    "prettier"
+  ],
+  "ignorePatterns": [
+    "node_modules/*",
+    "generated-sources/*",
+    "**/vendor/*.js",
+    "dist/*",
+    "server-docs/*",
+    ".nuxt/*",
+    ".idea/*",
+    "logs/*",
+    "coverage/*",
+    "**/*.config.js",
+    "spec/**",
+    "cypress/**"
+  ],
+  "globals": {
+    "Atomics": "readonly",
+    "SharedArrayBuffer": "readonly"
+  },
+  "parserOptions": {
+    "ecmaVersion": 2018,
+    "parser": "@typescript-eslint/parser",
+    "sourceType": "module"
+  },
+  "plugins": [
+    "vue",
+    "@typescript-eslint",
+    "prettier"
+  ],
+  "rules": {
+    "no-unused-vars": "error",
+    "no-console": "error",
+    "no-useless-escape": "off",
+    "no-extra-boolean-cast": "off",
+    "prettier/prettier": [
+      "error"
+    ]
+  },
+  "overrides": [
+    {
+      "files": [
+        "*.ts",
+        "*.tsx"
+      ],
+      "rules": {
+        "@typescript-eslint/no-unused-vars": [
+          2,
+          {
+            "args": "none"
+          }
+        ]
+      }
+    }
+  ]
+}

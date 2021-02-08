@@ -1,0 +1,79 @@
+image: node:12.13.0
+pipelines:
+  default:
+    - step:
+        caches:
+          - node
+        name: Linting
+        script:
+          - npm install
+          - npm run build
+          - npm run lint:eslint
+          - npm run lint:style
+    #- parallel:
+    #    - step:
+    #        name: Test Frontend
+    #        script:
+    #          - npm install
+    #          - npm run test
+
+  branches:
+    develop:
+      - step:
+          caches:
+            - node
+          name: Build and Deploy
+          script:
+            - npm install
+            - npm run build
+            - mkdir bundle
+            - cp -r .nuxt/ bundle/nuxt && cp -r node_modules/ bundle/node_modules && cp -r dist/ bundle/dist && cp -r server/ bundle/server && cp -r static/ bundle/static && cp package.json bundle/ && cp package-lock.json bundle/ && cp nuxt.config.js bundle/
+            - tar -zcvf bundle-dev.tar.gz bundle/
+          artifacts:
+            - bundle-dev.tar.gz
+      - step:
+          name: Deploy
+          script:
+            - scp -P $APPSERVER_PORT bundle-dev.tar.gz $APPSERVER_USER@$APPSERVER_IP:/home/bitbucket/
+            - ssh $APPSERVER_USER@$APPSERVER_IP -p $APPSERVER_PORT "bash -s" 'cd /home/bitbucket/&&if [ ! -d "/home/bitbucket/deploy-dev/" ];then sudo mkdir /home/bitbucket/deploy-dev;fi;sudo tar -xvf bundle-dev.tar.gz -C deploy-dev/&&sudo rm -f bundle-dev.tar.gz&&cd /opt/dev-claim-now/&&sudo docker stop claim-now-dev-nuxt&&sudo rm -r -f source&&if [ ! -d "source/" ];then sudo mkdir source;fi;sudo mv /home/bitbucket/deploy-dev/bundle/* source/&&if [ ! -d "source/.nuxt/" ];then sudo mkdir source/.nuxt/;fi;sudo mv source/nuxt/* source/.nuxt/&&cd /home/bitbucket/&&sudo rm -r -f deploy-dev/&&sudo docker start claim-now-dev-nuxt&&exit 0&&exit 0'
+
+
+    master:
+      - step:
+          caches:
+            - node
+          name: Build
+          script:
+            - npm install
+            - npm run build --prod
+            - mkdir bundle
+            - cp -r .nuxt/ bundle/nuxt && cp -r node_modules/ bundle/node_modules && cp -r dist/ bundle/dist && cp -r server/ bundle/server && cp -r static/ bundle/static && cp package.json bundle/ && cp package-lock.json bundle/ && cp nuxt.config.js bundle/
+            - tar -zcvf bundle-master.tar.gz bundle/
+          artifacts:
+            - bundle-master.tar.gz
+      - step:
+          name: Deploy
+          script:
+            - scp -P $APPSERVER_PORT bundle-master.tar.gz $APPSERVER_USER@$APPSERVER_IP:/home/bitbucket/
+            - ssh $APPSERVER_USER@$APPSERVER_IP -p $APPSERVER_PORT "bash -s" 'cd /home/bitbucket/&&if [ ! -d "/home/bitbucket/deploy-master/" ];then sudo mkdir /home/bitbucket/deploy-master;fi;sudo tar -xvf bundle-master.tar.gz -C deploy-master/&&sudo rm -f bundle-master.tar.gz&&cd /opt/test-claim-now/&&sudo docker stop claim-now-test-nuxt&&sudo rm -r -f source&&if [ ! -d "source/" ];then sudo mkdir source;fi;sudo mv /home/bitbucket/deploy-master/bundle/* source/&&if [ ! -d "source/.nuxt/" ];then sudo mkdir source/.nuxt/;fi;sudo mv source/nuxt/* source/.nuxt/&&cd /home/bitbucket/&&sudo rm -r -f deploy-master/&&sudo docker start claim-now-test-nuxt&&exit 0&&exit 0'
+
+  tags:
+    release-*:
+      - step:
+          caches:
+            - node
+          name: Build
+          script:
+            - npm
+            - npm run build --prod
+            - mkdir bundle
+            - cp -r .nuxt/ bundle/nuxt && cp -r node_modules/ bundle/node_modules && cp -r dist/ bundle/dist && cp -r server/ bundle/server && cp -r static/ bundle/static && cp package.json bundle/ && cp package-lock.json bundle/ && cp nuxt.config.js bundle/
+            - tar -zcvf bundle-tag.tar.gz bundle/
+          artifacts:
+            - bundle-tag.tar.gz
+      - step:
+          name: Deploy
+          script:
+            - scp -P $APPSERVER_PORT bundle-tag.tar.gz $APPSERVER_USER@$APPSERVER_IP:/home/bitbucket/
+            - ssh $APPSERVER_USER@$APPSERVER_IP -p $APPSERVER_PORT "bash -s" 'cd /home/bitbucket/&&if [ ! -d "/home/bitbucket/deploy-tag/" ];then sudo mkdir /home/bitbucket/deploy-tag;fi;sudo tar -xvf bundle-tag.tar.gz -C deploy-tag/&&sudo rm -f bundle-tag.tar.gz&&cd /opt/claim-now/&&sudo docker stop claim-now-prod-nuxt&&sudo rm -r -f source&&if [ ! -d "source/" ];then sudo mkdir source;fi;sudo mv /home/bitbucket/deploy-tag/bundle/* source/&&if [ ! -d "source/.nuxt/" ];then sudo mkdir source/.nuxt/;fi;sudo mv source/nuxt/* source/.nuxt/&&cd /home/bitbucket/&&sudo rm -r -f deploy-tag/&&sudo docker start claim-now-prod-nuxt&&exit 0&&exit 0'
+

@@ -1,0 +1,53 @@
+.detail {
+  .v-card-title {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  .v-text-field {
+    //padding-top: 0;
+
+    .edit-name {
+      display: flex;
+      gap: 1rem;
+    }
+  }
+
+  .col-md-4 {
+    padding-bottom: 0;
+    padding-top: 0;
+  }
+
+  .col-sm-6 {
+    padding-bottom: 0;
+    padding-top: 0;
+  }
+
+  .col-12 {
+    padding-bottom: 0;
+    padding-top: 0;
+  }
+
+  .card-action {
+    display: flex;
+    flex-direction: row;
+
+    button {
+      margin: 8px 0 0 !important;
+
+      &:first-child {
+        margin: 0;
+      }
+    }
+
+    .text-light {
+      color: #ebf4ff;
+    }
+
+    .highlight {
+      color: #667eea;
+      white-space: normal;
+    }
+  }
+}

@@ -1,0 +1,30 @@
+<div v-if="!formAnswer.rating">
+  <div v-if="isInsured">
+    <h4 class="text-center">
+      {{$t('components.claimcase.rating.damageAssessmentText', 'Bewerten Sie bitte die Bearbeitung des Schadenfalls')}}
+    </h4>
+    <br />
+    <div class="text-center">
+      <v-rating v-model="stars" size="28"> </v-rating>
+    </div>
+    <br />
+    <div class="text-center" v-if="!!stars && stars !== 5">
+      <p>{{$t('components.claimcase.rating.suggestionsForImprovementText', 'Bitte verraten Sie uns, was wir verbessern können')}}</p>
+      <textarea v-model="comment" name="text" cols="50" rows="3"> </textarea>
+    </div>
+    <div class="text-center">
+      <v-btn depressed color="primary" :disabled="stars===0" @click="save">
+        {{$t('components.claimcase.rating.buttons.send', 'Bewerten Sie bitte die Bearbeitung des Schadenfalls')}}
+      </v-btn>
+    </div>
+  </div>
+</div>
+<div v-else>
+  <div class="bb-conatiner">
+    <h3 class="bb-name">
+      {{$t('components.claimcase.rating.thankYouText', 'Danke für Ihre Bewertung')}}
+    </h3>
+    <v-rating :value="formAnswer.rating.stars" size="28" readonly> </v-rating>
+    {{ formAnswer.rating.comment }}
+  </div>
+</div>

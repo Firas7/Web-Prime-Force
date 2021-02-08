@@ -1,0 +1,21 @@
+.usercard {
+  .links {
+    float: left;
+
+    .link {
+      cursor: pointer;
+
+      &.active {
+        color: #3c366b;
+      }
+    }
+  }
+
+  .data {
+    float: left;
+    justify-content: center;
+    width: 100%;
+  }
+
+
+}

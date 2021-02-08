@@ -1,0 +1,20 @@
+<div class="clerk-container">
+  <div class="contact-data">
+    <h3 class="name">{{clerk.name}}</h3>
+    <h4 class="insurece">{{clerk.insurence}}</h4>
+    <div class="phone contact-data">
+      <span class="phone-label">{{$t('components.user.clerk.telefon', 'Telefon:')}}</span>
+      <a class="phone-number" :href="'tel:'+clerk.phoneNumber">{{clerk.phoneNumber}}</a>
+    </div>
+    <div class="email contact-data">
+      <span class="phone-label">{{$t('components.user.clerk.email', 'E-Mail:')}}</span>
+      <a class="email-adress" :href="'mailto:'+clerk.email">{{clerk.email}}</a>
+    </div>
+  </div>
+  <div class="clerk-image">
+    <img
+        class="face-image"
+        :src="clerk.faceImage"
+        alt="Sachbearbeiter Bild">
+  </div>
+</div>

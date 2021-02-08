@@ -1,0 +1,18 @@
+<div class="bb-conatiner">
+  <div>
+    <h3 class="bb-name">
+      {{$t('components.claimcase.claimAnswers.answers', 'Ausgefüllte Antworten')}}
+    </h3>
+  </div>
+  <v-list-item
+    v-if="answers"
+    two-line
+    v-bind:key="index"
+    v-for="(item, index) in answers"
+  >
+    <v-list-item-content>
+      <v-list-item-title> {{item.question}}</v-list-item-title>
+      <v-list-item-subtitle>{{item.answer}}</v-list-item-subtitle>
+    </v-list-item-content>
+  </v-list-item>
+</div>

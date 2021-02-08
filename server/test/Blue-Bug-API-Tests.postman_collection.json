@@ -1,0 +1,441 @@
+{
+	"info": {
+		"_postman_id": "1470242d-7d17-4b2c-92a9-15ac6df4141f",
+		"name": "Blue-Bug-API-Tests",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "insured",
+			"item": [
+				{
+					"name": "get all insured",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "57897488-321a-49f9-a5af-536f5ebf0838",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"const expandable = false;",
+									"",
+									"const allInsuredSchema = {",
+									"    \"type\": \"array\",",
+									"    \"items\": {",
+									"        \"type\": \"object\",",
+									"        \"properties\": {",
+									"            \"_id\": { \"type\": \"string\" },",
+									"            \"salutation\": { \"type\": \"string\" },",
+									"            \"firstname\": { \"type\": \"string\" },",
+									"            \"lastname\": { \"type\": \"string\" },",
+									"            \"gender\": { \"type\": \"number\" },",
+									"            \"birthday\": { \"type\": \"string\" },",
+									"            \"address\": {",
+									"                \"type\": \"object\",",
+									"                \"properties\": {",
+									"                    \"streetaddress\": { \"type\": \"string\" },",
+									"                    \"housenumber\": { \"type\": \"string\" },",
+									"                    \"postcode\": { \"type\": \"string\" },",
+									"                    \"country\": { \"type\": \"string\" },",
+									"                    \"state\": { \"type\": \"string\" },",
+									"                    \"city\": { \"type\": \"string\" }",
+									"                },",
+									"                \"additionalProperties\": expandable",
+									"            },",
+									"            \"contactData\": {",
+									"                \"type\": \"object\",",
+									"                \"properties\": {",
+									"                    \"postOfficeBox\": { \"type\": \"string\" },",
+									"                    \"mail\": { \"type\": \"string\" },",
+									"                    \"telefon\": { \"type\": \"string\" },",
+									"                    \"cellphonenumber\": { \"type\": \"string\" }",
+									"                },",
+									"                \"additionalProperties\": expandable",
+									"            },",
+									"            \"partnerId\": { \"type\": \"string\"},",
+									"            \"mandantenGruppenListen\": {",
+									"                \"type\": \"array\",",
+									"                \"items\": {",
+									"                    \"type\": \"object\",",
+									"                    \"properties\": {",
+									"                        \"mandantenId\": { \"type\": \"string\" },",
+									"                        \"acronym\": { \"type\": \"string\" },",
+									"                        \"desiggnation\": { \"type\": \"string\" }",
+									"                    },",
+									"                    \"additionalProperties\": expandable",
+									"                }",
+									"            }",
+									"        },",
+									"        \"additionalProperties\": expandable",
+									"    }",
+									"    ",
+									"}",
+									"",
+									"pm.test(\"Schema is valid\", function () {",
+									"    pm.response.to.have.jsonSchema(allInsuredSchema);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/insured",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"insured"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create a insured",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "3c119759-e68d-4e58-902f-bf7167ea96a7",
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"    ",
+									"    pm.collectionVariables.set(\"new_insured_id\", pm.response.json().message.substr(34, 24));",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"salutation\": \"pmt-salutation\",\n\t\"firstname\": \"pmt-firstname\",\n\t\"lastname\": \"pmt-lastnamename\",\n\t\"gender\": 0,\n\t\"birthday\": \"2000-01-01T00:00:00.000+00:00\",\n\t\"address\": {\n\t\t\"streetaddress\": \"pmt-streetaddress\",\n\t\t\"housenumber\": \"pmt-housenumber\",\n\t\t\"postcode\": \"pmt-postcode\",\n\t\t\"country\": \"pmt-country\",\n\t\t\"state\": \"pmt-state\",\n\t\t\"city\": \"pmt-city\"\n\t},\n\t\"contactData\": {\n\t\t\"postOfficeBox\": \"pmt-postOfficeBox\",\n\t\t\"mail\": \"pmt-mail\",\n\t\t\"telefon\": \"pmt-telefon\",\n\t\t\"cellphonenumber\": \"pmt-cellphonenumber\"\n\t},\n\t\"partnerId\": \"{{partner_id}}\",\n\t\"mandantenId\": \"{{mandanten_id}}\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/insured",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"insured"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get a insured by insuredId",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "746a120e-8a39-4cb5-b1e4-84f681de2544",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"const expandable = false;",
+									"",
+									"const insuredSchema = {",
+									"    \"type\": \"object\",",
+									"    \"properties\": {",
+									"        \"_id\": { \"type\": \"string\" },",
+									"        \"salutation\": { \"type\": \"string\" },",
+									"        \"firstname\": { \"type\": \"string\" },",
+									"        \"lastname\": { \"type\": \"string\" },",
+									"        \"gender\": { \"type\": \"number\" },",
+									"        \"birthday\": { \"type\": \"string\" },",
+									"        \"address\": {",
+									"            \"type\": \"object\",",
+									"            \"properties\": {",
+									"                \"streetaddress\": { \"type\": \"string\" },",
+									"                \"housenumber\": { \"type\": \"string\" },",
+									"                \"postcode\": { \"type\": \"string\" },",
+									"                \"country\": { \"type\": \"string\" },",
+									"                \"state\": { \"type\": \"string\" },",
+									"                \"city\": { \"type\": \"string\" }",
+									"            },",
+									"            \"additionalProperties\": expandable",
+									"        },",
+									"        \"contactData\": {",
+									"            \"type\": \"object\",",
+									"            \"properties\": {",
+									"                \"postOfficeBox\": { \"type\": \"string\" },",
+									"                \"mail\": { \"type\": \"string\" },",
+									"                \"telefon\": { \"type\": \"string\" },",
+									"                \"cellphonenumber\": { \"type\": \"string\" }",
+									"            },",
+									"            \"additionalProperties\": expandable",
+									"        },",
+									"        \"partnerId\": { \"type\": \"string\" },",
+									"        \"mandantenId\": { \"type\": \"string\" }",
+									"    },",
+									"    \"additionalProperties\": expandable",
+									"}",
+									"",
+									"pm.test(\"Schema is valid\", function () {",
+									"    pm.response.to.have.jsonSchema(insuredSchema);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/insured/{{new_insured_id}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"insured",
+								"{{new_insured_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get a insured by partnerId",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "4e9d21d8-d7c1-4c7b-b690-b05b8c544029",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"const expandable = false;",
+									"",
+									"const insuredSchema = {",
+									"    \"type\": \"object\",",
+									"    \"properties\": {",
+									"        \"_id\": { \"type\": \"string\" },",
+									"        \"salutation\": { \"type\": \"string\" },",
+									"        \"firstname\": { \"type\": \"string\" },",
+									"        \"lastname\": { \"type\": \"string\" },",
+									"        \"gender\": { \"type\": \"number\" },",
+									"        \"birthday\": { \"type\": \"string\" },",
+									"        \"address\": {",
+									"            \"type\": \"object\",",
+									"            \"properties\": {",
+									"                \"streetaddress\": { \"type\": \"string\" },",
+									"                \"housenumber\": { \"type\": \"string\" },",
+									"                \"postcode\": { \"type\": \"string\" },",
+									"                \"country\": { \"type\": \"string\" },",
+									"                \"state\": { \"type\": \"string\" },",
+									"                \"city\": { \"type\": \"string\" }",
+									"            },",
+									"            \"additionalProperties\": expandable",
+									"        },",
+									"        \"contactData\": {",
+									"            \"type\": \"object\",",
+									"            \"properties\": {",
+									"                \"postOfficeBox\": { \"type\": \"string\" },",
+									"                \"mail\": { \"type\": \"string\" },",
+									"                \"telefon\": { \"type\": \"string\" },",
+									"                \"cellphonenumber\": { \"type\": \"string\" }",
+									"            },",
+									"            \"additionalProperties\": expandable",
+									"        },",
+									"        \"partnerId\": { \"type\": \"string\" },",
+									"        \"mandantenId\": { \"type\": \"string\" }",
+									"    },",
+									"    \"additionalProperties\": expandable",
+									"}",
+									"",
+									"pm.test(\"Schema is valid\", function () {",
+									"    pm.response.to.have.jsonSchema(insuredSchema);",
+									"    ",
+									"    ",
+									"    var jsonData = JSON.parse(responseBody);",
+									"    pm.collectionVariables.set(\"insured_id\", jsonData._id);",
+									"});",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/insured/pid/{{partner_id}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"insured",
+								"pid",
+								"{{partner_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update a insured",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "11498dd6-b600-4451-b560-9d6cb6052a4e",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"salutation\": \"pmt-salutation-update\",\n\t\"firstname\": \"pmt-firstname-update\",\n\t\"lastname\": \"pmt-Lastlastnamename-update\",\n\t\"gender\": 0,\n\t\"birthday\": \"2000-01-01T00:00:00.000+00:00\",\n\t\"address\": {\n\t\t\"streetaddress\": \"pmt-streetaddress-update\",\n\t\t\"housenumber\": \"pmt-housenumber-update\",\n\t\t\"postcode\": \"pmt-postcode-update\",\n\t\t\"country\": \"pmt-country-update\",\n\t\t\"state\": \"pmt-state-update\",\n\t\t\"city\": \"pmt-city-update\"\n\t},\n\t\"contactData\": {\n\t\t\"postOfficeBox\": \"pmt-postOfficeBox-update\",\n\t\t\"mail\": \"pmt-mail-update\",\n\t\t\"telefon\": \"pmt-telefon-update\",\n\t\t\"cellphonenumber\": \"pmt-cellphonenumber-update\"\n\t},\n\t\"partnerId\": \"{{partner_id}}\",\n\t\"mandantenId\": \"{{mandanten_id}}\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/insured/{{new_insured_id}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"insured",
+								"{{new_insured_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete a insured",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "b357c6e6-0f7d-49ca-b695-cf0d4479e54b",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/insured/{{new_insured_id}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"insured",
+								"{{new_insured_id}}"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlOTg0NDNjOGYyMzliYTQyN2UwNzIzZiIsImZpcnN0bmFtZSI6bnVsbCwibGFzdG5hbWUiOm51bGwsImVtYWlsIjoiYmx1ZWJ1Zy5jbGFpbW5vdythZG1pbjFAZ21haWwuY29tIiwidmFsaWQiOnRydWUsInNjb3BlIjpbIkFETUlOIl0sImlhdCI6MTU4OTQ1MzAyNywiZXhwIjoxNTg5NDYwMjI3fQ.m_nXPdcaeW1qvrr2aWOfLOLQbzI3iXKggu9NhHe-n9I",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "e78016eb-1ff8-490b-9211-79a7f2f4ddda",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "cffc7434-47e6-4d0f-b2c7-5f2a922895f2",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "05cd0061-3113-4959-a1a5-bfb3262c19d1",
+			"key": "url",
+			"value": "https://dev.claim-now.de",
+			"type": "string"
+		},
+		{
+			"id": "1b6ffaae-c17f-41d6-ba6d-cd4873194806",
+			"key": "partner_id",
+			"value": "000000000000000000000000",
+			"type": "string"
+		},
+		{
+			"id": "9db7a1e0-593c-4828-8c7f-1983feff2ffd",
+			"key": "mandanten_id",
+			"value": "111111111111111111111111",
+			"type": "string"
+		},
+		{
+			"id": "1412a1f8-8e5f-43cf-9620-538bafbf636d",
+			"key": "new_insured_id",
+			"value": "",
+			"type": "string"
+		}
+	],
+	"protocolProfileBehavior": {}
+}

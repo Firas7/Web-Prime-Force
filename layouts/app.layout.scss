@@ -1,0 +1,80 @@
+html,
+body {
+  background-color: #f8f9fd;
+
+  .user-layout {
+    background-color: #f8f9fd;
+
+    display: grid;
+    grid-template-areas: 'mainbar headerbar' 'mainbar content';
+    grid-template-columns: 130px 1fr;
+    grid-template-rows: 60px 1fr;
+    height: 100vh;
+
+    @media only screen and (max-width: 639px) {
+      grid-template-areas: 'headerbar' 'content';
+      grid-template-columns: 1fr;
+    }
+  }
+}
+
+.headbar {
+  grid-area: headerbar;
+  overflow: hidden;
+}
+
+.content {
+  background-color: #f8f9fd;
+  grid-area: content;
+  overflow: auto;
+  padding: 0.5rem 2rem 0;
+  @media only screen and (max-width: 639px) {
+    padding: 0.5rem 0.8rem 0;
+  }
+}
+
+.mainbar {
+  grid-area: mainbar;
+  @media only screen and (max-width: 639px) {
+    display: none;
+  }
+}
+
+.open-menu {
+  @media only screen and (max-width: 639px) {
+    animation-duration: 200ms;
+    animation-name: slidein;
+    display: block;
+    transition-timing-function: ease-in-out;
+    z-index: 9999;
+  }
+}
+
+.overlay {
+  @media only screen and (max-width: 639px) {
+    animation-duration: 200ms;
+    animation-name: background;
+    filter: brightness(80%);
+    transition-timing-function: ease-in-out;
+  }
+}
+
+@keyframes background {
+  from {
+    filter: brightness(100%);
+  }
+
+  to {
+    filter: brightness(80%);
+  }
+}
+
+@keyframes slidein {
+  from {
+    left: -120px;
+  }
+
+  to {
+    left: 0;
+  }
+}

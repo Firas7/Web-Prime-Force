@@ -1,0 +1,29 @@
+<div>
+  <div v-if="!!form" class="bb-conatiner">
+    <h3 class="bb-name">
+      {{form.branch}}
+    </h3>
+    <h3 class="bb-name">
+      {{form.info}}
+    </h3>
+  </div>
+  <div v-if="formAnswer !== undefined" class="bb-conatiner">
+    <div class="bb-key-value">
+      <p class="bb-value bb-address">
+        <p v-if="!isInsured">Die Status Änderung per Formular ist nur während Testphasen vorhanden!</p>
+        <br>
+        <v-select
+          v-if="!isInsured"
+          :items="status_dropdown"
+          v-model="formAnswer.status"
+          label="Status"
+          @change="setClaimcaseStatus"
+        >
+        </v-select>
+        <v-chip v-if="isInsured" class="ma-2" color="primary">
+          {{$t('components.claimcase.claimDetails.status', 'STATUS')}} {{formAnswer.status}}
+        </v-chip>
+      </p>
+    </div>
+  </div>
+</div>

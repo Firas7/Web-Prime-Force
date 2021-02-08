@@ -1,0 +1,16 @@
+<div>
+  <contractsTable
+    v-bind:contracts="contracts"
+    v-bind:detailPath="detailPath"
+    v-bind:scopeAdmin="scopeAdmin"
+    v-bind:change.sync="limit"
+    v-bind:documents="documents"
+    v-bind:loading="loading"
+    v-bind:itemsPerPage="itemsPerPage"
+    @addContract="addContract"
+    @deleteContract="deleteContract"
+    @addClaimcase="addClaimcase"
+    @fetchContracts="fetchContracts"
+  >
+  </contractsTable>
+</div>

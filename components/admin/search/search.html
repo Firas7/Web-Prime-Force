@@ -1,0 +1,43 @@
+<section v-if="searchResult !== null">
+  <div class="card" v-if="searchResult.insured !== null">
+    <div class="head">
+      <h3 class="name">
+        <span v-if="searchResult.insured.salutation !== null">
+          {{searchResult.insured.salutation}}
+        </span>
+        {{searchResult.insured.firstname}} {{searchResult.insured.lastname}}
+      </h3>
+      <p class="partner-id">PartnerID: {{searchResult.insured.partnerId}}</p>
+    </div>
+    <div class="body">
+      <div class="contracts">
+        <h3 class="heading">{{$t('components.admin.search.searchTitle')}}</h3>
+        <div class="list">
+          <div class="item" v-for="contract in searchResult.contracts">
+            <span>{{contract.productname}}</span
+            ><span>{{contract.insurancepapernumber}}</span>
+          </div>
+        </div>
+      </div>
+      <div class="damges">
+        <h3 class="heading">
+          {{searchResult.claimCases.length}} {{$t('components.admin.search.damage')}}
+        </h3>
+        <div class="list">
+          <div class="item" v-for="claimCase in searchResult.claimCases">
+            <span>{{claimCase._id}}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="bottom">
+      <p class="search-found">
+        FOUND:
+        <span
+          class="search-found-bold"
+          v-html="searchResult.found.join(', ')"
+        ></span>
+      </p>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,63 @@
+<div>
+  <div v-if="!!insured && typeof insured._id==='string'" class="bb-conatiner">
+
+    <h3 class="bb-name" v-if="!!insured">{{insured.salutation}} {{insured.firstname}} {{insured.lastname}}</h3>
+
+    <div class="bb-key-value">
+      <p class="bb-key">
+        <v-icon class="bb-icon">mdi-gender-male-female</v-icon>
+        <span>{{$t('components.insured.gender', 'Geschlecht')}}</span></p>
+      <p class="bb-value" v-if="insured.gender===GenderEnum.UNDEFINED"><span>{{$t('components.insured.enum.undefined')}}</span></p>
+      <p class="bb-value" v-if="insured.gender===GenderEnum.NEUTRAL"><span>{{$t('components.insured.enum.neutral')}}</span></p>
+      <p class="bb-value" v-if="insured.gender===GenderEnum.FEMALE"><span>{{$t('components.insured.enum.female')}}</span></p>
+      <p class="bb-value" v-if="insured.gender===GenderEnum.MALE"><span>{{$t('components.insured.enum.male')}}</span></p>
+    </div>
+
+    <div class="bb-key-value">
+      <p class="bb-key">
+        <v-icon class="bb-icon">mdi-calendar-outline</v-icon>
+        {{$t('components.insured.birthday', 'Gebutstag')}}
+      </p>
+      <p class="bb-value" v-if="!!insured&&!!insured.birthday">{{ formatDate(insured.birthday)}}</p>
+    </div>
+
+    <div class="bb-key-value">
+      <p class="bb-key">
+        <v-icon class="bb-icon">mdi-map-marker-outline</v-icon>
+        {{$t('components.insured.address', 'Adresse')}}
+      </p>
+      <div>
+        <p class="bb-value bb-address" v-if="!!insured&&!!insured.address">{{ insured.address.streetaddress}}</p>
+        <p class="bb-value bb-address" v-if="!!insured&&!!insured.address">{{ insured.address.postcode}} {{ insured.address.city}}</p>
+        <p class="bb-value bb-address" v-if="!!insured&&!!insured.address">{{ insured.address.state}},
+          {{insured.address.country}}</p>
+      </div>
+    </div>
+
+    <div class="bb-key-value" v-if="!!insured&&!!insured.contactData">
+      <p class="bb-key">
+        <v-icon class="bb-icon">mdi-cellphone</v-icon>
+        {{$t('components.insured.handy', 'Handy')}}
+      </p>
+      <p class="bb-value bb-address" v-if="!!insured&&!!insured.contactData&&!!insured.contactData.cellphonenumber">
+        <span>{{ insured.contactData.cellphonenumber}}</span>
+      </p>
+    </div>
+    <div class="bb-key-value">
+      <p class="bb-key">
+        <v-icon class="bb-icon">mdi-phone-outline</v-icon>
+        {{$t('components.insured.telefon', 'Telefon')}}
+      </p>
+      <p class="bb-value bb-address" v-if="!!insured&&!!insured.contactData&&!!insured.contactData.telefon">
+        <span>{{ insured.contactData.telefon}}</span></p>
+    </div>
+    <div class="bb-key-value">
+      <p class="bb-key">
+        <v-icon class="bb-icon">mdi-email-outline</v-icon>
+        {{$t('components.insured.email', 'E-Mail')}}
+      </p>
+      <p class="bb-value bb-address" v-if="!!insured&&!!insured.contactData&&!!insured.contactData.mail">
+        <span>{{ insured.contactData.mail}}</span></p>
+    </div>
+  </div>
+</div>

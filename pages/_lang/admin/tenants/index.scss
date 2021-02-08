@@ -1,0 +1,28 @@
+.bb-container {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  margin-top: 0.5em;
+
+  .bb-pagignation-counter {
+    margin-left: 0.5em;
+    margin-right: 2em;
+  }
+
+  .bb-pagignation-itemsperpage {
+    margin-left: 0.5em;
+    margin-right: 2em;
+  }
+
+  .bb-pagignation-btn-next {
+    margin-left: 0.2em;
+    margin-right: 1em;
+    width: 87.5px;
+  }
+
+  .bb-pagignation-btn-previous {
+    margin-left: 1em;
+    margin-right: 0.2em;
+    width: 87.5px;
+  }
+}

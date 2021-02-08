@@ -1,0 +1,176 @@
+<div>
+  <div class="text-center">
+    <v-progress-circular
+      :size="50"
+      color="primary"
+      indeterminate
+      v-if="loading"
+    ></v-progress-circular>
+  </div>
+
+  <div v-if="!!tenants && !loading" class="bb-conatiner">
+    <v-toolbar flat>
+      <v-toolbar-title>
+        <p class="headline">{{ $t('components.admin.tenant.tenantTable.title', 'Klientenübersicht') }}</p>
+      </v-toolbar-title>
+      <v-spacer></v-spacer>
+      <v-tooltip>
+        <template v-slot:activator="{ on }">
+          <v-btn
+            data-cy="tenants-table-add-btn"
+            v-on="on"
+            depressed
+            color="primary"
+            @click="showAddDialog()"
+          >{{ $t('components.admin.tenant.tenantTable.buttons.add', 'anlegen') }}
+          </v-btn>
+        </template>
+        <span>{{ $t('components.admin.tenant.tenantTable.tooltips.tenant', 'Neuen Klienten anlegen') }}</span>
+      </v-tooltip>
+    </v-toolbar>
+    <div :key="tenant._id" class="table-loop" v-for="tenant in tenants">
+      <div
+        :key="tenant._id"
+        class="mobile-table"
+        @click="showEditDialog(tenant)"
+      >
+        <!--Kopfzeilen-->
+        <div class="header tenant-number-header">
+          {{ $t('components.admin.tenant.tenantTable.tableHeaders.id', 'Klientennummer') }}
+        </div>
+        <div class="header firstname-header">
+          {{
+          $t('components.admin.tenant.tenantTable.tableHeaders.firstName', 'Vorname')
+          }}
+        </div>
+        <div class="header lastname-header">
+          {{
+          $t('components.admin.tenant.tenantTable.tableHeaders.lastName', 'Nachname')
+          }}
+        </div>
+        <div class="header url-header">
+          {{
+          $t('components.admin.tenant.tenantTable.tableHeaders.url', 'Webseite')
+          }}
+        </div>
+        <div class="header pathname-header">
+          {{ $t('components.admin.tenant.tenantTable.tableHeaders.pathName', 'Pfadname') }}
+        </div>
+        <div class="header action-header">
+          {{
+          $t('components.admin.tenant.tenantTable.tableHeaders.actions', 'Aktionen')
+          }}
+        </div>
+
+        <!--Daten-->
+        <div v-if="!!tenant._id" class="tenant-number-data">{{ tenant._id }}</div>
+        <div v-else class="data">{{$t('components.admin.tenant.tenantTable.empty.id', 'Unbekannt') }}</div>
+        <div v-if="!!tenant.firstname" class="firstname-data">{{ tenant.firstname }}</div>
+        <div v-else class="data">{{$t('components.admin.tenant.tenantTable.firstName', 'Fehler') }}</div>
+        <div v-if="!!tenant.lastname" class="lastname-data">{{ tenant.lastname }}</div>
+        <div v-else class="data">{{$t('components.admin.tenant.tenantTable.lastName', 'Fehler') }}</div>
+        <div v-if="!!tenant.url" class="url-data">{{ tenant.url }}</div>
+        <div v-else class="data">{{$t('components.admin.tenant.tenantTable.url', 'Unbekannt') }}</div>
+        <div v-if="!!tenant.pathname" class="pathname-data">{{ tenant.pathname }}</div>
+        <div v-else class="data">{{$t('components.admin.tenant.tenantTable.pathName', 'Unbekannt') }}</div>
+        <div class="action-data">
+        <!--Knöpfe-->
+          <v-tooltip bottom>
+            <template v-slot:activator="{ on }">
+              <v-btn
+                data-cy="tenants-table-delete-icon"
+                depressed
+                icon
+                v-on="on"
+                @click="deleteTenant(tenant._id)"
+              >
+                <v-icon>mdi-trash-can-outline</v-icon>
+              </v-btn>
+            </template>
+            <span>{{ $t('components.admin.tenant.tenantTable.tooltips.delete', 'Klienten löschen') }}</span>
+          </v-tooltip>
+          <v-tooltip bottom>
+            <template v-slot:activator="{ on }">
+              <v-btn
+                data-cy="tenants-table-edit-icon"
+                depressed
+                icon
+                v-on="on"
+                @click="showEditDialog(tenant)">
+                <v-icon>mdi-pencil-outline</v-icon>
+              </v-btn>
+            </template>
+            <span>{{ $t('components.admin.tenant.tenantTable.tooltips.edit', 'Klienten bearbeiten') }}</span>
+          </v-tooltip>
+        </div>
+      </div>
+    </div>
+
+    <!--Pagination-->
+    <div class="bb-pagination">
+      <v-select
+        data-cy="tenants-table-itemsPerPage-dropdown"
+        :label="$t('components.admin.tenant.tenantTable.pagination.itemsPerPage', 'Klienten pro Seite')"
+        :items="itemsPerPage"
+        v-model="limit"
+        @change="changeLimit"
+        class="bb-pagignation-itemsperpage"
+      ></v-select>
+
+      <v-spacer></v-spacer>
+
+      <span
+        data-cy="tenants-table-pagignation-documents-text"
+        class="bb-pagignation-counter"
+      >
+        {{ startIndex + 1 }} - {{ endIndex }} {{
+        $t('components.admin.tenant.tenantTable.pagination.of', 'von') }} {{ documents }}
+      </span>
+      <div>
+        <v-tooltip top>
+          <template v-slot:activator="{ on }">
+            <v-btn
+              data-cy="tenants-table-previous-btn"
+              v-on="on"
+              class="bb-pagignation-btn-previous"
+              depressed
+              color="primary"
+              @click="previousPage()"
+            >
+              <v-icon>mdi-arrow-left-bold-circle-outline</v-icon>
+            </v-btn>
+          </template>
+          {{ $t('components.admin.tenant.tenantTable.tooltips.loadPrevious', 'Vorherige Seite laden') }}
+        </v-tooltip>
+        <v-tooltip top>
+          <template v-slot:activator="{ on }">
+            <v-btn
+              data-cy="tenants-table-next-btn"
+              depressed
+              v-on="on"
+              class="bb-pagignation-btn-next"
+              color="primary"
+              @click="nextPage()"
+            >
+              <v-icon>mdi-arrow-right-bold-circle-outline</v-icon>
+            </v-btn>
+          </template>
+          {{ $t('components.admin.tenant.tenantTable.tooltips.loadNext', 'Nächste Seite laden') }}
+        </v-tooltip>
+      </div>
+    </div>
+
+    <!--Dialog anzeigen lassen-->
+    <div v-if="showDialog">
+      <formDialog
+        v-bind:show.sync="showDialog"
+        v-bind:tenant="tenant"
+        v-bind:editMode="editMode"
+        @addTenant="addTenant"
+        @editTenant="editTenant"
+        @fetchTenants="changeLimit(limit)"
+      />
+    </div>
+
+  </div>
+</div>

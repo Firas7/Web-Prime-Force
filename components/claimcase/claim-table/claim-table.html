@@ -1,0 +1,26 @@
+<div>
+  <section>
+    <v-card>
+      <v-card-title>
+        {{$t('components.claimcase.claimTable.title', 'Schäden')}}
+        <v-spacer></v-spacer>
+        <v-select v-on:input="dofilter" label="Status" clearable :items="filter"></v-select>
+      </v-card-title>
+      <v-data-table
+        :headers="headers"
+        :items="filteredItems"
+        item-key="_id"
+        :loading="loading"
+        :loading-text="$t('components.contract.index.messages.loading')"
+        @click:row="showDetail"
+      >
+        <!--
+        <template v-slot:items.status="{ status }">
+          <v-chip :color="getColor(item.status)" dark
+            >{{ item.status }}</v-chip
+          >
+        </template>-->
+      </v-data-table>
+    </v-card>
+  </section>
+</div>

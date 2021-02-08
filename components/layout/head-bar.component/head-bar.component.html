@@ -1,0 +1,81 @@
+<section class="head-bar-component">
+  <div class="menu-button">
+    <v-tooltip bottom>
+      <template v-slot:activator="{ on }">
+        <v-btn
+          icon
+          class="menu"
+          depressed
+          v-on="on"
+          @click="openMenu">
+          <v-icon medium>mdi-menu</v-icon>
+        </v-btn>
+      </template>
+      <span>{{ $t('components.layout.head-bar.menu', 'Öffne Menü') }}</span>
+    </v-tooltip>
+  </div>
+  <div class="menu-tools">
+    <v-tooltip bottom>
+      <template v-slot:activator="{ on }">
+        <v-btn
+          data-cy="head-bar-logout-icon"
+          icon
+          class="logout"
+          depressed
+          v-on="on"
+          @click="logout"
+        >
+          <v-icon medium>mdi-exit-to-app</v-icon>
+        </v-btn>
+      </template>
+      <span>{{ $t('components.layout.head-bar.logout', 'Ausloggen') }}</span>
+    </v-tooltip>
+    <v-tooltip bottom>
+      <template v-slot:activator="{ on }">
+        <v-btn
+          icon
+          class="language"
+          depressed
+          v-on="on"
+          @click="changeLanguage"
+          exact>
+          <v-icon medium>mdi-translate</v-icon>
+          <p>{{ activeLanguage }}</p>
+        </v-btn>
+      </template>
+      <span>{{ $t('components.layout.head-bar.language', 'Sprache wechseln') }}</span>
+    </v-tooltip>
+    <v-tooltip bottom>
+      <template v-if="isAdmin" v-slot:activator="{ on }">
+        <v-btn
+          data-cy="head-bar-search-icon"
+          icon
+          class="search"
+          depressed
+          v-on="on"
+          @click="search"
+          exact
+        >
+          <v-icon medium>mdi-magnify</v-icon>
+        </v-btn>
+      </template>
+      <span>{{ $t('components.layout.head-bar.search', 'Suche') }}</span>
+    </v-tooltip>
+    <v-badge
+      bordered
+      bottom
+      color="deep-purple accent-4"
+      dot
+      offset-x=22
+      offset-y=33>
+      <template>
+        <v-btn icon class="message"
+        v-on="on"
+        @click="message"
+        exact>
+          <v-icon>mdi-email-open-multiple-outline</v-icon>
+        </v-btn>
+      </template>
+      </v-badge>
+  </div>
+</section>

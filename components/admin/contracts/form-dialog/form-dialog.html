@@ -1,0 +1,114 @@
+<div>
+  <v-dialog v-model="syncedShow" max-width="600px">
+    <v-card>
+      <v-card-title>
+        <span v-if="!editMode" class="headline">
+          {{ $t('components.admin.contracts.formDialog.addTitle', 'Vertrag anlegen') }}
+        </span>
+        <span v-if="editMode" class="headline">
+          {{ $t('components.admin.contracts.formDialog.editTitle', 'Vertrag bearbeiten') }}
+        </span>
+      </v-card-title>
+      <v-card-text>
+        <v-form v-model="valid">
+          <v-text-field
+            v-model="choosenModel().productname"
+            v-bind:label="$t('components.admin.contracts.formDialog.productname', 'Vertragsbezeichnung')"
+            :rules="[validateTextField(choosenModel().productname)]"
+            required
+          >
+          </v-text-field>
+          <v-text-field
+            v-model="choosenModel().insurancepapernumber"
+            v-bind:label="$t('components.admin.contracts.formDialog.insurancepapernumber', 'Versicherungsnummer')"
+            :rules="[validateTextField(choosenModel().insurancepapernumber)]"
+            required
+          >
+          </v-text-field>
+          <v-select
+            v-model="choosenModel().branch"
+            :items="branch"
+            v-bind:label="$t('components.admin.contracts.formDialog.branch', 'Sparte')"
+            :rules="[validateTextField(choosenModel().branch)]"
+            required
+          ></v-select>
+          <v-text-field
+            v-model="choosenModel().partnerId"
+            v-bind:label="$t('components.admin.contracts.formDialog.partnerId', 'Partnernummer')"
+            :rules="[validateTextField(choosenModel().partnerId)]"
+            required
+          ></v-text-field>
+          <v-menu
+            v-model="datePickerMenu"
+            :close-on-content-click="false"
+            :nudge-right="40"
+            transition="scale-transition"
+            offset-y
+            min-width="290px"
+          >
+            <template v-slot:activator="{ on }">
+              <v-text-field
+                v-if="!!startdate"
+                :value="startdate"
+                v-bind:label="$t('components.admin.contracts.formDialog.startdate', 'Vertragsbeginn')"
+                :rules="[validateDate(startdate)]"
+                prepend-icon="mdi-calendar-month-outline"
+                readonly
+                required
+                v-on="on"
+              />
+              <v-text-field
+                v-else
+                :value="choosenModel().startdate"
+                v-bind:label="$t('components.admin.contracts.formDialog.startdate', 'Vertragsbeginn')"
+                :rules="[validateDate(choosenModel().startdate)]"
+                prepend-icon="mdi-calendar-month-outline"
+                readonly
+                required
+                v-on="on"
+              />
+            </template>
+            <v-date-picker
+              v-if="!!startdate"
+              v-model="startdate"
+              @input="datePickerMenu = false"
+            />
+            <v-date-picker
+              v-else
+              v-model="choosenModel().startdate"
+              @input="datePickerMenu = false"
+            />
+          </v-menu>
+        </v-form>
+      </v-card-text>
+      <v-card-actions>
+        <v-spacer></v-spacer>
+        <v-btn
+        color="#667EEA"
+        depressed
+        text
+        @click="closeDetailDialog()"
+          >{{ $t('components.admin.contracts.formDialog.buttons.cancel', 'Abbrechen') }}
+        </v-btn>
+        <v-btn
+          depressed
+          v-if="!editMode"
+          :disabled="!valid"
+          color="#667EEA"
+          class="text-light"
+          @click="save()"
+          >{{ $t('components.admin.contracts.formDialog.buttons.save', 'Speichern') }}
+        </v-btn>
+        <v-btn
+          depressed
+          v-if="!!editMode && editMode"
+          :disabled="!valid"
+          color="#667EEA"
+          class="text-light"
+          @click="edit()"
+          >{{ $t('components.admin.contracts.formDialog.buttons.save', 'Speichern') }}
+        </v-btn>
+      </v-card-actions>
+    </v-card>
+  </v-dialog>
+</div>

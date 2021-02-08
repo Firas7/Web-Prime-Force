@@ -1,0 +1,18 @@
+<div>
+  <v-tabs v-model="tab">
+    <v-tab :key="1" value="insured" ref="insured" href="#insured">{{ $t('pages.admin.detail.tabs.insured', 'Versicherter')}}</v-tab>
+    <v-tab :key="2" value="contract" ref="contract" href="#contract">{{ $t('pages.admin.detail.tabs.contract', 'Verträge')}}</v-tab>
+    <v-tab :key="3" value="damages" ref="damages" href="#damages">{{ $t('pages.admin.detail.tabs.claimcase', 'Schadensfälle')}}</v-tab>
+  </v-tabs>
+  <v-tabs-items v-model="tab">
+    <v-tab-item :key="1" value="insured" ref="insured">
+      <insuredView v-bind:insured="insured"></insuredView>
+    </v-tab-item>
+    <v-tab-item :key="2" value="contract" ref="contract">
+      <contractView v-bind:contracts="contracts" v-bind:detailPath="detailPath"></contractView> 
+    </v-tab-item>
+    <v-tab-item :key="3" value="damages" ref="damages">
+      <claimcaseView v-bind:claimcases="claimcases" v-bind:contracts="contracts"></claimcaseView> 
+    </v-tab-item>
+  </v-tabs-items>
+</div>

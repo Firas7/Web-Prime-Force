@@ -1,0 +1,98 @@
+<section class="register">
+    <v-dialog v-model="syncedShow" max-width="400px">
+        <v-card data-cy="register-form">
+            <v-card-title class="pb-0 justify-center">
+                <h1>{{ $t('components.authentication.register.title', 'Registrieren') }}</h1>
+            </v-card-title>
+            <v-card-text class="mt-5">
+                <v-form v-if="!sendEmail" v-model="valid">
+                    <v-text-field
+                        data-cy="register-email"
+                        :label="$t('components.authentication.register.email', 'E-Mail')"
+                        color="#3C366B"
+                        v-model="user.email"
+                        required
+                        :rules="[validateEmail(user.email)]">
+                    </v-text-field>
+                    <v-text-field
+                        data-cy="register-password"
+                        color="#3C366B"
+                        :type="hiddenPassword ? 'password' :  'text'"
+                        :label="$t('components.authentication.register.password', 'Passwort')"
+                        :append-icon="hiddenPassword ? 'mdi-eye-outline':'mdi-eye-off-outline'"
+                        @click:append="showPassword"
+                        required
+                        :rules="[validatePasswordLength(password)]"
+                        v-model="password">
+                    </v-text-field>
+                    <v-text-field
+                        data-cy="register-password-match"
+                        color="#3C366B"
+                        :type="hiddenPassword ? 'password' :  'text'"
+                        :label="$t('components.authentication.register.password', 'Passwort')"
+                        :append-icon="hiddenPassword ? 'mdi-eye-outline':'mdi-eye-off-outline'"
+                        @click:append="showPassword"
+                        required
+                        :rules="[validatePasswordMatch(passwordMatch)]"
+                        v-model="passwordMatch">
+                    </v-text-field>
+                    <v-text-field
+                        data-cy=register-firstname
+                        :label="$t('components.authentication.register.firstName', 'Vorname')"
+                        color="#3C366B"
+                        v-model="user.firstname"
+                        required>
+                    </v-text-field>
+                    <v-text-field
+                        data-cy=register-lastname
+                        :label="$t('components.authentication.register.lastName', 'Nachname')"
+                        color="#3C366B"
+                        v-model="user.lastname"
+                        required>
+                    </v-text-field>
+                    <p>{{$t('components.authentication.register.registerText', 'Indem du auf „Registrieren“ klickst, akzeptierst du unsere ')}}
+                        <a href="https://www.prime-force.com/de/pfg/general/privacy-policy.html" target="_blank">{{$t('components.authentication.register.terms', 'Nutzungsbedingungen')}}</a>.
+                        {{$t('components.authentication.register.dataPolicyText', 'Informationen zum Datenschutz findest du in unserer ')}}
+                        <a href="https://www.prime-force.com/de/pfg/general/privacy-policy.html" target="_blank">{{$t('components.authentication.register.dataPolicy', 'Datenschutzrichtlinie')}}</a>.</p>
+                </v-form>
+                <span v-if="sendEmail">{{$t('components.authentication.register.sendEmailText', 'Eine E-Mail mit einem Bestätigungslink wurde gesendet an: ')}}<span class="highlight">{{ user.email }}</span>.</span>
+            </v-card-text>
+            <v-card-actions class="card-action">
+                <v-btn
+                    data-cy=register-send-email-btn
+                    v-if="!sendEmail"
+                    block
+                    color="#667EEA"
+                    class="max-width text-light"
+                    depressed
+                    @click="register"
+                    :disabled="!valid">
+                    {{ $t('components.authentication.register.buttons.register', 'Registrieren') }}
+                </v-btn>
+                <v-btn
+                    data-cy=register-close-btn
+                    v-if="sendEmail"
+                    block
+                    color="#667EEA"
+                    class="max-width text-light"
+                    depressed
+                    @click="closeRegister">
+                    {{ $t('components.authentication.register.buttons.close', 'Schließen') }}
+                </v-btn>
+                <v-btn
+                    text
+                    color="#3C366B"
+                    class="max-width text-light"
+                    depressed
+                    style="white-space: normal;"
+                    @click="switchToRegister">
+                    <span>{{ $t('components.authentication.register.haveAccount', 'Schon einen Account?') }}<br/>
+                    <span class="highlight">
+                        {{ $t('components.authentication.register.nowLoginLink', 'Jetzt einloggen') }}
+                    </span>
+                    </span>
+                </v-btn>
+            </v-card-actions>
+        </v-card>
+    </v-dialog>
+</section>

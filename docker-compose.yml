@@ -1,0 +1,44 @@
+version: "3.7"
+services:
+  nuxt:
+    build: .
+    #image: node:12.13.0
+    restart: always
+    container_name: claim-now-dev-nuxt
+    #command: npm run dev
+    volumes:
+      - .:/app
+      - /app/node_modules
+    #working_dir: /app
+    ports:
+      - "3000:3000"
+      - "80:3000"
+    environment:
+      HOST: 0.0.0.0
+      PORT: 3000
+      NODE_ENV: "development"
+      URI: "https://localhost"
+      ROBORT: "NOFOLLOW,NOINDEX"
+    depends_on:
+      - mongo
+    networks:
+      - local
+  mongo:
+    image: mongo:latest
+    container_name: claim-now-dev-mongo
+    volumes:
+      - db-data:/data/db
+    ports:
+      - "27017:27017"
+    expose:
+      - "27017"
+    networks:
+      local:
+        aliases:
+          - "mongodb"
+volumes:
+  db-data:
+networks:
+  local:
+    name: custom_local
+    driver: bridge

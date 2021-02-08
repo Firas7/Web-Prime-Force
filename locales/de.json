@@ -1,0 +1,663 @@
+{
+  "navigation": {
+    "links": {
+      "register": "Registrieren",
+      "login": "Einloggen",
+      "home": "Startseite",
+      "german": "DE",
+      "english": "EN"
+    }
+  },
+  "components": {
+    "admin": {
+      "contracts": {
+        "contractView": {
+          "title": "Vertragsübersicht",
+          "tableHeaders": {
+            "id": "Vertragsnummer",
+            "productname": "Produktname",
+            "insurancepapernumber": "Versicherungsnummer",
+            "startdate": "Vertragsbeginn"
+          },
+          "error": {
+            "notFound": "Noch kein Vertag vorhanden oder verknüpft"
+          }
+        },
+        "contractsTable": {
+          "title": "Vertragsübersicht",
+          "tableHeaders": {
+            "productname": "Produktname",
+            "branch": "Sparte",
+            "id": "Vertragsnummer",
+            "partnerId": "Partnernummer",
+            "action": "Aktionen"
+          },
+          "buttons": {
+            "add": "Anlegen"
+          },
+          "messages": {
+            "delete": "Vertrag löschen?",
+            "load": "Verträge werden geladen, bitte warten..."
+          },
+          "pagination": {
+            "itemsPerPage": "Verträge pro Seite",
+            "contracts": "Verträge",
+            "of": "von"
+          },
+          "tooltips": {
+            "detail": "Vertragsdetails anzeigen",
+            "delete": "Vertrag löschen",
+            "claimcase": "Neuen Schadensfall anlegen",
+            "loadPrevious": "Vorherige Seite laden",
+            "loadNext": "Nächste Seite laden"
+          }
+        },
+        "detailDialog": {
+          "title": "Vertragsdaten",
+          "contractData": {
+            "productname": "Vertragsbezeichnung",
+            "id": "Vertragsnummer",
+            "partnerId": "Partnernummer"
+          },
+          "partnerTitle": "Vertragspartner",
+          "partnerData": {
+            "name": "Name",
+            "birthday": "Geburtstag",
+            "address": "Adresse"
+          },
+          "detailTitle": "Vertragsdetails",
+          "contractDetailsData": {
+            "branch": "Sparte",
+            "insurancepapernumber": "Versicherungsnummer",
+            "startdate": "Vertragsbeginn"
+          },
+          "buttons": {
+            "close": "Schließen"
+          },
+          "tooltips": {
+            "edit": "Bearbeiten"
+          }
+        },
+        "formDialog": {
+          "addTitle": "Vertrag anlegen",
+          "editTitle": "Vertrag bearbeiten",
+          "productname": "Vertragsbezeichnung",
+          "insurancepapernumber": "Versicherungsnummer",
+          "branch": "Sparte",
+          "partnerId": "Partnernummer",
+          "startdate": "Vertragsbeginn",
+          "buttons": {
+            "cancel": "Abbrechen",
+            "save": "Speichern"
+          }
+        }
+      },
+      "insured": {
+        "createInsured": {
+          "title": "Versicherte Profil",
+          "tableHeaders": {
+            "name": "Name",
+            "gender": "Geschlecht",
+            "birthday": "Geburtstag",
+            "address": "Adresse",
+            "city": "Stadt",
+            "country": "Land",
+            "state": "Staat",
+            "email": "E-Mail",
+            "telefon": "Telefon",
+            "cellphoneNumber": "Handy",
+            "postOfficeBox": "Postfach"
+          },
+          "labels": {
+            "salutation": "Anrede",
+            "firstname": "Vorname",
+            "lastname": "Nachname",
+            "street": "Straße",
+            "housenumber": "Hausnummer",
+            "postcode": "Postleitzahl",
+            "city": "Stadt"
+          },
+          "buttons": {
+            "back": "Zurück",
+            "add": "Hinzufügen"
+          }
+        },
+        "insuredTable": {
+          "title": "Versicherte",
+          "tableHeaders": {
+            "salutation": "Anrede",
+            "firstname": "Vorname",
+            "lastname": "Nachname",
+            "gender": "Geschlecht",
+            "birthday": "Geburtstag",
+            "street": "Strasse",
+            "postcode": "Postleitzahl",
+            "postOfficeBox": "Postfach",
+            "email": "E-Mail",
+            "cellphoneNumber": "Handy",
+            "partnerId": "Partner ID",
+            "action": "Aktionen"
+          },
+          "empty": {
+            "salutation": "Unbekannt",
+            "firstname": "Fehler",
+            "lastname": "Fehler",
+            "gender": "Unbekannt",
+            "birthday": "Unbekannt",
+            "address": "Unbekannt",
+            "postcode": "Unbekannt",
+            "postOfficeBox": "Unbekannt",
+            "email": "Unbekannt",
+            "cellphoneNumber": "Unbekannt",
+            "partnerId": "Unbekannt"
+          },
+          "buttons": {
+            "add": "Hinzufügen",
+            "loadDataButton": "Weitere Daten laden"
+          },
+          "tooltips": {
+            "add": "Neuen Versicherten anlegen",
+            "delete": "Versicherten löschen",
+            "edit": "Versicherten bearbeiten"
+          }
+        }
+      },
+      "search": {
+        "searchTitle": "Verträge",
+        "damage": "Schäden"
+      },
+      "tenant": {
+        "formDialog": {
+          "addTitle": "Klienten erstellen",
+          "editTitle": "Klienten bearbeiten",
+          "firstName": "Vorname",
+          "lastName": "Nachname",
+          "url": "Webseite",
+          "pathName": "Pfadname",
+          "buttons": {
+            "cancel": "Abbrechen",
+            "save": "Speichern"
+          }
+        },
+        "tenantTable": {
+          "title": "Klientenübersicht",
+          "tableHeaders": {
+            "id": "Klientennummer",
+            "firstName": "Vorname",
+            "lastName": "Nachname",
+            "url": "Webseite",
+            "pathName": "Pfadname",
+            "actions": "Aktionen"
+          },
+          "empty": {
+            "id": "Unbekannt",
+            "firstName": "Fehler",
+            "lastName": "Fehler",
+            "url": "Unbekannt",
+            "pathName": "Unbekannt"
+          },
+          "buttons": {
+            "add": "anlegen"
+          },
+          "pagination": {
+            "itemsPerPage": "Klienten pro Seite",
+            "of": "von"
+          },
+          "tooltips": {
+            "delete": "Klienten löschen",
+            "edit": "Klienten bearbeiten",
+            "tenant": "Neuen Klienten anlegen",
+            "loadPrevious": "Vorherige Seite laden",
+            "loadNext": "Nächste Seite laden"
+          }
+        }
+      },
+      "createUser": {
+        "title": "Benutzer Anlegen",
+        "email": "Email",
+        "firstname": "Vorname",
+        "lastname": "Nachname",
+        "authorization": {
+          "title": "Authorization",
+          "branch": "Sparte",
+          "level": "Level"
+        },
+        "buttons": {
+          "create": "ANLEGEN",
+          "back": "ZURÜCK"
+        }
+      }
+    },
+    "appHeader": {
+      "links": {
+        "register": "Registrieren",
+        "login": "Einloggen",
+        "german": "DE",
+        "english": "EN"
+      }
+    },
+    "authentication": {
+      "login": {
+        "title": "Login",
+        "email": "E-Mail",
+        "password": "Passwort",
+        "passwordForget": "Passwort vergessen?",
+        "passwordForgetLink": "Jetzt wiederherstellen",
+        "noAccount": "Noch keinen Account?",
+        "nowRegisterLink": "Jetzt Registrieren",
+        "buttons": {
+          "login": "Login"
+        }
+      },
+      "register": {
+        "title": "Registrieren",
+        "email": "E-Mail",
+        "password": "Passwort",
+        "firstName": "Vorname",
+        "lastName": "Nachname",
+        "registerText": "Indem du auf „Registrieren“ klickst, akzeptierst du unsere ",
+        "terms": "Nutzungsbedingungen",
+        "dataPolicyText": "Informationen zum Datenschutz findest du in unserer ",
+        "dataPolicy": "Datenschutzrichtlinie",
+        "sendEmailText": "Eine E-Mail mit einem Bestätigungslink wurde gesendet an: ",
+        "haveAccount": "Schon einen Account?",
+        "nowLoginLink": "Jetzt einloggen",
+        "buttons": {
+          "register": "Registrieren",
+          "close": "Schließen"
+        }
+      }
+    },
+    "claimcase": {
+      "claimAnswers": {
+        "answers": "Ausgefüllte Antworten"
+      },
+      "claimCharts": {
+        "notUsed": "Keine Übersetzung genutzt"
+      },
+      "claimDetails": {
+        "status": "STATUS"
+      },
+      "claimFiles": {
+        "files": "Dateien",
+        "noTags": "Keine Tags hinzugefüg",
+        "noFiles": "Keine Dateien gefunden"
+      },
+      "claimTable": {
+        "title": "Schäden"
+      },
+      "claimcaseView": {
+        "title": "Schadensübersicht",
+        "claimNumber": "Schadensfallnummer",
+        "contractNumber": "Vertragsnummer",
+        "branch": "Sparte",
+        "status": "Status",
+        "notFound": "Keine Schadensfälle gefunden"
+      },
+      "imageUpload": {
+        "info": "Bild zu einer Kategorie hochladen",
+        "labels": {
+          "tags": "Kategorie auswählen",
+          "imageUpload": "Bilder auswählen"
+        },
+        "buttons": {
+          "upload": "Bilder Hochladen"
+        },
+        "imageCard": {
+          "imageInfo": "Bild zum Schadensfall",
+          "buttons": {
+            "close": "Schließen"
+          }
+        }
+      },
+      "rating": {
+        "damageAssessmentText": "Bewerten Sie bitte die Bearbeitung des Schadenfalls",
+        "suggestionsForImprovementText": "Bitte verraten Sie uns, was wir verbessern können",
+        "thankYouText": "Danke für Ihre Bewertung",
+        "buttons": {
+          "send": "Abschicken"
+        }
+      },
+      "damageAmount": {
+        "title": "Schadenssumme",
+        "damageAmountToBePaidOut": "Schadenssumme die ausgezahlt werden soll",
+        "fixedPaymentAmount": "Die festgelegte Auszahlungshöhe beträgt",
+        "buttons": {
+          "set": "Festlegen"
+        }
+      }
+    },
+    "common": {
+      "auth": {
+        "title": "Authorization",
+        "branch": "Sparte",
+        "level": "Level",
+        "noAuthorization": "Dieses Objekt besitzt keinen Authorizationschutz"
+      },
+      "statusComponent": {
+        "success": "Erfolgreich",
+        "unknown-user": "Unbekannter Nutzer",
+        "unknown-error": "Unbekannter Fehler",
+        "pending": "Ausstehend",
+        "progress": "In Bearbeitung",
+        "finished": "Beendet",
+        "declined": "Abgelehnt",
+        "none": "Bereit zum Senden"
+      },
+      "toolbar": {
+        "notUsed": "Keine Übersetzung genutzt"
+      }
+    },
+    "insured": {
+      "enum": {
+        "undefined": "Undefiniert",
+        "neutral": "Neutral",
+        "female": "Weiblich",
+        "male": "Männlich"
+      },
+      "birthday": "Geburtstag",
+      "gender": "Geschlecht",
+      "address": "Adresse",
+      "handy": "Handy",
+      "telefon": "Telefon",
+      "email": "E-Mail"
+    },
+    "layout": {
+      "main-bar": {
+        "claim": "Deine Claims",
+        "user": "Nutzerdaten",
+        "insured": "Versicherte",
+        "contract": "Verträge",
+        "tenant": "Tenants",
+        "claimcase": "Schadensfälle",
+        "createUser": "User Anlegen",
+        "createClaim": "Schadensfall Anlegen",
+        "menu": "Schließe Menü"
+      },
+      "head-bar": {
+        "logout": "Ausloggen",
+        "language": "Sprache wechseln",
+        "search": "Suche",
+        "menu": "Öffne Menü"
+      }
+    },
+    "user": {
+      "clerk": {
+        "telefon": "Telefon:",
+        "email": "E-Mail:"
+      },
+      "insuredCard": {
+        "title": "Versicherten Profil",
+        "tableHeaders": {
+          "name": "Name",
+          "gender": "Geschlecht",
+          "birthday": "Geburtstag",
+          "address": "Adresse",
+          "city": "Stadt",
+          "country": "Land",
+          "state": "Staat",
+          "email": "E-Mail",
+          "telefon": "Telefon",
+          "cellphoneNumber": "Handy",
+          "postOfficeBox": "Postfach"
+        },
+        "labels": {
+          "salutation": "Anrede",
+          "firstname": "Vorname",
+          "lastname": "Nachname",
+          "street": "Straße",
+          "housenumber": "Hausnummer",
+          "postcode": "Postleitzahl",
+          "city": "Stadt"
+        },
+        "tooltips": {
+          "edit": "Versicherten bearbeiten"
+        },
+        "buttons": {
+          "back": "Zurück",
+          "update": "Änderungen speichern"
+        }
+      },
+      "insuredAgent": {
+        "phone": "Telefon",
+        "email": "E-Mail"
+      },
+      "userCard": {
+        "userTitle": "Deine Nutzerdaten ",
+        "clerkTitle": "Dein*e Sachbearbeiter*in",
+        "agentTitle": "Dein*e Makler*in",
+        "insuranceTitle": "Deine Versicherungen",
+        "tableHeaders": {
+          "name": "Name",
+          "email": "E-Mail",
+          "partnerId": "Partner ID"
+        },
+        "labels": {
+          "firstName": "Vorname",
+          "lastName": "Nachname",
+          "email": ""
+        },
+        "buttons": {
+          "submitChanges": "Änderungen übernehmen",
+          "submitCode": "Code überprüfen",
+          "submit": "Abschicken"
+        },
+        "tooltips": {
+          "edit": "Nutzerdaten bearbeiten",
+          "email": {
+            "validated": "E-Mail bestätigt",
+            "unconfirmed": "Deine E-Mail ist noch nicht bestätigt"
+          },
+          "linkedPartner": {
+            "confirmed": "Partner ID bestätigt",
+            "unconfirmed": "Deine Partner ID wurde noch nicht bestätigt"
+          },
+          "insurance": {
+            "add": "Neue Versicherung hinzufügen"
+          }
+        },
+        "linkedPartner": {
+          "addPartnerIdHint": "Jetzt deine Partner ID eintragen:",
+          "confirmText": "Deine PartnerId wurde eingetragen, ist aber noch nicht bestätigt. Wir haben einen Bestätigungscode an die hinterlegte Emailadresse der PartnerId verschickt. Bitte trage den Bestätigungscode hier ein:"
+        },
+        "insurance": {
+          "notFound": "Keine Versicherungen gefunden"
+        }
+      }
+    }
+  },
+  "pages": {
+    "index": {
+      "headline": "Mache mehr aus deiner Zeit",
+      "subheadline": "Keine Warteschlangen, wenn es schnell gehen muss.",
+      "subsection": {
+        "headline": "Alle Versicherungen auf einen Blick",
+        "subheadline": "Eine schnelle Übersicht all deiner laufenden Claims."
+      }
+    },
+    "admin": {
+      "tenants": {
+        "index": {
+          "title": "Klientenübersicht",
+          "tableHeader": {
+            "id": "Klientennummer",
+            "firstName": "Vorname",
+            "lastName": "Nachname",
+            "url": "Webseite",
+            "pathName": "Pfadname",
+            "actions": "Aktionen"
+          },
+          "empty": {
+            "id": "Unbekannt",
+            "firstName": "Unbekannt",
+            "lastName": "Unbekannt",
+            "url": "Unbekannt",
+            "pathName": "Unbekannt"
+          },
+          "button": {
+            "add": "Klienten anlegen",
+            "delete": "Löschen",
+            "edit": "Bearbeiten"
+          },
+          "messages": {
+            "deleteMessage": "Klienten löschen?",
+            "loadingMessage": "Klienten werden geladen, bitte warten..."
+          },
+          "pagignation": {
+            "tenants": "Klienten",
+            "of": "von",
+            "itemsPerPage": "Klienten pro Seite"
+          }
+        },
+        "addEditDialog": {
+          "title": {
+            "addTitle": "Klienten erstellen:",
+            "editTitle": "Klienten bearbeiten:"
+          },
+          "index": {
+            "firstName": "Vorname",
+            "lastName": "Nachname",
+            "url": "Webseite",
+            "pathName": "Pfadname"
+          },
+          "button": {
+            "cancel": "Abbrechen",
+            "save": "Speichern"
+          }
+        },
+        "tooltip": {
+          "edit": "Klienten bearbeiten",
+          "delete": "Klienten löschen",
+          "tenant": "Neuen Klienten anlegen",
+          "loadNext": "Nächste Seite laden",
+          "loadPrevious": "Vorherige Seite laden"
+        }
+      },
+      "search": "Suche",
+      "detail": {
+        "tabs": {
+          "insured": "Versicherter",
+          "contract": "Verträge",
+          "claimcase": "Schadensfälle"
+        }
+      }
+    },
+    "user": {
+      "index": {
+        "userData": "User Daten",
+        "insuredData": "Verischerten Daten"
+      },
+      "cardaction": {
+        "submitChanges": "Änderungen übernehmen",
+        "submitCode": "Code überprüfen",
+        "submit": "Abschicken"
+      },
+      "card": {
+        "userdata": {
+          "title": "Deine Nutzerdaten",
+          "name": "Name",
+          "firstname": "Vorname",
+          "lastname": "Nachname",
+          "email": {
+            "email": "E-Mail",
+            "tooltip": {
+              "validated": "E-Mail bestätigt",
+              "unconfirmed": "Deine E-Mail ist noch nicht bestätigt"
+            }
+          },
+          "tooltip": {
+            "edit": "Bearbeiten"
+          },
+          "linkedPartner": {
+            "partnerId": "Partner ID",
+            "confirmed": "Confirmed",
+            "addPartnerIdHint": "Jetzt deine Partner ID eintragen:",
+            "confirmText": "Deine PartnerId wurde eingetragen, ist aber noch nicht bestätigt. Wir haben einen Bestätigungscode an die hinterlegte Emailadresse der PartnerId verschickt. Bitte trage den Bestätigungscode hier ein:",
+            "tooltip": {
+              "confirmed": "Partner ID bestätigt",
+              "unconfirmed": "Deine Partner ID wurde noch nicht bestätigt"
+            }
+          }
+        },
+        "insurance": {
+          "title": "Deine Versicherungen",
+          "notFound": "Keine Versicherungen gefunden",
+          "tooltip": {
+            "add": "Neue Versicherung hinzufügen"
+          }
+        },
+        "clerk": {
+          "title": "Dein Sachbearbeiter"
+        },
+        "insuredAgent": {
+          "title": "Dein*e Makler*in"
+        }
+      }
+    },
+    "claimcase": {
+      "index": {
+        "title": "Schadensfälle",
+        "notFound": "Keine Schadensfälle gefunden"
+      },
+      "table": {
+        "status": "Status",
+        "productname": "Produktname",
+        "licensePlate": "Kennzeichen",
+        "startdate": "Vertragsbeginn",
+        "contractID": "Versicherungsnummer",
+        "carID": "Fahrzeugidentifikationsnummer",
+        "mileage": "Kilometerstand",
+        "place": "Vorfallsort",
+        "driverInformation": "Fahrer Informationen",
+        "driverBirth": "Geburtstag",
+        "driverIdentify": "Name",
+        "description": "Beschreibung",
+        "time": "Unfallzeitpunkt",
+        "branch": "Sparte",
+        "version": "Version",
+        "details": "Claimcasedetails anzeigen"
+      }
+    },
+    "claim": {
+      "detail": {
+        "aboutPage": "Zurück zur About Seite",
+        "tabs": {
+          "overview": "Übersicht",
+          "answers": "Antwort",
+          "insured": "Versicherte",
+          "files": "Dateien",
+          "amountOfLoss": "Schadenssumme"
+        },
+        "buttons": {
+          "openDetail": "Detail Öffnen"
+        }
+      }
+    },
+    "setPassword": {
+      "title": "Neues Passwort erstellen",
+      "text": "Bitte geben Sie den mit der E-Mail versandten Token und das neue Passwort ein",
+      "form": {
+        "token": "Token",
+        "newPassword": "Neues Passwort",
+        "repeatPassword": "Password wiederholen"
+      },
+      "button": {
+        "save": "Passwort speichern"
+      }
+    },
+    "passwordForget": {
+      "title": "Password Vergessen",
+      "text": "Wenn Sie Ihr Passwort vergessen haben, senden Sie uns Ihre E-Mail-Adresse und wir schicken Ihnen eine E-Mail mit Anweisungen zur Wiederherstellung Ihres Passworts.",
+      "form": {
+        "email": "E-Mail"
+      },
+      "buttons": {
+        "send": "Send",
+        "close": "Schließen"
+      },
+      "sendMail": {
+        "title": "Erfolgreich"
+      }
+    }
+  }
+}

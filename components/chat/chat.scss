@@ -1,0 +1,37 @@
+.chat {
+  .card-chat {
+    background-color: darken($color: #fff, $amount: 0);
+    border-bottom-left-radius: 25px;
+    border-bottom-right-radius: 25px;
+    border-top-left-radius: 25px;
+    border-top-right-radius: 25px;
+    width: 1200px;
+
+    .messages-list {
+      display: flex;
+      flex-direction: column;
+      margin-left: 150px;
+
+      .message {
+        padding-top: 10px;
+      }
+    }
+
+    .chat-input {
+      display: flex;
+      flex-direction: row;
+      margin-left: 150px;
+      padding-bottom: 20px;
+      padding-top: 50px;
+      width: 950px;
+      
+      .textarea-chat {
+        background-color: darken($color: #fff, $amount: 0);
+      }
+
+      .send-button {
+        margin-top: 5px;
+      }
+    }
+  }
+}

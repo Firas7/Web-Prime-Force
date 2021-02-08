@@ -1,0 +1,9 @@
+.column {
+  float: left;
+  padding: 12px;
+}
+
+.row::after {
+  clear: both;
+  display: table;
+}

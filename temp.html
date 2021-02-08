@@ -1,0 +1,27 @@
+   <v-card class="chat-overview-card" @click.native="openChat(chat._id)">
+      <div class="d-flex flex-no-wrap justify-space-between">
+        <div class="chat-overview-text-box">
+          
+          
+          <v-card-text class="chat-overview-message"
+            >{{chat.messages[chat.messages.length-1].content}}</v-card-text
+          >
+
+          <v-card-subtitle class="chat-overview-participant-name"
+            >{{partNames[0]}}</v-card-subtitle
+          >
+
+          <v-avatar
+            class="chat-overview-avatar"
+            size="125"
+            position="right"
+            tile
+          >
+            <v-img
+              class="chat-overview-image"
+              src="https://cdn.vuetifyjs.com/images/profiles/marcus.jpg"
+            ></v-img>
+          </v-avatar>
+        </div>
+      </div>
+    </v-card>

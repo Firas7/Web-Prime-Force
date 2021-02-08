@@ -1,0 +1,90 @@
+<section class="login">
+  <v-dialog v-model="syncedShow" max-width="400px">
+    <v-card data-cy="login-form">
+      <v-card-title class="pb-0 justify-center">
+        <h1>{{ $t('components.authentication.login.title', 'Login') }}</h1>
+      </v-card-title>
+      <v-card-text class="mt-5" color="3C366B">
+        <v-form
+          color="3C366B"
+          v-model="valid"
+          @keyup.native.enter="handleKeyEvent"
+        >
+          <v-text-field
+            data-cy="login-email"
+            color="#3C366B"
+            :label="$t('components.authentication.login.email', 'E-Mail')"
+            prepend-icon="mdi-email-outline"
+            clearable
+            :rules="[validateEmail(email)]"
+            required
+            v-model="email"
+            tabindex="1"
+          >
+          </v-text-field>
+          <v-text-field
+            data-cy="login-password"
+            color="#3C366B"
+            :type="hiddenPassword ? 'password' : 'text'"
+            :label="$t('components.authentication.login.password', 'Passwort')"
+            prepend-icon="mdi-lock-outline"
+            :append-icon="hiddenPassword ? 'mdi-eye-outline': 'mdi-eye-off-outline'"
+            @click:append="showPassword"
+            v-model="password"
+            clearable
+            required
+            tabindex="2"
+            error-messages
+          >
+          </v-text-field>
+        </v-form>
+      </v-card-text>
+
+      <v-card-actions class="card-action">
+        <v-btn
+          data-cy="login-btn"
+          depressed
+          block
+          color="#667EEA"
+          class="max-width text-light"
+          @click="login"
+          :disabled="!valid"
+        >
+          {{ $t('components.authentication.login.buttons.login'), 'Login'}}
+        </v-btn>
+        <v-btn
+          text
+          depressed
+          color="#3C366B"
+          class="text-light"
+          style="white-space: normal;"
+        >
+          <span
+            >{{ $t('components.authentication.login.passwordForget', 'Jetzt wiederherstellen') }}<br />
+            <span class="highlight">
+              <nuxt-link to="/password-forget" style="text-decoration: none;"
+                >{{ $t('components.authentication.login.passwordForgetLink', 'Jetzt wiederherstellen')
+                }}
+              </nuxt-link>
+            </span>
+          </span>
+        </v-btn>
+        <v-btn
+          text
+          depressed
+          color="#3C366B"
+          class="max-width text-light"
+          style="white-space: normal;"
+          @click="switchToRegister"
+        >
+          <span
+            >{{ $t('components.authentication.login.noAccount', 'Noch keinen Account?') }}<br />
+            <span class="highlight">
+              {{ $t('components.authentication.login.nowRegisterLink', 'Jetzt Registrieren') }}
+            </span>
+          </span>
+        </v-btn>
+      </v-card-actions>
+    </v-card>
+  </v-dialog>
+</section>

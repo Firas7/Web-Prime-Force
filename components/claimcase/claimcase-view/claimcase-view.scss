@@ -1,0 +1,52 @@
+.bb-conatiner {
+  padding: 1rem 2rem;
+
+  .tb-header {
+    color: #888;
+    font-size: 0.7rem;
+    margin: 0;
+    text-transform: uppercase;
+  }
+
+  .bb-name {
+    margin: 1rem 0;
+  }
+
+  .chip {
+    border-radius: 100px;
+    margin: auto 0;
+    padding: 1px 16px;
+    text-align: center;
+    width: 175px;
+  }
+
+  .finished-chip {
+    background-color: #9ae6b4;
+    border: 1px solid #48bb78;
+    color: #22543d;
+  }
+
+  .progress-chip {
+    background-color: #faf089;
+    border: 1px solid #ecc94b;
+    color: #744210;
+  }
+
+  .pending-chip {
+    background-color: #e2e8f0;
+    border: 1px solid #a0aec0;
+    color: #1a202c;
+  }
+
+  .declined-chip {
+    background-color: #feb2b2;
+    border: 1px solid #f56565;
+    color: #742a2a;
+  }
+
+  .none-chip {
+    background-color: #e2e8f0;
+    border: 1px solid #a0aec0;
+    color: #1a202c;
+  }
+}

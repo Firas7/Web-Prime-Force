@@ -1,0 +1,27 @@
+<div class="messages-card">
+  <div class="message-card" v-for="msg in messages">
+    <v-card flat>
+      <div class="agent-image">
+        <img
+          class="face-image"
+          src="https://cdn.vuetifyjs.com/images/profiles/marcus.jpg"
+        />
+        <span style="color: #4682b4;">Kurt Wagner</span>
+      </div>
+      <v-list-item-subtitle class="message-date"> {{ msg.date }}</v-list-item-subtitle>
+      <v-card-text class="message-content">
+        {{ msg.content }}
+        <div class="message-time">{{ formatDate(msg.timestamp) }}</div>
+      </v-card-text>
+      <v-card-actions>
+        <v-spacer></v-spacer>
+        <v-btn icon>
+          <v-icon v-on:click="reply">mdi-email-send</v-icon>
+        </v-btn>
+        <v-btn icon>
+          <v-icon v-on:click="showAnswers">mdi-chevron-down</v-icon>
+        </v-btn>
+      </v-card-actions>
+    </v-card>
+  </div>
+</div>

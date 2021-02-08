@@ -1,0 +1,181 @@
+<section class="user" :key="componentKey">
+  <v-card class="mx-auto" max-width="500">
+    <v-card-title class="v-card-title">
+      {{ $t('components.user.userCard.userTitle', 'Deine Nutzerdaten ') }}
+      <v-tooltip bottom>
+        <template v-slot:activator="{ on }">
+          <v-btn
+            icon
+            v-on="on"
+            v-on:click="switchEdit"
+            depressed>
+            <v-icon class="add">mdi-pencil-outline</v-icon>
+          </v-btn>
+        </template>
+        <span>{{ $t('components.user.userCard.tooltips.edit', 'Nutzerdaten bearbeiten') }}</span>
+      </v-tooltip>
+    </v-card-title>
+    <v-card-text>
+      <h3 v-if="!!user.coredata">{{ $t('components.user.userCard.tableHeaders.name', 'Name') }}</h3>
+      <p v-if="!edit && !!user.coredata">
+        {{user.coredata.firstname}} {{user.coredata.lastname}}
+      </p>
+      <div v-if="edit" class="edit-name">
+        <v-text-field
+          required
+          v-bind:label="$t('components.user.userCard.labels.firstName', 'Vorname')"
+          v-model="user.coredata.firstname"
+        ></v-text-field>
+        <v-text-field
+          required
+          :label="$t('components.user.userCard.labels.lastName', 'Nachname')"
+          v-model="user.coredata.lastname"
+        ></v-text-field>
+      </div>
+      <h3>{{ $t('components.user.userCard.tableHeaders.email', 'E-Mail') }}</h3>
+      <p v-if="!edit">
+        <v-tooltip left>
+          <template v-slot:activator="{ on }">
+            <v-btn
+              icon
+              depressed
+              v-on="on">
+              <v-icon v-if="user.valid"
+              >mdi-checkbox-marked-circle-outline
+              </v-icon>
+              <v-icon v-else>mdi-close-circle-outline</v-icon>
+            </v-btn>
+            {{user.email}}
+          </template>
+          <span v-if="user.valid"
+          >{{ $t('components.user.userCard.tooltips.email.validated', 'E-Mail bestätigt') }}
+          </span>
+          <span v-else
+          >{{ $t('components.user.userCard.tooltips.email.unconfirmed', 'Deine E-Mail ist noch nicht bestätigt')}}
+          </span>
+        </v-tooltip>
+      </p>
+      <v-text-field required v-if="edit" v-model="user.email"></v-text-field>
+
+      <h3>{{ $t('components.user.userCard.tableHeaders.partnerId', 'Partner ID') }}</h3>
+      <p v-if="user.linkedPartner">
+        <v-tooltip left>
+          <template v-slot:activator="{ on }">
+            <v-btn
+              icon
+              v-on="on"
+              depressed>
+              <v-icon v-if="user.linkedPartner.confirmed"
+              >mdi-checkbox-marked-circle-outline
+              </v-icon>
+              <v-icon v-else>mdi-close-circle-outline</v-icon>
+            </v-btn>
+            {{user.linkedPartner.partnerId}}
+          </template>
+          <span v-if="user.linkedPartner.confirmed"
+          >{{ $t('components.user.userCard.tooltips.linkedPartner.confirmed', 'Partner ID bestätigt')}}
+          </span>
+          <span v-else
+          >{{$t('components.user.userCard.tooltips.linkedPartner.unconfirmed', 'Deine Partner ID wurde noch nicht bestätigt')}}
+          </span>
+        </v-tooltip>
+      </p>
+      <p v-if="!user.linkedPartner">
+        {{ $t('components.user.userCard.linkedPartner.addPartnerIdHint', 'Jetzt deine Partner ID eintragen:') }}
+      </p>
+      <v-text-field
+        required
+        v-if="!user.linkedPartner"
+        v-model="partnerId"
+      ></v-text-field>
+      <v-btn
+        block
+        depressed
+        color="#667EEA"
+        class="save-button"
+        v-on:click="submitPartnerID"
+        v-if="!user.linkedPartner"
+        :disabled="!confirmed"
+      >
+        {{ $t('components.user.userCard.buttons.submit', 'Abschicken') }}
+      </v-btn>
+      <p v-if="user.linkedPartner&&!user.linkedPartner.confirmed">
+        {{ $t('components.user.userCard.linkedPartner.confirmText', 'Deine PartnerId wurde eingetragen, ist aber noch nicht bestätigt. Wir haben einen Bestätigungscode an die hinterlegte Emailadresse der PartnerId verschickt. Bitte trage den Bestätigungscode hier ein:') }}
+      </p>
+      <v-text-field
+        required
+        v-if="user.linkedPartner&&!user.linkedPartner.confirmed"
+        v-model="partnerIdCode"
+      ></v-text-field>
+      <v-btn
+        block
+        depressed
+        color="#667EEA"
+        class="save-button"
+        v-on:click="submitPartnerIdCode"
+        v-if="user.linkedPartner&&!user.linkedPartner.confirmed"
+        :disabled="!confirmed"
+      >
+        {{ $t('components.user.userCard.buttons.submitCode', 'Code überprüfen') }}
+      </v-btn>
+      <v-btn
+        depressed
+        @click="deleteData"
+      >
+        Daten Löschen
+    </v-btn>
+    </v-card-text>
+    <v-card-actions v-if="edit">
+      <v-btn
+        block
+        depressed
+        color="#667EEA"
+        class="save-button"
+        v-on:click="submitEditProfile"
+        :disabled="!confirmed"
+      >
+        {{ $t('components.user.userCard.buttons.submitChanges', 'Änderungen übernehmen') }}
+      </v-btn>
+    </v-card-actions>
+    <v-divider></v-divider>
+
+    <v-card-title v-if="hasClerk">
+      {{ $t('components.user.userCard.clerkTitle', 'Dein*e Sachbearbeiter*in') }}
+    </v-card-title>
+    <v-card-text v-if="hasClerk">
+      <clerk></clerk>
+    </v-card-text>
+    <v-divider v-if="hasClerk"></v-divider>
+
+    <v-card-title v-if="hasAgent">
+      {{ $t('components.user.userCard.agentTitle', 'Dein*e Makler*in')}}
+    </v-card-title>
+    <v-card-text v-if="hasAgent">
+      <insuredAgent></insuredAgent>
+    </v-card-text>
+    <v-divider v-if="hasAgent"></v-divider>
+
+    <v-card-title>
+      {{ $t('components.user.userCard.insuranceTitle', 'Deine Versicherungen') }}
+      <v-tooltip bottom>
+        <template v-slot:activator="{ on }">
+          <v-btn
+            icon
+            depressed
+            v-on="on">
+            <v-icon class="add">mdi-plus</v-icon>
+          </v-btn>
+        </template>
+        <span>{{ $t('components.user.userCard.tooltips.insurance.add', 'Neue Versicherung hinzufügen') }}</span>
+      </v-tooltip>
+    </v-card-title>
+    <v-card-text>
+      <div v-if="!!contracts && contracts.length !== 0">
+        <div v-for="contract in contracts">
+          <p>{{contract.productname}}</p>
+        </div>
+      </div>
+      <div v-else><p>{{ $t('components.user.userCard.insurance.notFound', 'Keine Versicherungen gefunden') }}</p></div>
+    </v-card-text>
+  </v-card>
+</section>

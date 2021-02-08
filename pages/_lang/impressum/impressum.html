@@ -1,0 +1,121 @@
+<section>
+  <div>
+    <v-app-bar flat color="#667EEA" app>
+      <img alt="ClaimNow Logo" src="/blue-bug-logo.svg" class="logo" />
+      <h1 class="logo-text">Blue bug</h1>
+      <div class="login-wrapper">
+        <v-btn
+          outlined
+          class="button"
+          color="#EBF4FF"
+          @click="goToStart"
+          ><p class="button-text home">
+            {{ $t('navigation.links.home') }}
+          </p>
+          <v-icon class="icon">mdi-home</v-icon>
+        </v-btn>
+        <v-btn
+          data-cy="show-register-btn"
+          class="button"
+          outlined
+          color="#EBF4FF"
+          @click.stop="showRegister = true"
+          ><p class="button-text register">
+            {{ $t('navigation.links.register') }}
+          </p>
+          <v-icon class="icon">mdi-account-plus</v-icon>
+        </v-btn>
+        <v-btn
+          data-cy="showLogin"
+          class="button"
+          outlined
+          color="#EBF4FF"
+          @click.stop="showLogin = true"
+          ><p class="button-text login">{{ $t('navigation.links.login') }}</p>
+          <v-icon class="icon">mdi-account-key</v-icon>
+        </v-btn>
+        <v-tooltip bottom>
+          <template v-slot:activator="{ on }">
+            <v-btn
+              icon
+              class="language button"
+              v-on="on"
+              @click="changeLanguage"
+              color="#EBF4FF"
+              exact
+            >
+              <v-icon medium>mdi-translate</v-icon>
+              <p>{{ activeLanguage }}</p>
+            </v-btn>
+          </template>
+          <span>{{ $t('components.layout.head-bar.language') }}</span>
+        </v-tooltip>
+        <register
+          v-bind:show.sync="showRegister"
+          @switch="onSwitchToRegister"
+        />
+        <login v-bind:show.sync="showLogin" @switch="onSwitchToRegister" />
+      </div>
+    </v-app-bar>
+
+    <div class="section first-section">
+      <div class="section-imprint">
+        <h1>IMPRESSUM</h1>
+        <p>
+          Der Dienst BLUEBUG wird bereitgestellt durch die Prime Force Group Int. AG.<br><br><br>
+          Prime Force Group Int. AG<br><br>
+
+          Josef-Müller-Weg 6<br>
+          CH-6210 Sursee<br>
+          Schweiz<br><br>
+          
+          Telefon: <a href="tel.:+41 44 829 62 81">+41 44 829 62 81</a><br>
+          Fax: +41 44 829 62 73<br>
+          E-Mail: <a href="mailto:info@prime-force.com">info@prime-force.com</a><br><br><br>
+          
+           
+          Rechtsform: <br>
+          Gesellschaft mit beschränkter Haftung<br><br>
+          
+          Vertreten durch den Geschäftsleiter:<br>
+          Christian Gröger<br><br>
+          
+          Eintrag ins Handelsregister: 15.12.2011<br>
+          Handelsregisteramt: Kanton Luzern<br>
+          Rechtssitz der Firma: Luzern (LU)<br>
+          Umsatzsteuer-Identifikationsnummer (UID): CHE-321.991.563<br>
+          Handelsregister-Nummer: CH-170.4.010.903-0<br>
+        </p>
+      </div>
+    </div>
+    
+    <v-footer
+      color="primary lighten-1"
+      padless
+      >
+        <v-row
+          justify="center"
+          no-gutters
+        >
+          <v-btn
+            v-for="link in links"
+            :key="link"
+            color="white"
+            text
+            rounded
+            class="footer Button"
+            @click="footerBtn(link)"
+          >
+          {{ link }}
+          </v-btn>
+
+          <v-col
+            class="primary lighten-2 py-4 text-center white--text"
+            cols="12"
+          >
+          {{ new Date().getFullYear() }} -- <strong>Prime Force</strong>
+          </v-col>
+        </v-row>
+    </v-footer>
+  </div>
+</section>
